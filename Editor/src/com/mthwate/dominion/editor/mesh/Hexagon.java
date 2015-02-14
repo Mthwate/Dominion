@@ -1,4 +1,4 @@
-package com.mthwate.dominion.editor;
+package com.mthwate.dominion.editor.mesh;
 
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
@@ -17,7 +17,7 @@ public class Hexagon extends Mesh {
 	 * @param radius the radius of the hexagon
 	 */
 	public Hexagon(float radius) {
-		
+
 		float x = radius / 2f;
 		float y = (float) Math.sqrt(3) * radius / 2f;
 
@@ -29,13 +29,13 @@ public class Hexagon extends Mesh {
 		vertices[4] = new Vector3f(radius, 0, 0);
 		vertices[5] = new Vector3f(x, y, 0);
 		vertices[6] = new Vector3f(-x, y, 0);
-		
+
 
 		int[] indexes = {
 				0,1,2, 2,3,0, 0,3,4, 4,5,0, 0,5,6, 6,1,0, // top
 				//0,1,6, 6,5,0, 0,5,4, 4,3,0, 0,3,2, 2,1,0 // bottom
 		};
-		
+
 		float[] normals = {
 				0, 0, 1,
 				0, 0, 1,
@@ -61,5 +61,5 @@ public class Hexagon extends Mesh {
 		this.setBuffer(VertexBuffer.Type.Normal, 3, BufferUtils.createFloatBuffer(normals));
 		this.updateBound();
 	}
-	
+
 }

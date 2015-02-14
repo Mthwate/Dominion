@@ -1,12 +1,9 @@
-package com.mthwate.dominion.editor;
+package com.mthwate.dominion.editor.mesh;
 
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer;
 import com.jme3.util.BufferUtils;
-
-import java.lang.management.MemoryNotificationInfo;
 
 /**
  * @author mthwate
@@ -29,6 +26,7 @@ public class HexLine extends Mesh {
 		int[] indexes = {0,1, 1,2, 2,3, 3,4, 4,5, 5,0};
 		
 		this.setMode(Mode.Lines);
+		this.setLineWidth(2);
 		
 		this.setBuffer(VertexBuffer.Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
 		this.setBuffer(VertexBuffer.Type.Index, 2, BufferUtils.createIntBuffer(indexes));

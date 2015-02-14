@@ -1,4 +1,4 @@
-package com.mthwate.dominion.editor;
+package com.mthwate.dominion.editor.mesh;
 
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;

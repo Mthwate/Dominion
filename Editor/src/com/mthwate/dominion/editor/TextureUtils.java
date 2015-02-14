@@ -20,6 +20,7 @@ public class TextureUtils {
 		if (texture == null) {
 			texture = assetManager.loadTexture(path);
 			texture.setWrap(Texture.WrapMode.Repeat);
+			texture.setMagFilter(Texture.MagFilter.Nearest);
 			textures.put(path, texture);
 		}
 		

@@ -1,7 +1,6 @@
 package com.mthwate.dominion.editor;
 
 import com.jme3.asset.AssetNotFoundException;
-import com.jme3.asset.plugins.FileLocator;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.light.AmbientLight;
@@ -10,15 +9,16 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
+import com.jme3.scene.Node;
 import com.mthwate.datlib.Vector2i;
 import com.mthwate.dominion.common.CommonApp;
+import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Tile;
-import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.TextField;
+import com.mthwate.dominion.editor.mesh.HexLine;
+import com.mthwate.dominion.editor.mesh.HexSides;
+import com.mthwate.dominion.editor.mesh.Hexagon;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,48 +37,54 @@ public class EditorApp extends CommonApp {
 
 	private HexLine hexLine = new HexLine(1);
 	
-	private Nifty nifty;
-	
-	private boolean inMenu = false;
-	
 	private File saveFile = new File("map.dwm");
 
+	private Node highlightNode = new Node();
+
+	private Node tileNode = new Node();
+
+	private Node sideNode = new Node();
+
+	private Node wireNode = new Node();
+	
 	@Override
 	public void init() {
+		
+		rootNode.attachChild(highlightNode);
 
-		if (new File("assets").exists()) {
-			assetManager.registerLocator("assets", FileLocator.class);
-		}
+		rootNode.attachChild(tileNode);
+
+		rootNode.attachChild(sideNode);
+
+		rootNode.attachChild(wireNode);
 		
-		flyCam.setEnabled(false);
-		
-		cam.setLocation(new Vector3f(0, 0, 15));
-		cam.lookAt(new Vector3f(0, 10, 0), cam.getUp());
+		cam.setLocation(new Vector3f(0, -10, 15));
+		cam.lookAt(new Vector3f(0, 0, 0), cam.getUp());
 
 		keyHandler = new KeyHandler(inputManager);
 
-		initHud();
+		NiftyUtils.init(assetManager, inputManager, audioRenderer, guiViewPort);
+
+		tryLoad();
 		
+		initLight();
+		
+		mapUpdate();
+	}
+	
+	private void tryLoad() {
 		if (saveFile.exists()) {
 			tiles = SaveUtils.load(saveFile);
 		}
 
-		setMenuInt("width", tiles.length);
-		setMenuInt("height", tiles[0].length);
-
+		NiftyUtils.setMenuInt("width", tiles.length);
+		NiftyUtils.setMenuInt("height", tiles[0].length);
+	}
+	
+	private void initLight() {
 		AmbientLight al = new AmbientLight();
 		al.setColor(ColorRGBA.White.mult(4));
 		rootNode.addLight(al);
-
-		mapUpdate();
-	}
-
-	private static Vector3f getPosCartesian(int x, int y) {
-		return getPosHex(x, cartesianToHex(x, y));
-	}
-
-	private static Vector3f getPosHex(int x, int y) {
-		return new Vector3f(x * 3f / 2f, (float) ((Math.sqrt(3) * y) + (Math.sqrt(3) * x / 2)), 0);
 	}
 	
 	private void updateTile(int x, int y, boolean detach) {
@@ -86,7 +92,9 @@ public class EditorApp extends CommonApp {
 		String name = x + "," + y;
 		
 		if (detach) {
-			while (rootNode.detachChildNamed(name) != -1) {}
+			while (tileNode.detachChildNamed(name) != -1) {}
+			while (sideNode.detachChildNamed(name) != -1) {}
+			while (wireNode.detachChildNamed(name) != -1) {}
 		}
 			
 		Tile tile = tiles[x][y];
@@ -109,19 +117,18 @@ public class EditorApp extends CommonApp {
 		Geometry geom = new Geometry(name);
 		geom.setMesh(hex);
 		geom.setMaterial(mat);
-		geom.setLocalTranslation(getPosCartesian(x, y).setZ(elevation));
-		geom.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
+		geom.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation));
 
-		rootNode.attachChild(geom);
+		tileNode.attachChild(geom);
 
 
 
 		Geometry wire = new Geometry(name);
 		wire.setMesh(hexLine);
 		wire.setMaterial(MaterialUtils.getWireMaterial(assetManager));
-		wire.setLocalTranslation(getPosCartesian(x, y).setZ(elevation + 0.002f));
+		wire.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.002f));
 
-		rootNode.attachChild(wire);
+		wireNode.attachChild(wire);
 
 
 		if (elevation > 0) {
@@ -130,47 +137,27 @@ public class EditorApp extends CommonApp {
 			try {
 				matSides = MaterialUtils.getTexturedMaterial(type + "Side", assetManager);
 			} catch (AssetNotFoundException e) {}
-			
+
 			HexSides hexSides = new HexSides(1, elevation);
 
 			Geometry geomSides = new Geometry(name);
 			geomSides.setMesh(hexSides);
 			geomSides.setMaterial(matSides);
-			geomSides.setLocalTranslation(getPosCartesian(x, y));
-			geomSides.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
+			geomSides.setLocalTranslation(CoordUtils.getPosCartesian(x, y));
 
-			rootNode.attachChild(geomSides);
+			sideNode.attachChild(geomSides);
 		}
 	}
 
 	private void mapUpdate() {
-		rootNode.detachAllChildren();
+		tileNode.detachAllChildren();
+		sideNode.detachAllChildren();
+		wireNode.detachAllChildren();
 		for (int x = 0; x < tiles.length; x++) {
 			for (int y = 0; y < tiles[0].length; y++) {
 				updateTile(x, y, false);
 			}
 		}
-	}
-	
-	private void initHud() {
-		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
-		nifty = niftyDisplay.getNifty();
-		try {
-			nifty.validateXml("test.xml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		nifty.fromXml("test.xml", "edit");
-		
-		for (String name : nifty.getAllScreensName()) {
-			nifty.getScreen(name).startScreen();
-		}
-
-		setMenuInt("elevation", 0);
-		setMenuInt("brushSize", 1);
-
-		guiViewPort.addProcessor(niftyDisplay);
 	}
 	
 	private void move(float tpf) {
@@ -216,37 +203,15 @@ public class EditorApp extends CommonApp {
 
 	}
 	
-	private TextField getMenuTextField(String name) {
-		return nifty.getScreen("menu").findNiftyControl(name, TextField.class);
-	}
-
-	private void setMenuStr(String field, String contents) {
-		TextField textField = getMenuTextField(field);
-		textField.setText(contents);
-	}
-
-	private void setMenuInt(String field, int contents) {
-		setMenuStr(field, Integer.toString(contents));
-	}
-	
-	private String getMenuStr(String name) {
-		TextField field = getMenuTextField(name);
-		return field.getRealText();
-	}
-	
-	private int getMenuInt(String name) {
-		return Integer.parseInt(getMenuStr(name));
-	}
-	
 	private void menu() {
 		
 		if (keyHandler.isPressed(KeyControl.MENU)) {
 			keyHandler.onAction(KeyControl.MENU.getName(), false, 0);
-			if (inMenu) {
+			if (NiftyUtils.isOnScreen("menu")) {
 
-				int x = getMenuInt("width");
+				int x = NiftyUtils.getMenuInt("width");
 
-				int y = getMenuInt("height");
+				int y = NiftyUtils.getMenuInt("height");
 				
 				Tile[][] newTiles = new Tile[x][y];
 				
@@ -261,12 +226,11 @@ public class EditorApp extends CommonApp {
 				tiles = newTiles;
 				
 				mapUpdate();
-				
-				nifty.gotoScreen("edit");
+
+				NiftyUtils.gotoScreen("edit");
 			} else {
-				nifty.gotoScreen("menu");
+				NiftyUtils.gotoScreen("menu");
 			}
-			inMenu = !inMenu;
 		}
 	}
 	
@@ -278,101 +242,116 @@ public class EditorApp extends CommonApp {
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
 			keyHandler.onAction(KeyControl.INCREASE_BRUSH.getName(), false, 0);
-			setMenuInt("brushSize", getMenuInt("brushSize") + 1);
+			NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
 		}
 
 		if (keyHandler.isPressed(KeyControl.DECREASE_BRUSH)) {
 			keyHandler.onAction(KeyControl.DECREASE_BRUSH.getName(), false, 0);
-
-			int size = getMenuInt("brushSize") - 1;
-
-			size = Math.max(size, 1);
-
-			setMenuInt("brushSize", size);
+			NiftyUtils.setMenuInt("brushSize", Math.max(NiftyUtils.getMenuInt("brushSize") - 1, 1));
 		}
+
+		highlightNode.detachAllChildren();
 		
-		if (keyHandler.isPressed(KeyControl.CLICK)) {
-			//keyHandler.onAction(KeyControl.MOUSE_LEFT.getName(), false, 0);
+		highlight(keyHandler.isPressed(KeyControl.CLICK));
+	}
+	
+	private void highlight(boolean clicked) {
+		CollisionResult result = clickCollisions().getClosestCollision();
+		if (result != null) {
+			Geometry geom = result.getGeometry();
+			if (geom.getMesh() instanceof Hexagon) {
+				String name = geom.getName();
+				String[] split = name.split(",");
+				int x = Integer.parseInt(split[0]);
+				int y = Integer.parseInt(split[1]);
 
-			CollisionResults results = new CollisionResults();
-			Vector2f click2d = inputManager.getCursorPosition();
-			Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
-			Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d).normalizeLocal();
-			Ray ray = new Ray(click3d, dir);
-			rootNode.collideWith(ray, results);
+				String type = NiftyUtils.getMenuStr("type");
 
-			CollisionResult result = results.getClosestCollision();
-			if (result != null) {
-				Geometry geom = result.getGeometry();
-				if (geom.getMesh() instanceof Hexagon) {
-					String name = geom.getName();
-					String[] split = name.split(",");
-					int x = Integer.parseInt(split[0]);
-					int y = Integer.parseInt(split[1]);
+				int elevation = NiftyUtils.getMenuInt("elevation");
 
-					String type = getMenuStr("type");
-
-					int elevation = getMenuInt("elevation");
-					
-					int size = getMenuInt("brushSize");
+				int size = NiftyUtils.getMenuInt("brushSize");
 
 
-					List<Vector2i> coords = new ArrayList<Vector2i>();
-					
-					for (int ix = -size + 1; ix < size; ix++) {
-						for (int iy = -size + 1; iy < size; iy++) {
-							if (Math.abs(ix + iy) < size) {
-								int px = x + ix;
-								int py = hexToCartesian(px, cartesianToHex(x, y) + iy);
-								if (validPoint(px, py)) {
-									tiles[px][py] = new Tile(type, elevation);
-									coords.add(new Vector2i(px, py));
-									//updateTile(px, py, true);
+				List<Vector2i> coords = new ArrayList<Vector2i>();
+
+				for (int ix = -size + 1; ix < size; ix++) {
+					for (int iy = -size + 1; iy < size; iy++) {
+						if (Math.abs(ix + iy) < size) {
+							int px = x + ix;
+							int py = CoordUtils.hexToCartesian(px, CoordUtils.cartesianToHex(x, y) + iy);
+							if (validPoint(px, py)) {
+
+								Geometry g = new Geometry("selected");
+								g.setMesh(hex);
+								g.setQueueBucket(RenderQueue.Bucket.Transparent);
+								g.setMaterial(MaterialUtils.getHighlightMaterial(assetManager));
+								
+								float elev = 0;
+
+								Tile tile = tiles[px][py];
+								
+								if (tile != null) {
+									elev = tile.getElevation();
 								}
+								
+								g.setLocalTranslation(CoordUtils.getPosCartesian(px, py).setZ(elev * 0.75f + 0.002f));
+								highlightNode.attachChild(g);
+								
+								if (clicked) {
+									tiles[px][py] = new Tile(type, elevation);
+								}
+								
+								coords.add(new Vector2i(px, py));
 							}
 						}
 					}
+				}
 
-					List<Integer> ints = new ArrayList<Integer>();
-					
-					for (int i = 0; i < rootNode.getChildren().size(); i++) {
-						String childName = rootNode.getChild(i).getName();
-						String[] childSplit = childName.split(",");
-						int cx = Integer.parseInt(childSplit[0]);
-						int cy = Integer.parseInt(childSplit[1]);
-						
-						if (coords.contains(new Vector2i(cx, cy))) {
-							ints.add(i);
+
+				if (clicked) {
+					Node[] nodes = {tileNode, sideNode, wireNode};
+					for (Node node : nodes) {
+						List<Integer> ints = new ArrayList<Integer>();
+
+						for (int i = 0; i < node.getChildren().size(); i++) {
+							String childName = node.getChild(i).getName();
+							if (childName.contains(",")) {
+								String[] childSplit = childName.split(",");
+								int cx = Integer.parseInt(childSplit[0]);
+								int cy = Integer.parseInt(childSplit[1]);
+
+								if (coords.contains(new Vector2i(cx, cy))) {
+									ints.add(i);
+								}
+							}
 						}
-						
+
+						int c = 0;
+
+						for (int i : ints) {
+							node.detachChildAt(i - c++);
+						}
 					}
-					
-					int c = 0;
-					
-					for (int i : ints) {
-						rootNode.detachChildAt(i - c
-								++);
-					}
-					
+
 					for (Vector2i coord : coords) {
 						updateTile(coord.getX(), coord.getY(), false);
 					}
-
-					
 				}
+
 			}
-			
 		}
 	}
-
-	private static int cartesianToHex(int x, int y) {
-		return y - (x / 2);
-	}
-
-	private static int hexToCartesian(int x, int y) {
-		return y + (x / 2);
-	}
 	
+	private CollisionResults clickCollisions() {
+		CollisionResults results = new CollisionResults();
+		Vector2f click2d = inputManager.getCursorPosition();
+		Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
+		Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d).normalizeLocal();
+		Ray ray = new Ray(click3d, dir);
+		tileNode.collideWith(ray, results);
+		return results;
+	}
+
 	private boolean validPoint(int x, int y) {
 		boolean valid = true;
 		if (x >= tiles.length || x < 0) {

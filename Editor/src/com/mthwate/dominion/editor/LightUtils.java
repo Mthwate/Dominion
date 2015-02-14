@@ -6,10 +6,7 @@ import com.jme3.light.Light;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.shadow.DirectionalLightShadowRenderer;
-import com.mthwate.datlib.Pair;
 
-import java.awt.Color;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

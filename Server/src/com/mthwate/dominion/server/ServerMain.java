@@ -1,9 +1,6 @@
 package com.mthwate.dominion.server;
 
-import com.jme3.system.JmeContext;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.mthwate.dominion.common.Starter;
 
 /**
  * @author mthwate
@@ -11,9 +8,7 @@ import java.util.logging.Logger;
 public class ServerMain {
 	
 	public static void main(String[] args) {
-		Logger.getLogger("").setLevel(Level.OFF);
-		ServerApp app = new ServerApp();
-		app.start(JmeContext.Type.Headless);
+		Starter.start(new ServerApp(), false);
 	}
 	
 }

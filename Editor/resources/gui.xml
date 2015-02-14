@@ -24,8 +24,7 @@
 	</screen>
 
 	<screen id="edit">
-		<layer childLayout="horizontal">
-		</layer>
+		<layer/>
 	</screen>
 
 </nifty>

@@ -1,7 +1,9 @@
 package com.mthwate.dominion.common;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.asset.plugins.FileLocator;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -17,6 +19,20 @@ public abstract class CommonApp extends SimpleApplication {
 	@Override
 	public void simpleInitApp() {
 		Log.MAIN.info("Initializing log");
+		
+
+		Log.MAIN.info("Registering asset locator");
+		
+		if (new File("assets").exists()) {
+			assetManager.registerLocator("assets", FileLocator.class);
+		}
+		
+
+		Log.MAIN.info("Disabling the fly camera");
+		
+		flyCam.setEnabled(false);
+		
+
 		this.init();
 	}
 	
