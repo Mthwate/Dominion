@@ -76,8 +76,6 @@ public class EditorApp extends CommonApp {
 		initLight();
 		
 		mapUpdate();
-		
-		//TODO remove all null tile checks as tiles should never be null
 	}
 	
 	private void tryLoad() {
@@ -107,13 +105,8 @@ public class EditorApp extends CommonApp {
 			
 		Tile tile = tiles[x][y];
 
-		String type = "null";
-		float elevation = 0;
-
-		if (tile != null) {
-			type = tile.getType();
-			elevation = tile.getElevation() * 0.75F;
-		}
+		String type = tile.getType();
+		float elevation = tile.getElevation() * 0.75F;
 
 		Material mat;
 		try {
@@ -307,7 +300,7 @@ public class EditorApp extends CommonApp {
 		}
 
 		highlightNode.detachAllChildren();
-		
+
 		highlight(keyHandler.isPressed(KeyControl.CLICK));
 	}
 	
@@ -341,14 +334,10 @@ public class EditorApp extends CommonApp {
 								g.setMesh(hex);
 								g.setQueueBucket(RenderQueue.Bucket.Transparent);
 								g.setMaterial(MaterialUtils.getHighlightMaterial(assetManager));
-								
-								float elev = 0;
 
 								Tile tile = tiles[px][py];
-								
-								if (tile != null) {
-									elev = tile.getElevation();
-								}
+
+								float elev = tile.getElevation();
 								
 								g.setLocalTranslation(CoordUtils.getPosCartesian(px, py).setZ(elev * 0.75f + 0.002f));
 								highlightNode.attachChild(g);
@@ -359,18 +348,11 @@ public class EditorApp extends CommonApp {
 									int e = elevation;
 
 									if (type.equals("")) {
-										
-										t = "null";
-										
-										if (tile != null) {
-											t = tile.getType();
-										}
+										t = tile.getType();
 									}
 
 									if (NiftyUtils.isRelative("elevation")) {
-										if (tile != null) {
-											e += tile.getElevation();
-										}
+										e += tile.getElevation();
 									}
 									
 									tiles[px][py] = new Tile(t, Math.max(e, 0));
