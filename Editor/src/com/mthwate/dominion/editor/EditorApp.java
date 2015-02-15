@@ -5,6 +5,7 @@ import com.jme3.asset.plugins.FileLocator;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.light.AmbientLight;
+import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
@@ -13,6 +14,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.shadow.DirectionalLightShadowRenderer;
+import com.jme3.shadow.EdgeFilteringMode;
 import com.mthwate.datlib.Vector2i;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.CoordUtils;
@@ -91,8 +94,13 @@ public class EditorApp extends CommonApp {
 	
 	private void initLight() {
 		AmbientLight al = new AmbientLight();
-		al.setColor(ColorRGBA.White.mult(4));
+		al.setColor(ColorRGBA.White.mult(1));
 		rootNode.addLight(al);
+		
+		DirectionalLight dl = new DirectionalLight();
+		dl.setDirection(new Vector3f(1, 0, -1));
+		dl.setColor(ColorRGBA.White.mult(1));
+		rootNode.addLight(dl);
 	}
 	
 	private void updateTile(int x, int y, boolean detach) {
@@ -112,13 +120,12 @@ public class EditorApp extends CommonApp {
 
 		Material mat;
 		try {
-			mat = MaterialUtils.getTexturedMaterial(type, assetManager);
+			mat = TproUtils.getMaterialFace(type, assetManager);
 		} catch (AssetNotFoundException e) {
 			mat = MaterialUtils.getTexturedMaterial("null", assetManager);
 		}
 
 		Geometry geom = new Geometry(name);
-		geom.setShadowMode(RenderQueue.ShadowMode.Receive);
 		geom.setMesh(hex);
 		geom.setMaterial(mat);
 		geom.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation));
@@ -136,16 +143,17 @@ public class EditorApp extends CommonApp {
 
 
 		if (elevation > 0) {
-			Material matSides = MaterialUtils.getTexturedMaterial("stone", assetManager);
-
+			Material matSides;
+			
 			try {
-				matSides = MaterialUtils.getTexturedMaterial(type + "Side", assetManager);
-			} catch (AssetNotFoundException e) {}
+				matSides = TproUtils.getMaterialSide(type, assetManager);
+			} catch (AssetNotFoundException e) {
+				matSides = MaterialUtils.getTexturedMaterial("null", assetManager);
+			}
 
 			HexSides hexSides = new HexSides(1, elevation);
 
 			Geometry geomSides = new Geometry(name);
-			geomSides.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
 			geomSides.setMesh(hexSides);
 			geomSides.setMaterial(matSides);
 			geomSides.setLocalTranslation(CoordUtils.getPosCartesian(x, y));
@@ -291,6 +299,17 @@ public class EditorApp extends CommonApp {
 		look();
 		menu();
 
+		if (keyHandler.isPressed(KeyControl.TOGGLE_WIRE)) {
+			keyHandler.onAction(KeyControl.TOGGLE_WIRE.getName(), false, 0);
+			
+			if (wireNode.getParent() == null) {
+				rootNode.attachChild(wireNode);
+			} else {
+				wireNode.removeFromParent();
+			}
+		}
+
+
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
 			keyHandler.onAction(KeyControl.INCREASE_BRUSH.getName(), false, 0);
 			NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
@@ -298,7 +317,7 @@ public class EditorApp extends CommonApp {
 
 		if (keyHandler.isPressed(KeyControl.DECREASE_BRUSH)) {
 			keyHandler.onAction(KeyControl.DECREASE_BRUSH.getName(), false, 0);
-			NiftyUtils.setMenuInt("brushSize", Math.max(NiftyUtils.getMenuInt("brushSize") - 1, 1));
+			NiftyUtils.setMenuInt("brushSize", Math.max(NiftyUtils.getMenuInt("brushSize") - 1, 0));
 		}
 
 		highlightNode.detachAllChildren();

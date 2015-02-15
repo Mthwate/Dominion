@@ -31,6 +31,15 @@ public class HexSides extends Mesh {
 		vertices[7] = new Vector3f(radius, 0, 0);
 		vertices[9] = new Vector3f(x, y, 0);
 		vertices[11] = new Vector3f(-x, y, 0);
+		
+		Vector3f[] normals = new Vector3f[vertices.length];
+		
+		float half = height / 2;
+		
+		for (int i = 0; i < vertices.length; i++) {
+			normals[i] = vertices[i].clone();
+			normals[i].setZ(half * vertices[i].getZ() == 0 ? -1 : 1);
+		}
 
 
 		int[] indexes = {
@@ -72,7 +81,7 @@ public class HexSides extends Mesh {
 		this.setBuffer(VertexBuffer.Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
 		this.setBuffer(VertexBuffer.Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoord));
 		this.setBuffer(VertexBuffer.Type.Index, 3, BufferUtils.createIntBuffer(indexes));
-		this.setBuffer(VertexBuffer.Type.Normal, 3, BufferUtils.createFloatBuffer(vertices));
+		this.setBuffer(VertexBuffer.Type.Normal, 3, BufferUtils.createFloatBuffer(normals));
 		this.updateBound();
 	}
 	

@@ -69,7 +69,13 @@ public class LightUtils {
 	
 	public static void updateSun(DirectionalLight light, DirectionalLightShadowRenderer dlsr, Clock clock) {
 
-		float x = clock.getRatio() * -2 + 1;
+		//float x = clock.getRatio() * -2 + 1;
+
+		float x = clock.getRatio() - 0.5f;
+		x *= -4;
+		x = Math.min(x, 1);
+		x = Math.max(x, -1);
+		
 
 		light.setDirection(new Vector3f(x, 0, -(1-Math.abs(x))));
 		
@@ -96,8 +102,10 @@ public class LightUtils {
 
 		ColorRGBA color = null;
 
-		if (pos == (int) pos) {
-			ColorRGBA jcol = colors.get((int) pos);
+		int ipos = (int) pos;
+		
+		if (pos == (int) ipos && colors.containsKey(ipos)) {
+			ColorRGBA jcol = colors.get(ipos);
 			color = new ColorRGBA(jcol.getRed() / 256f, jcol.getGreen() / 256f, jcol.getBlue() / 256f, 1);
 		} else {
 			int i = 0;

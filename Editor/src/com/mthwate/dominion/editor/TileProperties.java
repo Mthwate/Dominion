@@ -7,8 +7,8 @@ import jdk.nashorn.internal.runtime.JSONFunctions;
  */
 public class TileProperties {
 	
-	public String[] textures;
+	public String[] textures = {"null"};
 
-	public String[] sides;
+	public String[] sides = {"stone"};
 	
 }

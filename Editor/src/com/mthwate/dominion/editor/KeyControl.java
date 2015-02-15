@@ -24,6 +24,8 @@ public enum KeyControl {
 	
 	INCREASE_BRUSH("increaseBrush"),
 	DECREASE_BRUSH("decreaseBrush"),
+
+	TOGGLE_WIRE("toggleWire");
 	
 	;
 

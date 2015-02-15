@@ -56,7 +56,7 @@ public class NiftyUtils {
 
 	public static int getMenuInt(String name) {
 		String str = getMenuStr(name).replace("~", "");
-		if (str.replace("-1", "").equals("")) {
+		if (str.replace("-", "").equals("")) {
 			str = "0";
 		}
 		return Integer.parseInt(str);
