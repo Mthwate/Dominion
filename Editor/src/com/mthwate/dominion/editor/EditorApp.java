@@ -1,22 +1,22 @@
 package com.mthwate.dominion.editor;
 
 import com.jme3.asset.AssetNotFoundException;
+import com.jme3.asset.plugins.FileLocator;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.light.AmbientLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.system.SystemListener;
 import com.mthwate.datlib.Vector2i;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.CoordUtils;
+import com.mthwate.dominion.common.Log;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.editor.mesh.HexLine;
 import com.mthwate.dominion.editor.mesh.HexSides;
@@ -25,7 +25,6 @@ import com.mthwate.dominion.editor.mesh.Hexagon;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author mthwate
@@ -52,6 +51,12 @@ public class EditorApp extends CommonApp {
 	
 	@Override
 	public void init() {
+
+		if (new File("assets").exists()) {
+			assetManager.registerLocator("assets", FileLocator.class);
+		}
+
+		assetManager.registerLoader(TproLoader.class, "tpro");
 		
 		rootNode.attachChild(highlightNode);
 
@@ -60,9 +65,6 @@ public class EditorApp extends CommonApp {
 		rootNode.attachChild(sideNode);
 
 		rootNode.attachChild(wireNode);
-
-		//cam.setLocation(new Vector3f(0, -10, 15));
-		//cam.lookAt(new Vector3f(0, 0, 0), cam.getUp());
 		
 		cam.setLocation(new Vector3f(0, -10, 15));
 		cam.lookAtDirection(new Vector3f(0, 0.5f, -1), new Vector3f(0, 0, 1));
@@ -283,7 +285,7 @@ public class EditorApp extends CommonApp {
 	
 	@Override
 	public void simpleUpdate(float tpf) {
-
+		
 		zoom(tpf);
 		move(tpf);
 		look();
