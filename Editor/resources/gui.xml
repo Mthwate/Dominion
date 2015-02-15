@@ -17,7 +17,7 @@
 				<control id="width" name="textfield" filter="[0-9]"/>
 				<control id="height" name="textfield" filter="[0-9]"/>
 				<control id="type" name="textfield"/>
-				<control id="elevation" name="textfield" filter="[0-9]"/>
+				<control id="elevation" name="textfield" filter="[~\-0-9]"/>
 				<control id="brushSize" name="textfield" filter="[0-9]"/>
 			</panel>
 		</layer>

@@ -6,12 +6,14 @@ import com.jme3.collision.CollisionResults;
 import com.jme3.light.AmbientLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.system.SystemListener;
 import com.mthwate.datlib.Vector2i;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.CoordUtils;
@@ -23,6 +25,7 @@ import com.mthwate.dominion.editor.mesh.Hexagon;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author mthwate
@@ -57,10 +60,13 @@ public class EditorApp extends CommonApp {
 		rootNode.attachChild(sideNode);
 
 		rootNode.attachChild(wireNode);
+
+		//cam.setLocation(new Vector3f(0, -10, 15));
+		//cam.lookAt(new Vector3f(0, 0, 0), cam.getUp());
 		
 		cam.setLocation(new Vector3f(0, -10, 15));
-		cam.lookAt(new Vector3f(0, 0, 0), cam.getUp());
-
+		cam.lookAtDirection(new Vector3f(0, 0.5f, -1), new Vector3f(0, 0, 1));
+		
 		keyHandler = new KeyHandler(inputManager);
 
 		NiftyUtils.init(assetManager, inputManager, audioRenderer, guiViewPort);
@@ -70,6 +76,8 @@ public class EditorApp extends CommonApp {
 		initLight();
 		
 		mapUpdate();
+		
+		//TODO remove all null tile checks as tiles should never be null
 	}
 	
 	private void tryLoad() {
@@ -115,6 +123,7 @@ public class EditorApp extends CommonApp {
 		}
 
 		Geometry geom = new Geometry(name);
+		geom.setShadowMode(RenderQueue.ShadowMode.Receive);
 		geom.setMesh(hex);
 		geom.setMaterial(mat);
 		geom.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation));
@@ -141,6 +150,7 @@ public class EditorApp extends CommonApp {
 			HexSides hexSides = new HexSides(1, elevation);
 
 			Geometry geomSides = new Geometry(name);
+			geomSides.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
 			geomSides.setMesh(hexSides);
 			geomSides.setMaterial(matSides);
 			geomSides.setLocalTranslation(CoordUtils.getPosCartesian(x, y));
@@ -160,27 +170,12 @@ public class EditorApp extends CommonApp {
 		}
 	}
 	
-	private void move(float tpf) {
+	private void zoom(float tpf) {
 		
-		float moveMod = 2f;
 		float zoomMod = 100f;
-
-		int ud = 0;
-		int rl = 0;
+		
 		int zoom = 0;
 		
-		if (keyHandler.isPressed(KeyControl.LEFT)) {
-			rl--;
-		}
-		if (keyHandler.isPressed(KeyControl.RIGHT)) {
-			rl++;
-		}
-		if (keyHandler.isPressed(KeyControl.UP)) {
-			ud++;
-		}
-		if (keyHandler.isPressed(KeyControl.DOWN)) {
-			ud--;
-		}
 		if (keyHandler.isPressed(KeyControl.ZOOM_IN)) {
 			zoom--;
 			keyHandler.onAction(KeyControl.ZOOM_IN.getName(), false, 0);
@@ -191,16 +186,73 @@ public class EditorApp extends CommonApp {
 		}
 		
 		Vector3f location = cam.getLocation();
-
+		
 		float z = location.getZ() + (zoom * tpf * zoomMod);
 
 		z = Math.max(z, 5);
 		z = Math.min(z, 250);
 
-		location.addLocal(rl * moveMod * tpf * (z-3), ud * moveMod * tpf * (z-3), z - location.getZ());
+		location.addLocal(0, 0, z - location.getZ());
 
 		cam.setLocation(location);
+	}
 
+	private void move(float tpf) {
+
+		float moveMod = 2f;
+		
+		Vector3f direction = cam.getDirection().setZ(0);
+		Vector3f left = cam.getLeft().setZ(0);
+
+		for (int i = 0; i < 3; i++) {
+			if (direction.get(i) != 0) {
+				direction.set(i, direction.get(i) / Math.abs(direction.get(i)));
+			}
+		}
+		
+		Vector3f move = new Vector3f();
+
+		if (keyHandler.isPressed(KeyControl.LEFT)) {
+			move.addLocal(left);
+		}
+		if (keyHandler.isPressed(KeyControl.RIGHT)) {
+			move.addLocal(left.negate());
+		}
+		if (keyHandler.isPressed(KeyControl.UP)) {
+			move.addLocal(direction);
+		}
+		if (keyHandler.isPressed(KeyControl.DOWN)) {
+			move.addLocal(direction.negate());
+		}
+
+		float z = cam.getLocation().getZ();
+		
+		cam.setLocation(cam.getLocation().add(move.mult(moveMod * tpf * (z-3))));
+	}
+	
+	private void look() {
+		float x = 0;
+		float y = 0;
+
+		if (keyHandler.isPressed(KeyControl.NORTH)) {
+			y += 0.5;
+		}
+
+		if (keyHandler.isPressed(KeyControl.SOUTH)) {
+			y -= 0.5;
+		}
+
+		if (keyHandler.isPressed(KeyControl.EAST)) {
+			x += 0.5;
+		}
+
+		if (keyHandler.isPressed(KeyControl.WEST)) {
+			x -= 0.5;
+		}
+
+		if ((x != 0 || y != 0) && Math.abs(x) != Math.abs(y)) {
+			cam.lookAtDirection(new Vector3f(x, y, -1), new Vector3f(0, 0, 1));
+		}
 	}
 	
 	private void menu() {
@@ -219,6 +271,8 @@ public class EditorApp extends CommonApp {
 					for (int yi = 0; yi < y; yi++) {
 						if (xi < tiles.length && yi < tiles[0].length) {
 							newTiles[xi][yi] = tiles[xi][yi];
+						} else {
+							newTiles[xi][yi] = new Tile("null", 0);
 						}
 					}
 				}
@@ -236,8 +290,10 @@ public class EditorApp extends CommonApp {
 	
 	@Override
 	public void simpleUpdate(float tpf) {
-		
+
+		zoom(tpf);
 		move(tpf);
+		look();
 		menu();
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
@@ -298,7 +354,26 @@ public class EditorApp extends CommonApp {
 								highlightNode.attachChild(g);
 								
 								if (clicked) {
-									tiles[px][py] = new Tile(type, elevation);
+									
+									String t = type;
+									int e = elevation;
+
+									if (type.equals("")) {
+										
+										t = "null";
+										
+										if (tile != null) {
+											t = tile.getType();
+										}
+									}
+
+									if (NiftyUtils.isRelative("elevation")) {
+										if (tile != null) {
+											e += tile.getElevation();
+										}
+									}
+									
+									tiles[px][py] = new Tile(t, Math.max(e, 0));
 								}
 								
 								coords.add(new Vector2i(px, py));

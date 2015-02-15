@@ -25,9 +25,6 @@ public class NiftyUtils {
 			nifty.getScreen(name).startScreen();
 		}
 
-		setMenuInt("elevation", 0);
-		setMenuInt("brushSize", 1);
-
 		guiViewPort.addProcessor(niftyDisplay);
 	}
 	
@@ -58,7 +55,16 @@ public class NiftyUtils {
 	}
 
 	public static int getMenuInt(String name) {
-		return Integer.parseInt(getMenuStr(name));
+		String str = getMenuStr(name).replace("~", "");
+		if (str.replace("-1", "").equals("")) {
+			str = "0";
+		}
+		return Integer.parseInt(str);
+	}
+	
+	public static boolean isRelative(String name) {
+		String str = getMenuStr(name);
+		return str.contains("~") || str.equals("");
 	}
 	
 }
