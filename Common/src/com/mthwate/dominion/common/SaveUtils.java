@@ -1,4 +1,4 @@
-package com.mthwate.dominion.editor;
+package com.mthwate.dominion.common;
 
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.common.Tile;

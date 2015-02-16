@@ -5,7 +5,11 @@ import com.jme3.network.Server;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.Log;
+import com.mthwate.dominion.common.MessageUtils;
+import com.mthwate.dominion.common.SaveUtils;
+import com.mthwate.dominion.common.TileStore;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -14,6 +18,8 @@ import java.io.IOException;
 public class ServerApp extends CommonApp {
 	
 	private Server server;
+
+	private File saveFile = new File("map.dwm");
 	
 	@Override
 	protected void init() {
@@ -26,6 +32,8 @@ public class ServerApp extends CommonApp {
 		}
 
 		if (server != null) {
+			TileStore.set(SaveUtils.load(saveFile));
+			MessageUtils.register();
 			server.addMessageListener(new ServerListener(), GZIPCompressedMessage.class);
 			server.start();
 		}

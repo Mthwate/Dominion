@@ -1,4 +1,4 @@
-package com.mthwate.dominion.editor;
+package com.mthwate.dominion.common;
 
 import jdk.nashorn.internal.runtime.JSONFunctions;
 

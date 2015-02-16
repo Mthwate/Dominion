@@ -1,8 +1,9 @@
-package com.mthwate.dominion.editor;
+package com.mthwate.dominion.common;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.jme3.asset.AssetInfo;
 import com.jme3.asset.AssetLoader;
+import com.mthwate.dominion.common.TileProperties;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

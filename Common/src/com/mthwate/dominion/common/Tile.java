@@ -5,12 +5,15 @@ import java.io.Serializable;
 /**
  * @author mthwate
  */
-
+@com.jme3.network.serializing.Serializable
 public class Tile implements Serializable {
 	
 	private String type;
 	
 	private int elevation;
+	
+	@Deprecated
+	public Tile() {}
 	
 	public Tile(String type, int elevation) {
 		this.type = type;

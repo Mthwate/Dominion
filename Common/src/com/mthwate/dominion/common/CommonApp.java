@@ -26,11 +26,8 @@ public abstract class CommonApp extends SimpleApplication {
 		if (new File("assets").exists()) {
 			assetManager.registerLocator("assets", FileLocator.class);
 		}
-		
 
-		Log.MAIN.info("Disabling the fly camera");
-		
-		flyCam.setEnabled(false);
+		assetManager.registerLoader(TproLoader.class, "tpro");
 		
 
 		this.init();

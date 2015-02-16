@@ -1,12 +1,9 @@
 package com.mthwate.dominion.editor;
 
-import com.jme3.asset.AssetNotFoundException;
-import com.jme3.asset.plugins.FileLocator;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
-import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
@@ -14,16 +11,15 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.shadow.DirectionalLightShadowRenderer;
-import com.jme3.shadow.EdgeFilteringMode;
 import com.mthwate.datlib.Vector2i;
-import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.CoordUtils;
-import com.mthwate.dominion.common.Log;
+import com.mthwate.dominion.common.GraphicalApp;
+import com.mthwate.dominion.common.KeyControl;
+import com.mthwate.dominion.common.MaterialUtils;
+import com.mthwate.dominion.common.SaveUtils;
 import com.mthwate.dominion.common.Tile;
-import com.mthwate.dominion.editor.mesh.HexLine;
-import com.mthwate.dominion.editor.mesh.HexSides;
-import com.mthwate.dominion.editor.mesh.Hexagon;
+import com.mthwate.dominion.common.TileStore;
+import com.mthwate.dominion.common.mesh.Hexagon;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,50 +28,15 @@ import java.util.List;
 /**
  * @author mthwate
  */
-public class EditorApp extends CommonApp {
-	
-	private KeyHandler keyHandler;
-	
-	private Tile[][] tiles = new Tile[1][1];
-
-	private Hexagon hex = new Hexagon(1);
-
-	private HexLine hexLine = new HexLine(1);
+public class EditorApp extends GraphicalApp {
 	
 	private File saveFile = new File("map.dwm");
-
-	private Node highlightNode = new Node();
-
-	private Node tileNode = new Node();
-
-	private Node sideNode = new Node();
-
-	private Node wireNode = new Node();
 	
 	@Override
 	public void init() {
-
-		if (new File("assets").exists()) {
-			assetManager.registerLocator("assets", FileLocator.class);
-		}
-
-		assetManager.registerLoader(TproLoader.class, "tpro");
 		
-		rootNode.attachChild(highlightNode);
-
-		rootNode.attachChild(tileNode);
-
-		rootNode.attachChild(sideNode);
-
-		rootNode.attachChild(wireNode);
-		
-		cam.setLocation(new Vector3f(0, -10, 15));
-		cam.lookAtDirection(new Vector3f(0, 0.5f, -1), new Vector3f(0, 0, 1));
-		
-		keyHandler = new KeyHandler(inputManager);
-
 		NiftyUtils.init(assetManager, inputManager, audioRenderer, guiViewPort);
-
+		
 		tryLoad();
 		
 		initLight();
@@ -85,11 +46,14 @@ public class EditorApp extends CommonApp {
 	
 	private void tryLoad() {
 		if (saveFile.exists()) {
-			tiles = SaveUtils.load(saveFile);
+			TileStore.set(SaveUtils.load(saveFile));
+		} else {
+			TileStore.set(new Tile[1][1]);
+			TileStore.set(new Tile("null", 0), 0, 0);
 		}
 
-		NiftyUtils.setMenuInt("width", tiles.length);
-		NiftyUtils.setMenuInt("height", tiles[0].length);
+		NiftyUtils.setMenuInt("width", TileStore.sizeX());
+		NiftyUtils.setMenuInt("height", TileStore.sizeY());
 	}
 	
 	private void initLight() {
@@ -101,136 +65,6 @@ public class EditorApp extends CommonApp {
 		dl.setDirection(new Vector3f(1, 0, -1));
 		dl.setColor(ColorRGBA.White.mult(1));
 		rootNode.addLight(dl);
-	}
-	
-	private void updateTile(int x, int y, boolean detach) {
-		
-		String name = x + "," + y;
-		
-		if (detach) {
-			while (tileNode.detachChildNamed(name) != -1) {}
-			while (sideNode.detachChildNamed(name) != -1) {}
-			while (wireNode.detachChildNamed(name) != -1) {}
-		}
-			
-		Tile tile = tiles[x][y];
-
-		String type = tile.getType();
-		float elevation = tile.getElevation() * 0.75F;
-
-		Material mat;
-		try {
-			mat = TproUtils.getMaterialFace(type, assetManager);
-		} catch (AssetNotFoundException e) {
-			mat = MaterialUtils.getTexturedMaterial("null", assetManager);
-		}
-
-		Geometry geom = new Geometry(name);
-		geom.setMesh(hex);
-		geom.setMaterial(mat);
-		geom.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation));
-
-		tileNode.attachChild(geom);
-
-
-
-		Geometry wire = new Geometry(name);
-		wire.setMesh(hexLine);
-		wire.setMaterial(MaterialUtils.getWireMaterial(assetManager));
-		wire.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.002f));
-
-		wireNode.attachChild(wire);
-
-
-		if (elevation > 0) {
-			Material matSides;
-			
-			try {
-				matSides = TproUtils.getMaterialSide(type, assetManager);
-			} catch (AssetNotFoundException e) {
-				matSides = MaterialUtils.getTexturedMaterial("null", assetManager);
-			}
-
-			HexSides hexSides = new HexSides(1, elevation);
-
-			Geometry geomSides = new Geometry(name);
-			geomSides.setMesh(hexSides);
-			geomSides.setMaterial(matSides);
-			geomSides.setLocalTranslation(CoordUtils.getPosCartesian(x, y));
-
-			sideNode.attachChild(geomSides);
-		}
-	}
-
-	private void mapUpdate() {
-		tileNode.detachAllChildren();
-		sideNode.detachAllChildren();
-		wireNode.detachAllChildren();
-		for (int x = 0; x < tiles.length; x++) {
-			for (int y = 0; y < tiles[0].length; y++) {
-				updateTile(x, y, false);
-			}
-		}
-	}
-	
-	private void zoom(float tpf) {
-		
-		float zoomMod = 100f;
-		
-		int zoom = 0;
-		
-		if (keyHandler.isPressed(KeyControl.ZOOM_IN)) {
-			zoom--;
-			keyHandler.onAction(KeyControl.ZOOM_IN.getName(), false, 0);
-		}
-		if (keyHandler.isPressed(KeyControl.ZOOM_OUT)) {
-			zoom++;
-			keyHandler.onAction(KeyControl.ZOOM_OUT.getName(), false, 0);
-		}
-		
-		Vector3f location = cam.getLocation();
-		
-		float z = location.getZ() + (zoom * tpf * zoomMod);
-
-		z = Math.max(z, 5);
-		z = Math.min(z, 250);
-
-		location.addLocal(0, 0, z - location.getZ());
-
-		cam.setLocation(location);
-	}
-
-	private void move(float tpf) {
-
-		float moveMod = 2f;
-		
-		Vector3f direction = cam.getDirection().setZ(0);
-		Vector3f left = cam.getLeft().setZ(0);
-
-		for (int i = 0; i < 3; i++) {
-			if (direction.get(i) != 0) {
-				direction.set(i, direction.get(i) / Math.abs(direction.get(i)));
-			}
-		}
-		
-		Vector3f move = new Vector3f();
-
-		if (keyHandler.isPressed(KeyControl.LEFT)) {
-			move.addLocal(left);
-		}
-		if (keyHandler.isPressed(KeyControl.RIGHT)) {
-			move.addLocal(left.negate());
-		}
-		if (keyHandler.isPressed(KeyControl.UP)) {
-			move.addLocal(direction);
-		}
-		if (keyHandler.isPressed(KeyControl.DOWN)) {
-			move.addLocal(direction.negate());
-		}
-
-		float z = cam.getLocation().getZ();
-		
-		cam.setLocation(cam.getLocation().add(move.mult(moveMod * tpf * (z-3))));
 	}
 	
 	private void look() {
@@ -272,15 +106,15 @@ public class EditorApp extends CommonApp {
 				
 				for (int xi = 0; xi < x; xi++) {
 					for (int yi = 0; yi < y; yi++) {
-						if (xi < tiles.length && yi < tiles[0].length) {
-							newTiles[xi][yi] = tiles[xi][yi];
+						if (xi < TileStore.sizeX() && yi < TileStore.sizeY()) {
+							newTiles[xi][yi] = TileStore.get(xi, yi);
 						} else {
 							newTiles[xi][yi] = new Tile("null", 0);
 						}
 					}
 				}
 				
-				tiles = newTiles;
+				TileStore.set(newTiles);
 				
 				mapUpdate();
 
@@ -293,7 +127,7 @@ public class EditorApp extends CommonApp {
 	
 	@Override
 	public void simpleUpdate(float tpf) {
-		
+
 		zoom(tpf);
 		move(tpf);
 		look();
@@ -356,7 +190,7 @@ public class EditorApp extends CommonApp {
 								g.setQueueBucket(RenderQueue.Bucket.Transparent);
 								g.setMaterial(MaterialUtils.getHighlightMaterial(assetManager));
 
-								Tile tile = tiles[px][py];
+								Tile tile = TileStore.get(px, py);
 
 								float elev = tile.getElevation();
 								
@@ -376,7 +210,7 @@ public class EditorApp extends CommonApp {
 										e += tile.getElevation();
 									}
 									
-									tiles[px][py] = new Tile(t, Math.max(e, 0));
+									TileStore.set(new Tile(t, Math.max(e, 0)), px, py);
 								}
 								
 								coords.add(new Vector2i(px, py));
@@ -432,10 +266,10 @@ public class EditorApp extends CommonApp {
 
 	private boolean validPoint(int x, int y) {
 		boolean valid = true;
-		if (x >= tiles.length || x < 0) {
+		if (x >= TileStore.sizeX() || x < 0) {
 			valid = false;
 		}
-		if (y >= tiles[0].length || y < 0) {
+		if (y >= TileStore.sizeY() || y < 0) {
 			valid = false;
 		}
 		return valid;
@@ -443,6 +277,6 @@ public class EditorApp extends CommonApp {
 
 	@Override
 	public void close() {
-		SaveUtils.save(saveFile, tiles);
+		SaveUtils.save(saveFile, TileStore.get());
 	}
 }
