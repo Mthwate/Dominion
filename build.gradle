@@ -1,0 +1,10 @@
+subprojects {
+	apply plugin: "java"
+
+	repositories {
+		mavenCentral()
+		maven {
+			url 'http://updates.jmonkeyengine.org/maven'
+		}
+	}
+}

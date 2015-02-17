@@ -1,0 +1,6 @@
+[submodule "datlib"]
+	path = datlib
+	url = ssh://git@mthwate.com/DatLib
+[submodule "naturallog"]
+	path = naturallog
+	url = ssh://git@mthwate.com/NaturalLog
