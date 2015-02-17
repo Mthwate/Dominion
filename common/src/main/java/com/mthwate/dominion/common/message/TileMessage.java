@@ -2,7 +2,6 @@ package com.mthwate.dominion.common.message;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
-import com.jme3.network.serializing.Serializer;
 import com.mthwate.datlib.math.Vector2i;
 import com.mthwate.dominion.common.Tile;
 

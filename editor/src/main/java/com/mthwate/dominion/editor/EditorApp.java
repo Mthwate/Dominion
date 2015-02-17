@@ -11,7 +11,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.mthwate.datlib.Vector2i;
+import com.mthwate.datlib.math.Vector2i;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.GraphicalApp;
 import com.mthwate.dominion.common.KeyControl;
