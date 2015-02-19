@@ -16,7 +16,6 @@ import java.io.OutputStream;
  * @author mthwate
  */
 public class Log {
-
 	private static LogWriter logWriter = new StdLogWriter(getOutputStream());
 
 	public static final Logger MAIN = new Logger("dominion", Level.ALL, logWriter);
@@ -24,6 +23,8 @@ public class Log {
 	public static final Logger CONFIG = MAIN.createChild("config");
 
 	public static final Logger MESSAGING = MAIN.createChild("messaging");
+
+	public static final Logger CONSOLE = MAIN.createChild("console");
 
 	public static final Logger ENGINE = MAIN.createChild("engine", Level.OFF);
 

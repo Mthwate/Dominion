@@ -10,8 +10,13 @@ public class CommandRegistry {
 	
 	private static Map<String, Command> commands = new HashMap<String, Command>();
 	
+	static {
+		init();
+	}
+	
 	public static void init() {
 		add(new CommandEcho());
+		add(new CommandSetTile());
 	}
 	
 	private static void add(Command cmd) {

@@ -8,6 +8,7 @@ import com.mthwate.dominion.common.SaveUtils;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.common.message.MessageUtils;
+import com.mthwate.dominion.server.command.CommandUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class ServerApp extends CommonApp {
 		
 		while (true) {
 			String line = reader.nextLine();
-			System.out.println("Read: " + line);
+			CommandUtils.run(server, line);
 		}
 			
 	}
