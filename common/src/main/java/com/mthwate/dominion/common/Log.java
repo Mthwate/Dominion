@@ -1,5 +1,6 @@
 package com.mthwate.dominion.common;
 
+import com.mthwate.datlib.DualOutputStream;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.naturallog.Level;
 import com.mthwate.naturallog.LogWriter;
@@ -29,7 +30,6 @@ public class Log {
 	public static final Logger TMP = MAIN.createChild("tmp");//TODO remove this
 	
 	private static OutputStream getOutputStream() {
-		OutputStream out = System.out;
 		
 		File file = new File("log.txt");
 		
@@ -37,10 +37,18 @@ public class Log {
 			file.delete();
 		}
 
+		FileOutputStream fos = null;
+		
 		try {
 			file.createNewFile();
-			out = new FileOutputStream(file);
+			fos = new FileOutputStream(file);
 		} catch (IOException e) {}
+		
+		OutputStream out = System.out;
+		
+		if (fos != null) {
+			out = new DualOutputStream(System.out, fos);
+		}
 		
 		return out;
 	}

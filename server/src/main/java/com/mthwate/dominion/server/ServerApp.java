@@ -11,6 +11,7 @@ import com.mthwate.dominion.common.TileStore;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * @author mthwate
@@ -38,6 +39,13 @@ public class ServerApp extends CommonApp {
 			server.start();
 		}
 
+		Scanner reader = new Scanner(System.in);
+		
+		while (true) {
+			String line = reader.nextLine();
+			System.out.println("Read: " + line);
+		}
+			
 	}
 
 	@Override
