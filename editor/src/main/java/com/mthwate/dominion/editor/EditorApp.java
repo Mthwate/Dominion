@@ -33,7 +33,9 @@ public class EditorApp extends GraphicalApp {
 	private File saveFile = new File("map.dwm");
 	
 	@Override
-	public void init() {
+	protected void init() {
+		
+		super.init();
 		
 		NiftyUtils.init(assetManager, inputManager, audioRenderer, guiViewPort);
 		

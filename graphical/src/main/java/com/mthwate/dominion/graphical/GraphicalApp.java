@@ -35,10 +35,7 @@ public abstract class GraphicalApp extends CommonApp {
 	protected KeyHandler keyHandler;
 
 	@Override
-	public void simpleInitApp() {
-		super.simpleInitApp();
-		
-		
+	protected void init() {
 		assetManager.registerLoader(TproLoader.class, "tpro");
 		
 		keyHandler = new KeyHandler(inputManager);

@@ -31,6 +31,8 @@ public class ClientApp extends GraphicalApp {
 	@Override
 	protected void init() {
 		
+		super.init();
+		
 		try {
 			client = Network.connectToServer("localhost", 6969);
 		} catch (IOException e) {
