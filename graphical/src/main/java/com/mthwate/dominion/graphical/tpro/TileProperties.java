@@ -7,6 +7,6 @@ public class TileProperties {
 	
 	public String[] textures = {"null"};
 
-	public String[] sides = {"stone"};
+	public String[] sides = {"stoneSide"};
 	
 }
