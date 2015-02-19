@@ -22,7 +22,7 @@ public abstract class GraphicalApp extends CommonApp {
 
 	protected Hexagon hex = new Hexagon(1);
 
-	protected HexLine hexLine = new HexLine(1);
+	//protected HexLine hexLine = new HexLine(1);
 	
 	protected Node highlightNode = new Node();
 
@@ -102,7 +102,7 @@ public abstract class GraphicalApp extends CommonApp {
 
 
 		Geometry wire = new Geometry(name);
-		wire.setMesh(hexLine);
+		wire.setMesh(new HexLine(1, elevation));
 		wire.setMaterial(MaterialUtils.getWireMaterial(assetManager));
 		wire.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.002f));
 
