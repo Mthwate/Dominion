@@ -17,6 +17,7 @@ public class CommandRegistry {
 	public static void init() {
 		add(new CommandEcho());
 		add(new CommandSetTile());
+		add(new CommandUsers());
 	}
 	
 	private static void add(Command cmd) {

@@ -5,6 +5,7 @@ import com.mthwate.datlib.IOUtils;
 import com.mthwate.naturallog.Level;
 import com.mthwate.naturallog.LogWriter;
 import com.mthwate.naturallog.Logger;
+import com.mthwate.naturallog.PrefixLogWriter;
 import com.mthwate.naturallog.StdLogWriter;
 
 import java.io.File;
@@ -24,7 +25,7 @@ public class Log {
 
 	public static final Logger MESSAGING = MAIN.createChild("messaging");
 
-	public static final Logger CONSOLE = MAIN.createChild("console");
+	public static final Logger CONSOLE = MAIN.createChild("console", Level.ALL, new PrefixLogWriter(System.out, "  "));
 
 	public static final Logger ENGINE = MAIN.createChild("engine", Level.OFF);
 

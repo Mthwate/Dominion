@@ -25,6 +25,8 @@ public class ServerListener implements MessageListener<HostedConnection> {
 			Log.TMP.info("Received message of type " + msg.getClass());
 			
 			if (msg instanceof LoginMessage) {
+				LoginMessage loginMsg = (LoginMessage) msg;
+				source.setAttribute("username", loginMsg.getUsername());
 				MessageUtils.send(source, new MapMessage(TileStore.get()));
 			}
 			
