@@ -6,14 +6,20 @@ dependencies {
 	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.09"
 	compile "org.bushe:eventbus:1.4"
 	compile "com.jme3:jme3-core:$jme_version"
-	compile "com.jme3:jme3-effects:$jme_version"
 	compile "com.jme3:jme3-networking:$jme_version"
-	compile "com.jme3:jme3-plugins:$jme_version"
-	compile "com.jme3:jme3-jogg:$jme_version"
-	compile "com.jme3:jme3-terrain:$jme_version"
-	compile "com.jme3:jme3-blender:$jme_version"
-	compile "com.jme3:jme3-jbullet:$jme_version"
 	compile "com.jme3:jme3-niftygui:$jme_version"
 	compile "com.jme3:jme3-desktop:$jme_version"
 	compile "com.jme3:jme3-lwjgl:$jme_version"
 }
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+
+	dependencies {
+		classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
+	}
+}
+
+apply plugin: 'eu.appsatori.fatjar'
