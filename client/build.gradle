@@ -2,14 +2,8 @@ dependencies {
 	compile project(':graphical')
 }
 
-buildscript {
-	repositories {
-		jcenter()
-	}
-
-	dependencies {
-		classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.mthwate.dominion.client.ClientMain'
 	}
 }
-
-apply plugin: 'eu.appsatori.fatjar'

@@ -4,17 +4,5 @@ dependencies {
 	compile "com.mthwate.datlib:datlib:1.0"
 	compile "com.mthwate.naturallog:naturallog:1.0"
 	compile "com.jme3:jme3-networking:$jme_version"
-	compile "com.jme3:jme3-desktop:$jme_version"
+	runtime "com.jme3:jme3-desktop:$jme_version"
 }
-
-buildscript {
-	repositories {
-		jcenter()
-	}
-
-	dependencies {
-		classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
-	}
-}
-
-apply plugin: 'eu.appsatori.fatjar'
