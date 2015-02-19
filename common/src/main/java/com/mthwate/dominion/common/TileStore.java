@@ -1,6 +1,6 @@
 package com.mthwate.dominion.common;
 
-import com.mthwate.datlib.math.Vector2i;
+import com.mthwate.datlib.math.Set2i;
 
 /**
  * @author mthwate
@@ -33,7 +33,7 @@ public class TileStore {
 		tiles[x][y] = tile;
 	}
 
-	public static void set(Tile tile, Vector2i pos) {
+	public static void set(Tile tile, Set2i pos) {
 		set(tile, pos.getX(), pos.getY());
 	}
 

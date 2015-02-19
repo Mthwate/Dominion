@@ -11,7 +11,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.mthwate.datlib.math.Vector2i;
+import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.GraphicalApp;
 import com.mthwate.dominion.common.KeyControl;
@@ -163,7 +163,7 @@ public class EditorApp extends GraphicalApp {
 				int size = NiftyUtils.getMenuInt("brushSize");
 
 
-				List<Vector2i> coords = new ArrayList<Vector2i>();
+				List<Set2i> coords = new ArrayList<Set2i>();
 
 				for (int ix = -size + 1; ix < size; ix++) {
 					for (int iy = -size + 1; iy < size; iy++) {
@@ -212,7 +212,7 @@ public class EditorApp extends GraphicalApp {
 									}
 
 									if (change) {
-										coords.add(new Vector2i(px, py));
+										coords.add(new Set2i(px, py));
 									}
 								}
 							}
@@ -233,7 +233,7 @@ public class EditorApp extends GraphicalApp {
 								int cx = Integer.parseInt(childSplit[0]);
 								int cy = Integer.parseInt(childSplit[1]);
 
-								if (coords.contains(new Vector2i(cx, cy))) {
+								if (coords.contains(new Set2i(cx, cy))) {
 									ints.add(i);
 								}
 							}
@@ -246,7 +246,7 @@ public class EditorApp extends GraphicalApp {
 						}
 					}
 
-					for (Vector2i coord : coords) {
+					for (Set2i coord : coords) {
 						updateTile(coord.getX(), coord.getY(), false);
 					}
 				}

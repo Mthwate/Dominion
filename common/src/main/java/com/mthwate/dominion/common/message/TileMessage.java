@@ -2,7 +2,7 @@ package com.mthwate.dominion.common.message;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
-import com.mthwate.datlib.math.Vector2i;
+import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Tile;
 
 /**
@@ -29,8 +29,8 @@ public class TileMessage extends AbstractMessage {
 		return this.tile;
 	}
 
-	public Vector2i getPos() {
-		return new Vector2i(x, y);
+	public Set2i getPos() {
+		return new Set2i(x, y);
 	}
 	
 }
