@@ -8,7 +8,7 @@ import com.mthwate.dominion.common.Starter;
 public class EditorMain {
 
 	public static void main(String[] args) {
-		Starter.start(new EditorApp(), true);
+		Starter.start(new EditorApp(), true, "Dominion Map Editor");
 	}
 
 }

@@ -8,7 +8,7 @@ import com.mthwate.dominion.common.Starter;
 public class ClientMain {
 	
 	public static void main(String[] args) {
-		Starter.start(new ClientApp(), true);
+		Starter.start(new ClientApp(), true, "Dominion");
 	}
 	
 }
