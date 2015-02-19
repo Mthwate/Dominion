@@ -1,8 +1,8 @@
 def jme_version = '3.0.10'
 
 dependencies {
-	compile project(':datlib')
-	compile project(':naturallog')
+	compile "com.mthwate.datlib:datlib:1.0"
+	compile "com.mthwate.naturallog:naturallog:1.0"
 	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.09"
 	compile "org.bushe:eventbus:1.4"
 	compile "com.jme3:jme3-core:$jme_version"

@@ -6,5 +6,8 @@ subprojects {
 		maven {
 			url 'http://updates.jmonkeyengine.org/maven'
 		}
+		maven {
+			url 'http://mthwate.com/maven'
+		}
 	}
 }

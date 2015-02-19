@@ -6,7 +6,3 @@ include 'server'
 
 include 'client'
 
-include 'datlib'
-
-include 'naturallog'
-
