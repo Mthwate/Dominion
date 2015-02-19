@@ -7,9 +7,9 @@ import com.jme3.math.Vector3f;
 import com.jme3.network.Client;
 import com.jme3.network.Network;
 import com.jme3.network.message.GZIPCompressedMessage;
-import com.mthwate.dominion.common.GraphicalApp;
 import com.mthwate.dominion.common.log.Log;
-import com.mthwate.dominion.common.MessageUtils;
+import com.mthwate.dominion.graphical.GraphicalApp;
+import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.LoginMessage;
 
 import java.io.IOException;

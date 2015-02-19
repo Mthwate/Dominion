@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.graphical;
 
 import com.jme3.math.Vector3f;
 
@@ -32,7 +32,7 @@ public class CoordUtils {
 	}
 
 	public static Vector3f getPosCartesian(int x, int y) {
-		return getPosHex(x, com.mthwate.dominion.common.CoordUtils.cartesianToHex(x, y));
+		return getPosHex(x, CoordUtils.cartesianToHex(x, y));
 	}
 
 	public static Vector3f getPosHex(int x, int y) {

@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.graphical;
 
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;

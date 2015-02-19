@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.graphical;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;

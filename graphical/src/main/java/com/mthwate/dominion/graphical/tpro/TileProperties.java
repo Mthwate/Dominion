@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common.tpro;
+package com.mthwate.dominion.graphical.tpro;
 
 /**
  * @author mthwate

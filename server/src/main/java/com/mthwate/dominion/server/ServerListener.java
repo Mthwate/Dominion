@@ -5,10 +5,10 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.dominion.common.log.Log;
-import com.mthwate.dominion.common.MessageUtils;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MapMessage;
+import com.mthwate.dominion.common.message.MessageUtils;
 
 /**
  * @author mthwate

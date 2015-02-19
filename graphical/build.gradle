@@ -1,5 +1,5 @@
 dependencies {
-	compile project(':graphical')
+	compile project(':common')
 }
 
 buildscript {

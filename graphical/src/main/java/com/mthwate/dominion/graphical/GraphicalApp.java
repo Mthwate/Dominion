@@ -1,15 +1,19 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.graphical;
 
 import com.jme3.asset.AssetNotFoundException;
 import com.jme3.material.Material;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.mthwate.dominion.common.CommonApp;
+import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.log.Log;
-import com.mthwate.dominion.common.mesh.HexLine;
-import com.mthwate.dominion.common.mesh.HexSides;
-import com.mthwate.dominion.common.mesh.Hexagon;
-import com.mthwate.dominion.common.tpro.TproUtils;
+import com.mthwate.dominion.graphical.mesh.HexLine;
+import com.mthwate.dominion.graphical.mesh.HexSides;
+import com.mthwate.dominion.graphical.mesh.Hexagon;
+import com.mthwate.dominion.graphical.tpro.TproLoader;
+import com.mthwate.dominion.graphical.tpro.TproUtils;
 
 /**
  * @author mthwate
@@ -33,6 +37,9 @@ public abstract class GraphicalApp extends CommonApp {
 	@Override
 	public void simpleInitApp() {
 		super.simpleInitApp();
+		
+		
+		assetManager.registerLoader(TproLoader.class, "tpro");
 		
 		keyHandler = new KeyHandler(inputManager);
 		

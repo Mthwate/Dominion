@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common.mesh;
+package com.mthwate.dominion.graphical.mesh;
 
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;

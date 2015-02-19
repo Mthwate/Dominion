@@ -2,6 +2,7 @@ package com.mthwate.dominion.common;
 
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
+import com.mthwate.dominion.common.CommonApp;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
