@@ -1,6 +1,7 @@
 package com.mthwate.dominion.common;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.asset.plugins.ClasspathLocator;
 import com.jme3.asset.plugins.FileLocator;
 import com.mthwate.dominion.common.log.Log;
 
@@ -25,7 +26,9 @@ public abstract class CommonApp extends SimpleApplication {
 		Log.MAIN.info("Registering asset locator");
 		
 		if (new File("assets").exists()) {
+			assetManager.unregisterLocator("/", ClasspathLocator.class);
 			assetManager.registerLocator("assets", FileLocator.class);
+			assetManager.registerLocator("/", ClasspathLocator.class);
 		}
 		
 
