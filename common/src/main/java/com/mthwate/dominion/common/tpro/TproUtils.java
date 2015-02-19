@@ -1,7 +1,8 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.common.tpro;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
+import com.mthwate.dominion.common.MaterialUtils;
 
 import java.util.HashMap;
 import java.util.Map;

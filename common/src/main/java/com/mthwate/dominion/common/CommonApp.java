@@ -2,6 +2,8 @@ package com.mthwate.dominion.common;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.FileLocator;
+import com.mthwate.dominion.common.log.Log;
+import com.mthwate.dominion.common.tpro.TproLoader;
 
 import java.io.File;
 import java.io.PrintWriter;

@@ -1,6 +1,6 @@
 package com.mthwate.dominion.server.command;
 
-import com.mthwate.dominion.common.Log;
+import com.mthwate.dominion.common.log.Log;
 
 /**
  * @author mthwate

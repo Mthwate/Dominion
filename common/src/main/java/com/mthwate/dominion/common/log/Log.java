@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.common.log;
 
 import com.mthwate.datlib.DualOutputStream;
 import com.mthwate.datlib.IOUtils;

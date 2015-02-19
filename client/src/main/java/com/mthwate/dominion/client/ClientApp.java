@@ -8,7 +8,7 @@ import com.jme3.network.Client;
 import com.jme3.network.Network;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.dominion.common.GraphicalApp;
-import com.mthwate.dominion.common.Log;
+import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.common.MessageUtils;
 import com.mthwate.dominion.common.message.LoginMessage;
 
