@@ -63,6 +63,7 @@ public class ClientApp extends GraphicalApp {
 
 		zoom(tpf);
 		move(tpf);
+		listenWire();
 		
 		if (worldChange) {
 			worldChange = false;

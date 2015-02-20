@@ -189,4 +189,18 @@ public abstract class GraphicalApp extends CommonApp {
 		cam.setLocation(cam.getLocation().add(move.mult(moveMod * tpf * (z-3))));
 	}
 	
+	protected void listenWire() {
+
+		if (keyHandler.isPressed(KeyControl.TOGGLE_WIRE)) {
+			keyHandler.onAction(KeyControl.TOGGLE_WIRE.getName(), false, 0);
+
+			if (wireNode.getParent() == null) {
+				rootNode.attachChild(wireNode);
+			} else {
+				wireNode.removeFromParent();
+			}
+		}
+		
+	}
+	
 }

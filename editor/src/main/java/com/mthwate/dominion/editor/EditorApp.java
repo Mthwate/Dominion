@@ -121,16 +121,7 @@ public class EditorApp extends GraphicalApp {
 		move(tpf);
 		look();
 		menu();
-
-		if (keyHandler.isPressed(KeyControl.TOGGLE_WIRE)) {
-			keyHandler.onAction(KeyControl.TOGGLE_WIRE.getName(), false, 0);
-			
-			if (wireNode.getParent() == null) {
-				rootNode.attachChild(wireNode);
-			} else {
-				wireNode.removeFromParent();
-			}
-		}
+		listenWire();
 
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
