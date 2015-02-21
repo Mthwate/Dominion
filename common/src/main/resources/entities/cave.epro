@@ -1,0 +1,3 @@
+model: cave
+texture: cave
+moveable: false

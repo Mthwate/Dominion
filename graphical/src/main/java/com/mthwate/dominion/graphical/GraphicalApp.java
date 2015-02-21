@@ -1,10 +1,12 @@
 package com.mthwate.dominion.graphical;
 
 import com.jme3.asset.AssetNotFoundException;
+import com.jme3.collision.CollisionResults;
 import com.jme3.material.Material;
 import com.jme3.math.FastMath;
-import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
+import com.jme3.math.Ray;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
@@ -13,6 +15,8 @@ import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
+import com.mthwate.dominion.common.epro.EntityProperties;
+import com.mthwate.dominion.common.epro.EproUtils;
 import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.graphical.mesh.HexLine;
 import com.mthwate.dominion.graphical.mesh.HexSides;
@@ -140,11 +144,12 @@ public abstract class GraphicalApp extends CommonApp {
 		}
 		
 		if (tile.hasInhabitant()) {
-			String inhabitant = tile.getInhabitant();
-			Spatial model = assetManager.loadModel("obj/" + inhabitant + ".obj");
+			EntityProperties inhabitant = tile.getInhabitant();
+			
+			Spatial model = assetManager.loadModel("obj/" + inhabitant.model + ".obj");
 			model.setName(name);
-			model.setMaterial(MaterialUtils.getTexturedMaterial(inhabitant, assetManager));
-			model.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.002f));
+			model.setMaterial(MaterialUtils.getTexturedMaterial(inhabitant.texture, assetManager));
+			model.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.004f));
 			model.setLocalScale(0.1f, 0.1f, 0.1f);
 
 			Quaternion rotation = new Quaternion();
@@ -230,6 +235,16 @@ public abstract class GraphicalApp extends CommonApp {
 			}
 		}
 		
+	}
+
+	protected CollisionResults clickCollisions() {
+		CollisionResults results = new CollisionResults();
+		Vector2f click2d = inputManager.getCursorPosition();
+		Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
+		Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d).normalizeLocal();
+		Ray ray = new Ray(click3d, dir);
+		tileNode.collideWith(ray, results);
+		return results;
 	}
 	
 }

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class Starter {
 	
 	public static void start(CommonApp app, boolean graphical, String name) {
-		Logger.getLogger("").setLevel(Level.OFF);
+		//Logger.getLogger("").setLevel(Level.OFF);
 
 		if (graphical) {
 			AppSettings settings = new AppSettings(false);

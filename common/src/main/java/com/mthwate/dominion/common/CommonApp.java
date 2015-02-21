@@ -3,6 +3,7 @@ package com.mthwate.dominion.common;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.ClasspathLocator;
 import com.jme3.asset.plugins.FileLocator;
+import com.mthwate.dominion.common.epro.EproLoader;
 import com.mthwate.dominion.common.log.Log;
 
 import java.io.File;
@@ -30,7 +31,8 @@ public abstract class CommonApp extends SimpleApplication {
 			assetManager.registerLocator("assets", FileLocator.class);
 			assetManager.registerLocator("/", ClasspathLocator.class);
 		}
-		
+
+		assetManager.registerLoader(EproLoader.class, "epro");
 
 		this.init();
 	}

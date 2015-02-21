@@ -1,4 +1,4 @@
-package com.mthwate.dominion.graphical.tpro;
+package com.mthwate.dominion.common.epro;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.jme3.asset.AssetInfo;
@@ -10,16 +10,16 @@ import java.io.InputStreamReader;
 /**
  * @author mthwate
  */
-public class TproLoader implements AssetLoader {
+public class EproLoader implements AssetLoader {
 	
 	@Override
-	public TileProperties load(AssetInfo assetInfo) throws IOException {
+	public EntityProperties load(AssetInfo assetInfo) throws IOException {
 
 		InputStreamReader isr = new InputStreamReader(assetInfo.openStream());
 		
 		YamlReader yr = new YamlReader(isr);
 
-		TileProperties properties = yr.read(TileProperties.class);
+		EntityProperties properties = yr.read(EntityProperties.class);
 
 		yr.close();
 		isr.close();

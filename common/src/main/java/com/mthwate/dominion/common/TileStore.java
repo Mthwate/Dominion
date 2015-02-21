@@ -1,7 +1,6 @@
 package com.mthwate.dominion.common;
 
 import com.mthwate.datlib.math.Set2i;
-import com.mthwate.dominion.common.Tile;
 
 /**
  * @author mthwate
@@ -46,6 +45,10 @@ public class TileStore {
 		return tiles[x][y];
 	}
 	
+	public static Tile get(Set2i pos) {
+		return get(pos.getX(), pos.getY());
+	}
+	
 	public static int sizeX() {
 		int size = 0;
 		
@@ -58,6 +61,17 @@ public class TileStore {
 
 	public static int sizeY() {
 		return tiles[0].length;
+	}
+
+	public static boolean validPoint(int x, int y) {
+		boolean valid = true;
+		if (x >= sizeX() || x < 0) {
+			valid = false;
+		}
+		if (y >= sizeY() || y < 0) {
+			valid = false;
+		}
+		return valid;
 	}
 	
 }

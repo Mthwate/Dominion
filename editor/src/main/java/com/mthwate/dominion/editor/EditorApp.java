@@ -1,24 +1,21 @@
 package com.mthwate.dominion.editor;
 
 import com.jme3.collision.CollisionResult;
-import com.jme3.collision.CollisionResults;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Ray;
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
+import com.mthwate.dominion.common.SaveUtils;
+import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.graphical.CoordUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.MaterialUtils;
-import com.mthwate.dominion.common.SaveUtils;
-import com.mthwate.dominion.common.Tile;
-import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.graphical.mesh.Hexagon;
 
 import java.io.File;
@@ -136,10 +133,10 @@ public class EditorApp extends GraphicalApp {
 
 		highlightNode.detachAllChildren();
 
-		highlight(keyHandler.isPressed(KeyControl.CLICK));
+		highlight();
 	}
 	
-	private void highlight(boolean clicked) {
+	private void highlight() {
 		CollisionResult result = clickCollisions().getClosestCollision();
 		if (result != null) {
 			Geometry geom = result.getGeometry();
@@ -156,6 +153,8 @@ public class EditorApp extends GraphicalApp {
 				int size = NiftyUtils.getMenuInt("brushSize");
 
 
+				boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
+				
 				List<Set2i> coords = new ArrayList<Set2i>();
 
 				for (int ix = -size + 1; ix < size; ix++) {
@@ -163,7 +162,7 @@ public class EditorApp extends GraphicalApp {
 						if (Math.abs(ix + iy) < size) {
 							int px = x + ix;
 							int py = CoordUtils.hexToCartesian(px, CoordUtils.cartesianToHex(x, y) + iy);
-							if (validPoint(px, py)) {
+							if (TileStore.validPoint(px, py)) {
 
 								Geometry g = new Geometry("selected");
 								g.setMesh(hex);
@@ -246,27 +245,6 @@ public class EditorApp extends GraphicalApp {
 
 			}
 		}
-	}
-	
-	private CollisionResults clickCollisions() {
-		CollisionResults results = new CollisionResults();
-		Vector2f click2d = inputManager.getCursorPosition();
-		Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
-		Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d).normalizeLocal();
-		Ray ray = new Ray(click3d, dir);
-		tileNode.collideWith(ray, results);
-		return results;
-	}
-
-	private boolean validPoint(int x, int y) {
-		boolean valid = true;
-		if (x >= TileStore.sizeX() || x < 0) {
-			valid = false;
-		}
-		if (y >= TileStore.sizeY() || y < 0) {
-			valid = false;
-		}
-		return valid;
 	}
 
 	@Override

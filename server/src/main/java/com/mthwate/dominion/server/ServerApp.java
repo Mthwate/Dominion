@@ -44,7 +44,7 @@ public class ServerApp extends CommonApp {
 		
 		while (true) {
 			String line = reader.nextLine();
-			CommandUtils.run(server, line);
+			CommandUtils.run(server, assetManager, line);
 		}
 			
 	}

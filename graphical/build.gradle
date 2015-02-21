@@ -2,7 +2,6 @@ def jme_version = '3.0.10'
 
 dependencies {
 	compile project(':common')
-	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.09"
 	runtime "org.bushe:eventbus:1.4"
 	compile "com.jme3:jme3-core:$jme_version"
 	compile "com.jme3:jme3-niftygui:$jme_version"

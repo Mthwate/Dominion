@@ -5,6 +5,7 @@ import com.jme3.network.MessageConnection;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.jme3.network.serializing.Serializer;
 import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.epro.EntityProperties;
 import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.TileMessage;
@@ -22,8 +23,10 @@ public class MessageUtils {
 		Serializer.registerClass(LoginMessage.class);
 		Serializer.registerClass(TileMessage.class);
 		Serializer.registerClass(MapMessage.class);
+		Serializer.registerClass(MoveMessage.class);
 		
 		Serializer.registerClass(Tile.class);
+		Serializer.registerClass(EntityProperties.class);
 	}
 	
 }
