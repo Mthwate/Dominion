@@ -5,10 +5,14 @@ import com.jme3.network.Server;
 import com.mthwate.datlib.StringUtils;
 import com.mthwate.dominion.common.log.Log;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public class CommandUtils {
+
+	private static final Logger log = Logger.getLogger(CommandUtils.class.getName());
 	
 	public static void run(Server server, AssetManager assetManager, String line) {
 		String[] split = line.split(" ");
@@ -17,7 +21,7 @@ public class CommandUtils {
 		if (cmd != null) {
 			cmd.run(server, assetManager, StringUtils.join(split, 1, " "));
 		} else {
-			Log.CONSOLE.info("Command not found: " + name);
+			log.info("Command not found: " + name);
 		}
 	}
 	

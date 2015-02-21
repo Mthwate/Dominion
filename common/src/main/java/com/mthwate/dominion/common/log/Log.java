@@ -1,35 +1,33 @@
 package com.mthwate.dominion.common.log;
 
 import com.mthwate.datlib.DualOutputStream;
-import com.mthwate.datlib.IOUtils;
-import com.mthwate.naturallog.Level;
-import com.mthwate.naturallog.LogWriter;
-import com.mthwate.naturallog.Logger;
-import com.mthwate.naturallog.PrefixLogWriter;
-import com.mthwate.naturallog.StdLogWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
 
 /**
  * @author mthwate
  */
 public class Log {
-	private static LogWriter logWriter = new StdLogWriter(getOutputStream());
+	
+	public static void init() {
+		Logger root = Logger.getLogger("");
 
-	public static final Logger MAIN = new Logger("dominion", Level.ALL, logWriter);
+		for (Handler handler : root.getHandlers()) {
+			root.removeHandler(handler);
+		}
 
-	public static final Logger CONFIG = MAIN.createChild("config");
-
-	public static final Logger MESSAGING = MAIN.createChild("messaging");
-
-	public static final Logger CONSOLE = MAIN.createChild("console", Level.ALL, new PrefixLogWriter(System.out, "  "));
-
-	public static final Logger ENGINE = MAIN.createChild("engine", Level.OFF);
-
-	public static final Logger TMP = MAIN.createChild("tmp");//TODO remove this
+		root.addHandler(new LiveStreamHandler(getOutputStream(), new SimpleFormatter()));
+		
+		root.setLevel(Level.ALL);
+	}
 	
 	private static OutputStream getOutputStream() {
 		
@@ -53,10 +51,6 @@ public class Log {
 		}
 		
 		return out;
-	}
-	
-	public static void close() {
-		IOUtils.close(MAIN);//Closing main will close all child loggers
 	}
 	
 }

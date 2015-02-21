@@ -8,10 +8,14 @@ import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public class CommandSetTile implements Command {
+
+	private static final Logger log = Logger.getLogger(CommandSetTile.class.getName());
 	
 	@Override
 	public String getName() {
@@ -36,7 +40,7 @@ public class CommandSetTile implements Command {
 				MessageUtils.send(connection, new MapMessage(TileStore.get()));
 			}
 		} else {
-			Log.CONSOLE.error("Error");
+			log.severe("Error");
 		}
 		
 	}

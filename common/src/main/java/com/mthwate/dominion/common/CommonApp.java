@@ -9,22 +9,27 @@ import com.mthwate.dominion.common.log.Log;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
 public abstract class CommonApp extends SimpleApplication {
 
+	private static final Logger log = Logger.getLogger(CommonApp.class.getName());
+	
 	protected abstract void init();
 	
 	protected abstract void close();
 
 	@Override
 	public void simpleInitApp() {
-		Log.MAIN.info("Initializing log");
+		log.info("Initializing log");
 		
 
-		Log.MAIN.info("Registering asset locator");
+		log.info("Registering asset locator");
 		
 		if (new File("assets").exists()) {
 			assetManager.unregisterLocator("/", ClasspathLocator.class);
@@ -41,20 +46,11 @@ public abstract class CommonApp extends SimpleApplication {
 	public void destroy() {
 		this.close();
 
-		Log.MAIN.info("Closing log");
-		Log.close();
-
 		super.destroy();
 	}
 
 	@Override
 	public void handleError(String msg, Throwable err) {
-		Log.MAIN.error(msg);
-
-		StringWriter stringWriter = new StringWriter();
-		PrintWriter printWriter = new PrintWriter(stringWriter);
-		err.printStackTrace(printWriter);
-
-		Log.MAIN.info(stringWriter.toString());
+		log.log(Level.SEVERE, msg, err);
 	}
 }

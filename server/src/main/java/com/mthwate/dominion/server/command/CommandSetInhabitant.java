@@ -9,10 +9,14 @@ import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public class CommandSetInhabitant implements Command {
+
+	private static final Logger log = Logger.getLogger(CommandSetInhabitant.class.getName());
 	
 	@Override
 	public String getName() {
@@ -37,7 +41,7 @@ public class CommandSetInhabitant implements Command {
 				MessageUtils.send(connection, new MapMessage(TileStore.get()));
 			}
 		} else {
-			Log.CONSOLE.error("Error");
+			log.severe("Error");
 		}
 	}
 	

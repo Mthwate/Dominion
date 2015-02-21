@@ -25,11 +25,14 @@ import com.mthwate.dominion.graphical.mesh.Hexagon;
 
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
 public class ClientApp extends GraphicalApp {
+
+	private static final Logger log = Logger.getLogger(ClientApp.class.getName());
 	
 	private Client client;
 	
@@ -128,7 +131,7 @@ public class ClientApp extends GraphicalApp {
 
 	@Override
 	protected void close() {
-		Log.MAIN.info("Stopping application");
+		log.info("Stopping application");
 		if (client != null) {
 			client.close();
 		}

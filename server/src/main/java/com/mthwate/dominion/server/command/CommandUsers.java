@@ -5,10 +5,14 @@ import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 import com.mthwate.dominion.common.log.Log;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public class CommandUsers implements Command {
+
+	private static final Logger log = Logger.getLogger(CommandUsers.class.getName());
 	
 	@Override
 	public String getName() {
@@ -18,7 +22,7 @@ public class CommandUsers implements Command {
 	@Override
 	public void run(Server server, AssetManager assetManager, String params) {
 		for (HostedConnection connection : server.getConnections()) {
-			Log.CONSOLE.info(connection.getId() + ": " + connection.getAttribute("username"));
+			log.info(connection.getId() + ": " + connection.getAttribute("username"));
 		}
 	}
 	

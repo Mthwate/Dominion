@@ -13,11 +13,14 @@ import com.mthwate.dominion.server.command.CommandUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
 public class ServerApp extends CommonApp {
+
+	private static final Logger log = Logger.getLogger(ServerApp.class.getName());
 	
 	private Server server;
 
@@ -51,7 +54,7 @@ public class ServerApp extends CommonApp {
 
 	@Override
 	protected void close() {
-		Log.MAIN.info("Stopping server");
+		log.info("Stopping server");
 		if (server != null) {
 			server.close();
 		}

@@ -24,14 +24,16 @@ import com.mthwate.dominion.graphical.mesh.Hexagon;
 import com.mthwate.dominion.graphical.tpro.TproLoader;
 import com.mthwate.dominion.graphical.tpro.TproUtils;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public abstract class GraphicalApp extends CommonApp {
 
+	private static final Logger log = Logger.getLogger(GraphicalApp.class.getName());
+	
 	protected Hexagon hex = new Hexagon(1);
-
-	//protected HexLine hexLine = new HexLine(1);
 	
 	protected Node highlightNode = new Node();
 
@@ -62,7 +64,7 @@ public abstract class GraphicalApp extends CommonApp {
 		rootNode.attachChild(modelNode);
 		
 
-		Log.MAIN.info("Disabling the fly camera");
+		log.info("Disabling the fly camera");
 
 		flyCam.setEnabled(false);
 		

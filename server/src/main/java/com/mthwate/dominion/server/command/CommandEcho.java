@@ -4,17 +4,21 @@ import com.jme3.asset.AssetManager;
 import com.jme3.network.Server;
 import com.mthwate.dominion.common.log.Log;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public class CommandEcho implements Command {
+
+	private static final Logger log = Logger.getLogger(CommandEcho.class.getName());
 	
 	public String getName() {
 		return "echo";
 	}
 	
 	public void run(Server server, AssetManager assetManager, String params) {
-		Log.CONSOLE.info(params);
+		log.info(params);
 	}
 	
 }

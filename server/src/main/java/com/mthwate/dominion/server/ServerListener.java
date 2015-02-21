@@ -14,10 +14,14 @@ import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public class ServerListener implements MessageListener<HostedConnection> {
+
+	private static final Logger log = Logger.getLogger(ServerListener.class.getName());
 	
 	@Override
 	public void messageReceived(HostedConnection connection, Message m) {
@@ -48,11 +52,11 @@ public class ServerListener implements MessageListener<HostedConnection> {
 					}
 				}
 			} else {
-				Log.MESSAGING.warning("Invalid message type \"" + m.getClass() + "\" received");
+				log.warning("Invalid message type \"" + m.getClass() + "\" received");
 			}
 			
 		} else {
-			Log.MESSAGING.warning("Invalid message type \"" + m.getClass() + "\" received");
+			log.warning("Invalid message type \"" + m.getClass() + "\" received");
 		}
 		
 	}
