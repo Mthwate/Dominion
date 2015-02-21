@@ -26,6 +26,7 @@ public class MaterialUtils {
 		if (material == null) {
 			material = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
 			material.setTexture("DiffuseMap", TextureUtils.getTexture("textures/" + name + ".png", assetManager));
+			material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
 			materials.put(name, material);
 		}
 		

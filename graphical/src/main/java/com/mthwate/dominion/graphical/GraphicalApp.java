@@ -2,9 +2,14 @@ package com.mthwate.dominion.graphical;
 
 import com.jme3.asset.AssetNotFoundException;
 import com.jme3.material.Material;
+import com.jme3.math.FastMath;
+import com.jme3.math.Matrix3f;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
@@ -32,6 +37,8 @@ public abstract class GraphicalApp extends CommonApp {
 
 	protected Node wireNode = new Node();
 
+	protected Node modelNode = new Node();
+
 	protected KeyHandler keyHandler;
 
 	@Override
@@ -47,6 +54,8 @@ public abstract class GraphicalApp extends CommonApp {
 		rootNode.attachChild(sideNode);
 
 		rootNode.attachChild(wireNode);
+
+		rootNode.attachChild(modelNode);
 		
 
 		Log.MAIN.info("Disabling the fly camera");
@@ -63,6 +72,7 @@ public abstract class GraphicalApp extends CommonApp {
 		tileNode.detachAllChildren();
 		sideNode.detachAllChildren();
 		wireNode.detachAllChildren();
+		modelNode.detachAllChildren();
 		for (int x = 0; x < TileStore.sizeX(); x++) {
 			for (int y = 0; y < TileStore.sizeY(); y++) {
 				updateTile(x, y, false);
@@ -78,6 +88,7 @@ public abstract class GraphicalApp extends CommonApp {
 			while (tileNode.detachChildNamed(name) != -1) {}
 			while (sideNode.detachChildNamed(name) != -1) {}
 			while (wireNode.detachChildNamed(name) != -1) {}
+			while (modelNode.detachChildNamed(name) != -1) {}
 		}
 
 		Tile tile = TileStore.get(x, y);
@@ -126,6 +137,24 @@ public abstract class GraphicalApp extends CommonApp {
 			geomSides.setLocalTranslation(CoordUtils.getPosCartesian(x, y));
 
 			sideNode.attachChild(geomSides);
+		}
+		
+		if (tile.hasInhabitant()) {
+			String inhabitant = tile.getInhabitant();
+			Spatial model = assetManager.loadModel("obj/" + inhabitant + ".obj");
+			model.setName(name);
+			model.setMaterial(MaterialUtils.getTexturedMaterial(inhabitant, assetManager));
+			model.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.002f));
+			model.setLocalScale(0.1f, 0.1f, 0.1f);
+
+			Quaternion rotation = new Quaternion();
+			rotation.fromAngleAxis(FastMath.PI / 2, new Vector3f(1, 0, 0));
+			model.setLocalRotation(rotation);
+
+			model.setQueueBucket(RenderQueue.Bucket.Transparent);
+
+
+			modelNode.attachChild(model);
 		}
 	}
 
