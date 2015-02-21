@@ -192,9 +192,9 @@ public abstract class GraphicalApp extends CommonApp {
 		Vector3f direction = cam.getDirection().setZ(0);
 		Vector3f left = cam.getLeft().setZ(0);
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 2; i++) {//loops through the x and y coordinates (z is already set to 0)
 			if (direction.get(i) != 0) {
-				direction.set(i, direction.get(i) / Math.abs(direction.get(i)));
+				direction.set(i, direction.get(i) / Math.abs(direction.get(i)));//sets the magnitude to 1 or -1
 			}
 		}
 
