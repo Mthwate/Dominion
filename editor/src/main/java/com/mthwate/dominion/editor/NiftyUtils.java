@@ -5,8 +5,13 @@ import com.jme3.audio.AudioRenderer;
 import com.jme3.input.InputManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
+import com.mthwate.dominion.graphical.tpro.TileProperties;
+import com.mthwate.dominion.graphical.tpro.TproUtils;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.controls.TextField;
+
+import java.util.List;
 
 /**
  * @author mthwate
@@ -26,6 +31,16 @@ public class NiftyUtils {
 		}
 
 		guiViewPort.addProcessor(niftyDisplay);
+
+
+		addTileOption("");
+		
+		List<String> tiles = (List<String>) assetManager.loadAsset("tiles/tiles.list");
+		
+		for (String tile : tiles) {
+			TproUtils.load(tile, assetManager);
+			addTileOption(tile);
+		}
 	}
 	
 	public static boolean isOnScreen(String screen) {
@@ -38,6 +53,18 @@ public class NiftyUtils {
 	
 	private static TextField getMenuTextField(String name) {
 		return nifty.getScreen("menu").findNiftyControl(name, TextField.class);
+	}
+
+	private static DropDown<String> getMenuDropDown(String name) {
+		return nifty.getScreen("menu").findNiftyControl(name, DropDown.class);
+	}
+	
+	public static String getTileSelection() {
+		return getMenuDropDown("type").getSelection();
+	}
+	
+	public static void addTileOption(String tile) {
+		getMenuDropDown("type").addItem(tile);
 	}
 
 	private static void setMenuStr(String field, String contents) {

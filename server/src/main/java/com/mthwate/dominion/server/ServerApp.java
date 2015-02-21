@@ -39,7 +39,7 @@ public class ServerApp extends CommonApp {
 		if (server != null) {
 			TileStore.set(SaveUtils.load(saveFile));
 			MessageUtils.register();
-			server.addMessageListener(new ServerListener(), GZIPCompressedMessage.class);
+			server.addMessageListener(new ServerListener(server), GZIPCompressedMessage.class);
 			server.start();
 		}
 

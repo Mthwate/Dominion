@@ -3,6 +3,7 @@ package com.mthwate.dominion.server;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
+import com.jme3.network.Server;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Tile;
@@ -22,6 +23,12 @@ import java.util.logging.Logger;
 public class ServerListener implements MessageListener<HostedConnection> {
 
 	private static final Logger log = Logger.getLogger(ServerListener.class.getName());
+	
+	private Server server;
+	
+	public ServerListener(Server server) {
+		this.server = server;
+	}
 	
 	@Override
 	public void messageReceived(HostedConnection connection, Message m) {
@@ -48,7 +55,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
 					if (sourceTile.getInhabitant().moveable) {
 						targetTile.setInhabitant(sourceTile.getInhabitant());
 						sourceTile.setInhabitant(null);
-						MessageUtils.send(connection, new MapMessage(TileStore.get()));
+						MessageUtils.broadcast(server, new MapMessage(TileStore.get()));
 					}
 				}
 			} else {

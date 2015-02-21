@@ -40,5 +40,8 @@ public class TproUtils {
 		String side = sides[rand.nextInt(sides.length)];
 		return MaterialUtils.getTexturedMaterial(side, assetManager);
 	}
-	
+
+	public static void load(String name, AssetManager assetManager) {
+		getProperties(name, assetManager);
+	}
 }

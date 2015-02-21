@@ -38,6 +38,7 @@ public abstract class CommonApp extends SimpleApplication {
 		}
 
 		assetManager.registerLoader(EproLoader.class, "epro");
+		assetManager.registerLoader(ListLoader.class, "list");
 
 		this.init();
 	}

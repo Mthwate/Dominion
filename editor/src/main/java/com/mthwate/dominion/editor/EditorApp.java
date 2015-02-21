@@ -146,8 +146,8 @@ public class EditorApp extends GraphicalApp {
 				int x = Integer.parseInt(split[0]);
 				int y = Integer.parseInt(split[1]);
 
-				String type = NiftyUtils.getMenuStr("type");
-
+				String type = NiftyUtils.getTileSelection();
+				
 				int elevation = NiftyUtils.getMenuInt("elevation");
 
 				int size = NiftyUtils.getMenuInt("brushSize");
