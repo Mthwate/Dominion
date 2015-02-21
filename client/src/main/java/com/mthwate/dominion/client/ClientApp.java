@@ -38,6 +38,13 @@ public class ClientApp extends GraphicalApp {
 	
 	private static boolean worldChange = false;
 	
+	private String ip;
+	
+	public ClientApp(String ip) {
+		super();
+		this.ip = ip;
+	}
+
 	public static void triggerWorldChange() {
 		worldChange = true;
 	}
@@ -48,7 +55,7 @@ public class ClientApp extends GraphicalApp {
 		super.init();
 		
 		try {
-			client = Network.connectToServer("localhost", 6969);
+			client = Network.connectToServer(ip, 6969);
 		} catch (IOException e) {
 			e.printStackTrace();
 			//TODO log this
