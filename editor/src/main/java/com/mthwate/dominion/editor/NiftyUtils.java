@@ -5,7 +5,6 @@ import com.jme3.audio.AudioRenderer;
 import com.jme3.input.InputManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
-import com.mthwate.dominion.graphical.tpro.TileProperties;
 import com.mthwate.dominion.graphical.tpro.TproUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.DropDown;

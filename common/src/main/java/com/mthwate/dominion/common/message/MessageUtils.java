@@ -7,9 +7,6 @@ import com.jme3.network.message.GZIPCompressedMessage;
 import com.jme3.network.serializing.Serializer;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.epro.EntityProperties;
-import com.mthwate.dominion.common.message.LoginMessage;
-import com.mthwate.dominion.common.message.MapMessage;
-import com.mthwate.dominion.common.message.TileMessage;
 
 /**
  * @author mthwate

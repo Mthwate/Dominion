@@ -6,7 +6,6 @@ import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.SaveUtils;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.server.command.CommandUtils;
 

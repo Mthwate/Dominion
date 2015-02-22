@@ -2,17 +2,12 @@ package com.mthwate.dominion.common;
 
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
-import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.log.Log;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.StreamHandler;
 
 /**
  * @author mthwate

@@ -7,8 +7,6 @@ import com.jme3.network.Server;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Tile;
-import com.mthwate.dominion.common.epro.EproUtils;
-import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MapMessage;

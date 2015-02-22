@@ -16,8 +16,6 @@ import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.epro.EntityProperties;
-import com.mthwate.dominion.common.epro.EproUtils;
-import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.graphical.mesh.HexLine;
 import com.mthwate.dominion.graphical.mesh.HexSides;
 import com.mthwate.dominion.graphical.mesh.Hexagon;
@@ -86,15 +84,29 @@ public abstract class GraphicalApp extends CommonApp {
 		}
 	}
 	
+	private String coordsToName(int x, int y) {
+		return x + "," + y;
+	}
+	
+	private void detachAll(Node node, String name) {
+		while (node.detachChildNamed(name) != -1) {}
+	}
+	
+	private void attachSpatial(Spatial spatial, Material material, Node node, int x, int y, float z) {
+		spatial.setName(coordsToName(x, y));
+		spatial.setMaterial(material);
+		spatial.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(z));
+		node.attachChild(spatial);
+	}
+	
 	protected void updateTile(int x, int y, boolean detach) {
-
-		String name = x + "," + y;
-
+		
 		if (detach) {
-			while (tileNode.detachChildNamed(name) != -1) {}
-			while (sideNode.detachChildNamed(name) != -1) {}
-			while (wireNode.detachChildNamed(name) != -1) {}
-			while (modelNode.detachChildNamed(name) != -1) {}
+			String name = coordsToName(x, y);
+			detachAll(tileNode, name);
+			detachAll(sideNode, name);
+			detachAll(wireNode, name);
+			detachAll(modelNode, name);
 		}
 
 		Tile tile = TileStore.get(x, y);
@@ -102,31 +114,38 @@ public abstract class GraphicalApp extends CommonApp {
 		String type = tile.getType();
 		float elevation = tile.getElevation() * 0.75F;
 
+		
+		addTile(type, x, y, elevation);
+
+		addWire(x, y, elevation);
+		
+		addSides(type, x, y, elevation);
+		
+		addInhabitant(tile, x, y, elevation);
+	}
+	
+	private void addTile(String type, int x, int y, float z) {
 		Material mat;
 		try {
 			mat = TproUtils.getMaterialFace(type, assetManager);
 		} catch (AssetNotFoundException e) {
 			mat = MaterialUtils.getTexturedMaterial("null", assetManager);
 		}
-
-		Geometry geom = new Geometry(name);
+		
+		Geometry geom = new Geometry(coordsToName(x, y));
 		geom.setMesh(hex);
-		geom.setMaterial(mat);
-		geom.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation));
 
-		tileNode.attachChild(geom);
-
-
-
-		Geometry wire = new Geometry(name);
-		wire.setMesh(new HexLine(1, elevation));
-		wire.setMaterial(MaterialUtils.getWireMaterial(assetManager));
-		wire.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.002f));
-
-		wireNode.attachChild(wire);
-
-
-		if (elevation > 0) {
+		attachSpatial(geom, mat, tileNode, x, y, z);
+	}
+	
+	private void addWire(int x, int y, float z) {
+		Geometry wire = new Geometry();
+		wire.setMesh(new HexLine(1, z));
+		attachSpatial(wire, MaterialUtils.getWireMaterial(assetManager), wireNode, x, y, z + 0.002f);
+	}
+	
+	private void addSides(String type, int x, int y, float z) {
+		if (z > 0) {
 			Material matSides;
 
 			try {
@@ -135,34 +154,35 @@ public abstract class GraphicalApp extends CommonApp {
 				matSides = MaterialUtils.getTexturedMaterial("null", assetManager);
 			}
 
-			HexSides hexSides = new HexSides(1, elevation);
+			HexSides hexSides = new HexSides(1, z);
 
-			Geometry geomSides = new Geometry(name);
+			Geometry geomSides = new Geometry();
 			geomSides.setMesh(hexSides);
-			geomSides.setMaterial(matSides);
-			geomSides.setLocalTranslation(CoordUtils.getPosCartesian(x, y));
-
-			sideNode.attachChild(geomSides);
+			attachSpatial(geomSides, matSides, sideNode, x, y, 0);
 		}
-		
+	}
+	
+	private void addInhabitant(Tile tile, int x, int y, float z) {
 		if (tile.hasInhabitant()) {
 			EntityProperties inhabitant = tile.getInhabitant();
-			
-			Spatial model = assetManager.loadModel("obj/" + inhabitant.model + ".obj");
-			model.setName(name);
-			model.setMaterial(MaterialUtils.getTexturedMaterial(inhabitant.texture, assetManager));
-			model.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(elevation + 0.004f));
-			model.setLocalScale(0.1f, 0.1f, 0.1f);
 
-			Quaternion rotation = new Quaternion();
-			rotation.fromAngleAxis(FastMath.PI / 2, new Vector3f(1, 0, 0));
-			model.setLocalRotation(rotation);
+			Spatial model = assetManager.loadModel("obj/" + inhabitant.model + ".obj");
+			Material mat = MaterialUtils.getTexturedMaterial(inhabitant.texture, assetManager);
+			
+			model.setLocalScale(0.1f, 0.1f, 0.1f);
+			
+			model.setLocalRotation(getModelRotation());
 
 			model.setQueueBucket(RenderQueue.Bucket.Transparent);
 
-
-			modelNode.attachChild(model);
+			attachSpatial(model, mat, modelNode, x, y, z + 0.004f);
 		}
+	}
+	
+	private Quaternion getModelRotation() {
+		Quaternion rotation = new Quaternion();
+		rotation.fromAngleAxis(FastMath.PI / 2, new Vector3f(1, 0, 0));
+		return rotation;
 	}
 
 	protected void zoom(float tpf) {
@@ -236,8 +256,8 @@ public abstract class GraphicalApp extends CommonApp {
 				wireNode.removeFromParent();
 			}
 		}
-		
-	}
+
+    }
 
 	protected CollisionResults clickCollisions() {
 		CollisionResults results = new CollisionResults();

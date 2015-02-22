@@ -13,15 +13,13 @@ import com.jme3.scene.Geometry;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.common.log.Log;
+import com.mthwate.dominion.common.message.LoginMessage;
+import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.CoordUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
-import com.mthwate.dominion.common.message.MessageUtils;
-import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.MaterialUtils;
-import com.mthwate.dominion.graphical.mesh.Hexagon;
 
 import java.io.IOException;
 import java.util.Random;

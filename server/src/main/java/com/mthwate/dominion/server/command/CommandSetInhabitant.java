@@ -5,7 +5,6 @@ import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.epro.EproUtils;
-import com.mthwate.dominion.common.log.Log;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 

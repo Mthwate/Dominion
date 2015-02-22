@@ -4,12 +4,8 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.ClasspathLocator;
 import com.jme3.asset.plugins.FileLocator;
 import com.mthwate.dominion.common.epro.EproLoader;
-import com.mthwate.dominion.common.log.Log;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
