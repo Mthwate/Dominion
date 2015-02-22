@@ -92,19 +92,20 @@ public class LightUtils {
 	
 	private static void setLightColor(Light light, Clock clock, Map<Integer, ColorRGBA> colors) {
 
+		Integer[] indexes = new Integer[colors.size()];
 
-		Integer[] indexes = colors.keySet().toArray(new Integer[0]);
+		indexes = colors.keySet().toArray(indexes);
 
 		int last = indexes[colors.size()-1];
 
 		float pos = clock.getRatio() * last;
 
 
-		ColorRGBA color = null;
+		ColorRGBA color;
 
 		int ipos = (int) pos;
 		
-		if (pos == (int) ipos && colors.containsKey(ipos)) {
+		if (pos == ipos && colors.containsKey(ipos)) {
 			ColorRGBA jcol = colors.get(ipos);
 			color = new ColorRGBA(jcol.getRed() / 256f, jcol.getGreen() / 256f, jcol.getBlue() / 256f, 1);
 		} else {

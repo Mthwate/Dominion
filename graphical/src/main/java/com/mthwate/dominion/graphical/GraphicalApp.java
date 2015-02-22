@@ -89,7 +89,7 @@ public abstract class GraphicalApp extends CommonApp {
 	}
 	
 	private void detachAll(Node node, String name) {
-		while (node.detachChildNamed(name) != -1) {}
+		while (node.detachChildNamed(name) != -1);
 	}
 	
 	private void attachSpatial(Spatial spatial, Material material, Node node, int x, int y, float z) {
@@ -98,7 +98,11 @@ public abstract class GraphicalApp extends CommonApp {
 		spatial.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(z));
 		node.attachChild(spatial);
 	}
-	
+
+	protected void updateTile(int x, int y) {
+		updateTile(x, y, true);
+	}
+
 	protected void updateTile(int x, int y, boolean detach) {
 		
 		if (detach) {

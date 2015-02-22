@@ -27,7 +27,7 @@ public class ServerApp extends CommonApp {
 	
 	@Override
 	protected void init() {
-		
+
 		try {
 			server = Network.createServer(6969);
 		} catch (IOException e) {
@@ -43,12 +43,13 @@ public class ServerApp extends CommonApp {
 		}
 
 		Scanner reader = new Scanner(System.in);
-		
+
+		//TODO fix my stupidity
 		while (true) {
 			String line = reader.nextLine();
 			CommandUtils.run(server, assetManager, line);
 		}
-			
+
 	}
 
 	@Override

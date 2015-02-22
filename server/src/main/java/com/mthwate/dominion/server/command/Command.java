@@ -8,6 +8,11 @@ import com.jme3.network.Server;
  */
 public interface Command {
 
+	/**
+	 * Gets the name of the command.
+	 *
+	 * @return the command name
+	 */
 	public String getName();
 
 	public void run(Server server, AssetManager assetManager, String params);

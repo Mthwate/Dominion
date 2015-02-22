@@ -11,11 +11,13 @@ import java.util.logging.Logger;
 public class CommandEcho implements Command {
 
 	private static final Logger log = Logger.getLogger(CommandEcho.class.getName());
-	
+
+	@Override
 	public String getName() {
 		return "echo";
 	}
-	
+
+	@Override
 	public void run(Server server, AssetManager assetManager, String params) {
 		log.info(params);
 	}
