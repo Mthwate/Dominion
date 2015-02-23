@@ -1,5 +1,6 @@
 package com.mthwate.dominion.common.log;
 
+import com.jme3.util.JmeFormatter;
 import com.mthwate.datlib.DualOutputStream;
 
 import java.io.File;
@@ -23,8 +24,8 @@ public class Log {
 			root.removeHandler(handler);
 		}
 
-		root.addHandler(new LiveStreamHandler(getOutputStream(), new SimpleFormatter()));
-		
+		root.addHandler(new LiveStreamHandler(getOutputStream(), new StandardFormatter()));
+
 		root.setLevel(Level.ALL);
 	}
 	
