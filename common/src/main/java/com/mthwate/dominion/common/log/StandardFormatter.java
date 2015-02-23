@@ -2,6 +2,8 @@ package com.mthwate.dominion.common.log;
 
 import jdk.nashorn.internal.codegen.CompilerConstants;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Formatter;
@@ -35,6 +37,14 @@ public class StandardFormatter extends Formatter {
 		sb.append(' ');
 		sb.append(formatMessage(record));
 		sb.append(newline);
+
+		if (record.getThrown() != null) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			record.getThrown().printStackTrace(pw);
+			pw.close();
+			sb.append(sw.toString());
+		}
 
 		return sb.toString();
 	}
