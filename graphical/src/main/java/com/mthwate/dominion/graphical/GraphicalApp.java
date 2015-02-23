@@ -31,17 +31,17 @@ public abstract class GraphicalApp extends CommonApp {
 
 	private static final Logger log = Logger.getLogger(GraphicalApp.class.getName());
 	
-	protected Hexagon hex = new Hexagon(1);
+	protected final Hexagon hex = new Hexagon(1);
 	
-	protected Node highlightNode = new Node();
+	protected final Node highlightNode = new Node();
 
-	protected Node tileNode = new Node();
+	protected final Node tileNode = new Node();
 
-	protected Node sideNode = new Node();
+	protected final Node sideNode = new Node();
 
-	protected Node wireNode = new Node();
+	protected final Node wireNode = new Node();
 
-	protected Node modelNode = new Node();
+	protected final Node modelNode = new Node();
 
 	protected KeyHandler keyHandler;
 
@@ -50,24 +50,25 @@ public abstract class GraphicalApp extends CommonApp {
 		assetManager.registerLoader(TproLoader.class, "tpro");
 		
 		keyHandler = new KeyHandler(inputManager);
-		
+
+
+		log.info("Setting up nodes");
 		rootNode.attachChild(highlightNode);
-
 		rootNode.attachChild(tileNode);
-
 		rootNode.attachChild(sideNode);
-
 		rootNode.attachChild(wireNode);
-
 		rootNode.attachChild(modelNode);
 		
 
-		log.info("Disabling the fly camera");
-
+		log.info("Disabling the default fly camera");
 		flyCam.setEnabled(false);
-		
-		
+
+
+		log.info("Setting initial location");
 		cam.setLocation(new Vector3f(0, -10, 15));
+
+
+		log.info("Setting initial camera direction");
 		cam.lookAtDirection(new Vector3f(0, 0.5f, -1), new Vector3f(0, 0, 1));
 		
 	}
@@ -92,9 +93,8 @@ public abstract class GraphicalApp extends CommonApp {
 		while (node.detachChildNamed(name) != -1);
 	}
 	
-	private void attachSpatial(Spatial spatial, Material material, Node node, int x, int y, float z) {
+	private void attachSpatial(Spatial spatial, Node node, int x, int y, float z) {
 		spatial.setName(coordsToName(x, y));
-		spatial.setMaterial(material);
 		spatial.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(z));
 		node.attachChild(spatial);
 	}
@@ -117,76 +117,42 @@ public abstract class GraphicalApp extends CommonApp {
 
 		String type = tile.getType();
 		float elevation = tile.getElevation() * 0.75F;
-
 		
 		addTile(type, x, y, elevation);
-
 		addWire(x, y, elevation);
-		
 		addSides(type, x, y, elevation);
-		
 		addInhabitant(tile, x, y, elevation);
 	}
 	
 	private void addTile(String type, int x, int y, float z) {
-		Material mat;
-		try {
-			mat = TproUtils.getMaterialFace(type, assetManager);
-		} catch (AssetNotFoundException e) {
-			mat = MaterialUtils.getTexturedMaterial("null", assetManager);
-		}
-		
-		Geometry geom = new Geometry(coordsToName(x, y));
+		Geometry geom = new Geometry();
 		geom.setMesh(hex);
-
-		attachSpatial(geom, mat, tileNode, x, y, z);
+		geom.setMaterial(TproUtils.getMaterialFace(type, assetManager));
+		attachSpatial(geom, tileNode, x, y, z);
 	}
 	
 	private void addWire(int x, int y, float z) {
 		Geometry wire = new Geometry();
 		wire.setMesh(new HexLine(1, z));
-		attachSpatial(wire, MaterialUtils.getWireMaterial(assetManager), wireNode, x, y, z + 0.002f);
+		wire.setMaterial(MaterialUtils.getWireMaterial(assetManager));
+		attachSpatial(wire, wireNode, x, y, z + 0.002f);
 	}
 	
 	private void addSides(String type, int x, int y, float z) {
 		if (z > 0) {
-			Material matSides;
-
-			try {
-				matSides = TproUtils.getMaterialSide(type, assetManager);
-			} catch (AssetNotFoundException e) {
-				matSides = MaterialUtils.getTexturedMaterial("null", assetManager);
-			}
-
 			HexSides hexSides = new HexSides(1, z);
-
 			Geometry geomSides = new Geometry();
 			geomSides.setMesh(hexSides);
-			attachSpatial(geomSides, matSides, sideNode, x, y, 0);
+			geomSides.setMaterial(TproUtils.getMaterialSide(type, assetManager));
+			attachSpatial(geomSides, sideNode, x, y, 0);
 		}
 	}
 	
 	private void addInhabitant(Tile tile, int x, int y, float z) {
 		if (tile.hasInhabitant()) {
-			EntityProperties inhabitant = tile.getInhabitant();
-
-			Spatial model = assetManager.loadModel("obj/" + inhabitant.model + ".obj");
-			Material mat = MaterialUtils.getTexturedMaterial(inhabitant.texture, assetManager);
-			
-			model.setLocalScale(0.1f, 0.1f, 0.1f);
-			
-			model.setLocalRotation(getModelRotation());
-
-			model.setQueueBucket(RenderQueue.Bucket.Transparent);
-
-			attachSpatial(model, mat, modelNode, x, y, z + 0.004f);
+			Spatial model = ModelUtils.getModel(tile.getInhabitant(), assetManager);
+			attachSpatial(model, modelNode, x, y, z + 0.004f);
 		}
-	}
-	
-	private Quaternion getModelRotation() {
-		Quaternion rotation = new Quaternion();
-		rotation.fromAngleAxis(FastMath.PI / 2, new Vector3f(1, 0, 0));
-		return rotation;
 	}
 
 	protected void zoom(float tpf) {
