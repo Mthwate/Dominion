@@ -11,7 +11,6 @@ import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.graphical.mesh.HexLine;
 import com.mthwate.dominion.graphical.mesh.HexSides;
 import com.mthwate.dominion.graphical.mesh.Hexagon;
 import com.mthwate.dominion.graphical.tpro.TproLoader;

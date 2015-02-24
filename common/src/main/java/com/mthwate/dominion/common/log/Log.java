@@ -1,6 +1,5 @@
 package com.mthwate.dominion.common.log;
 
-import com.jme3.util.JmeFormatter;
 import com.mthwate.datlib.DualOutputStream;
 
 import java.io.File;
@@ -10,7 +9,6 @@ import java.io.OutputStream;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * @author mthwate

@@ -3,11 +3,7 @@ package com.mthwate.dominion.graphical;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.KeyTrigger;
-import com.jme3.input.controls.MouseAxisTrigger;
-import com.jme3.input.controls.MouseButtonTrigger;
-import com.jme3.input.controls.Trigger;
+import com.jme3.input.controls.*;
 
 import java.util.HashMap;
 import java.util.Map;

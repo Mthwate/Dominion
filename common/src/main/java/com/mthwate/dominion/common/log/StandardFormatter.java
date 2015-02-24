@@ -1,13 +1,9 @@
 package com.mthwate.dominion.common.log;
 
-import jdk.nashorn.internal.codegen.CompilerConstants;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Formatter;
-import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 /**
