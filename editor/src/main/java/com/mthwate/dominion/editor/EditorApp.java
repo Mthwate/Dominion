@@ -12,7 +12,7 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.SaveUtils;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.graphical.CoordUtils;
+import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.MaterialUtils;

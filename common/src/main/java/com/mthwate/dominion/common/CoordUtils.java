@@ -1,6 +1,7 @@
-package com.mthwate.dominion.graphical;
+package com.mthwate.dominion.common;
 
 import com.jme3.math.Vector3f;
+import com.mthwate.datlib.math.Set2i;
 
 /**
  * @author mthwate
@@ -19,6 +20,10 @@ public class CoordUtils {
 		return y - (x / 2);
 	}
 
+	public static Set2i cartesianToHex(Set2i pos) {
+		return new Set2i(pos.getX(), cartesianToHex(pos.getX(), pos.getY()));
+	}
+
 	/**
 	 * Converts hexagonal coordinates to cartesian coordinates.
 	 * Note that the x values of hexagonal and cartesian coordinates are the same.
@@ -29,6 +34,10 @@ public class CoordUtils {
 	 */
 	public static int hexToCartesian(int x, int y) {
 		return y + (x / 2);
+	}
+
+	public static Set2i hexToCartesian(Set2i pos) {
+		return new Set2i(pos.getX(), hexToCartesian(pos.getX(), pos.getY()));
 	}
 
 	public static Vector3f getPosCartesian(int x, int y) {

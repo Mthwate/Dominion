@@ -1,21 +1,16 @@
 package com.mthwate.dominion.graphical;
 
-import com.jme3.asset.AssetNotFoundException;
 import com.jme3.collision.CollisionResults;
-import com.jme3.material.Material;
-import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.CommonApp;
+import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.common.epro.EntityProperties;
 import com.mthwate.dominion.graphical.mesh.HexLine;
 import com.mthwate.dominion.graphical.mesh.HexSides;
 import com.mthwate.dominion.graphical.mesh.Hexagon;
@@ -116,31 +111,33 @@ public abstract class GraphicalApp extends CommonApp {
 		Tile tile = TileStore.get(x, y);
 
 		String type = tile.getType();
-		float elevation = tile.getElevation() * 0.75F;
+		int elevation = tile.getElevation();
+
+		float elevMod = 0.75f;
 		
-		addTile(type, x, y, elevation);
-		addWire(x, y, elevation);
-		addSides(type, x, y, elevation);
-		addInhabitant(tile, x, y, elevation);
+		addTile(type, x, y, elevation, elevMod);
+		addWire(x, y, elevation, elevMod);
+		addSides(type, x, y, elevation, elevMod);
+		addInhabitant(tile, x, y, elevation, elevMod);
 	}
 	
-	private void addTile(String type, int x, int y, float z) {
+	private void addTile(String type, int x, int y, int z, float elevMod) {
 		Geometry geom = new Geometry();
 		geom.setMesh(hex);
 		geom.setMaterial(TproUtils.getMaterialFace(type, assetManager));
-		attachSpatial(geom, tileNode, x, y, z);
+		attachSpatial(geom, tileNode, x, y, z * elevMod);
 	}
 	
-	private void addWire(int x, int y, float z) {
+	private void addWire(int x, int y, int z, float elevMod) {
 		Geometry wire = new Geometry();
-		wire.setMesh(new HexLine(1, z));
+		wire.setMesh(MeshUtils.getWire(z, elevMod));
 		wire.setMaterial(MaterialUtils.getWireMaterial(assetManager));
-		attachSpatial(wire, wireNode, x, y, z + 0.002f);
+		attachSpatial(wire, wireNode, x, y, (z * elevMod) + 0.002f);
 	}
 	
-	private void addSides(String type, int x, int y, float z) {
+	private void addSides(String type, int x, int y, int z, float elevMod) {
 		if (z > 0) {
-			HexSides hexSides = new HexSides(1, z);
+			HexSides hexSides = MeshUtils.getSide(z, elevMod);
 			Geometry geomSides = new Geometry();
 			geomSides.setMesh(hexSides);
 			geomSides.setMaterial(TproUtils.getMaterialSide(type, assetManager));
@@ -148,10 +145,10 @@ public abstract class GraphicalApp extends CommonApp {
 		}
 	}
 	
-	private void addInhabitant(Tile tile, int x, int y, float z) {
+	private void addInhabitant(Tile tile, int x, int y, float z, float elevMod) {
 		if (tile.hasInhabitant()) {
 			Spatial model = ModelUtils.getModel(tile.getInhabitant(), assetManager);
-			attachSpatial(model, modelNode, x, y, z + 0.004f);
+			attachSpatial(model, modelNode, x, y, (z * elevMod) + 0.004f);
 		}
 	}
 

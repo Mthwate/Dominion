@@ -63,6 +63,10 @@ public class TileStore {
 		return tiles[0].length;
 	}
 
+	public static boolean validPoint(Set2i pos) {
+		return validPoint(pos.getX(), pos.getY());
+	}
+
 	public static boolean validPoint(int x, int y) {
 		boolean valid = true;
 		if (x >= sizeX() || x < 0) {
