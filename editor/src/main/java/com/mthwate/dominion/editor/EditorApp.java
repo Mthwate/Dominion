@@ -155,7 +155,7 @@ public class EditorApp extends GraphicalApp {
 
 				boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
 				
-				List<Set2i> coords = new ArrayList<Set2i>();
+				//List<Set2i> coords = new ArrayList<Set2i>();
 
 				for (int ix = -size + 1; ix < size; ix++) {
 					for (int iy = -size + 1; iy < size; iy++) {
@@ -204,42 +204,11 @@ public class EditorApp extends GraphicalApp {
 									}
 
 									if (change) {
-										coords.add(new Set2i(px, py));
+										updateTile(px, py, true);
 									}
 								}
 							}
 						}
-					}
-				}
-
-
-				if (clicked) {
-					Node[] nodes = {tileNode, sideNode, wireNode};
-					for (Node node : nodes) {
-						List<Integer> ints = new ArrayList<Integer>();
-
-						for (int i = 0; i < node.getChildren().size(); i++) {
-							String childName = node.getChild(i).getName();
-							if (childName.contains(",")) {
-								String[] childSplit = childName.split(",");
-								int cx = Integer.parseInt(childSplit[0]);
-								int cy = Integer.parseInt(childSplit[1]);
-
-								if (coords.contains(new Set2i(cx, cy))) {
-									ints.add(i);
-								}
-							}
-						}
-
-						int c = 0;
-
-						for (int i : ints) {
-							node.detachChildAt(i - c++);
-						}
-					}
-
-					for (Set2i coord : coords) {
-						updateTile(coord.getX(), coord.getY(), false);
 					}
 				}
 

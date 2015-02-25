@@ -8,7 +8,6 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.CommonApp;
-import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.graphical.mesh.HexSides;
@@ -26,16 +25,8 @@ public abstract class GraphicalApp extends CommonApp {
 	private static final Logger log = Logger.getLogger(GraphicalApp.class.getName());
 	
 	protected final Hexagon hex = new Hexagon(1);
-	
+
 	protected final Node highlightNode = new Node();
-
-	protected final Node tileNode = new Node();
-
-	protected final Node sideNode = new Node();
-
-	protected final Node wireNode = new Node();
-
-	protected final Node modelNode = new Node();
 
 	protected KeyHandler keyHandler;
 
@@ -48,10 +39,7 @@ public abstract class GraphicalApp extends CommonApp {
 
 		log.info("Setting up nodes");
 		rootNode.attachChild(highlightNode);
-		rootNode.attachChild(tileNode);
-		rootNode.attachChild(sideNode);
-		rootNode.attachChild(wireNode);
-		rootNode.attachChild(modelNode);
+		NodeHandler.init(rootNode);
 		
 
 		log.info("Disabling the default fly camera");
@@ -68,29 +56,12 @@ public abstract class GraphicalApp extends CommonApp {
 	}
 	
 	protected void mapUpdate() {
-		tileNode.detachAllChildren();
-		sideNode.detachAllChildren();
-		wireNode.detachAllChildren();
-		modelNode.detachAllChildren();
+		NodeHandler.clear();
 		for (int x = 0; x < TileStore.sizeX(); x++) {
 			for (int y = 0; y < TileStore.sizeY(); y++) {
 				updateTile(x, y, false);
 			}
 		}
-	}
-	
-	private String coordsToName(int x, int y) {
-		return x + "," + y;
-	}
-	
-	private void detachAll(Node node, String name) {
-		while (node.detachChildNamed(name) != -1);
-	}
-	
-	private void attachSpatial(Spatial spatial, Node node, int x, int y, float z) {
-		spatial.setName(coordsToName(x, y));
-		spatial.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(z));
-		node.attachChild(spatial);
 	}
 
 	protected void updateTile(int x, int y) {
@@ -100,11 +71,7 @@ public abstract class GraphicalApp extends CommonApp {
 	protected void updateTile(int x, int y, boolean detach) {
 		
 		if (detach) {
-			String name = coordsToName(x, y);
-			detachAll(tileNode, name);
-			detachAll(sideNode, name);
-			detachAll(wireNode, name);
-			detachAll(modelNode, name);
+			NodeHandler.detach(x, y);
 		}
 
 		Tile tile = TileStore.get(x, y);
@@ -114,41 +81,44 @@ public abstract class GraphicalApp extends CommonApp {
 
 		float elevMod = 0.75f;
 		
-		addTile(type, x, y, elevation, elevMod);
-		addWire(x, y, elevation, elevMod);
-		addSides(type, x, y, elevation, elevMod);
-		addInhabitant(tile, x, y, elevation, elevMod);
+		Geometry tileGeom = addTile(type, x, y, elevation, elevMod);
+		Geometry wireGeom = addWire(x, y, elevation, elevMod);
+		Geometry sideGeom = addSides(type, x, y, elevation, elevMod);
+		Spatial model = addInhabitant(tile, x, y, elevation, elevMod);
+		NodeHandler.attach(tileGeom, sideGeom, wireGeom, model, x, y, elevation * elevMod);
 	}
 	
-	private void addTile(String type, int x, int y, int z, float elevMod) {
+	private Geometry addTile(String type, int x, int y, int z, float elevMod) {
 		Geometry geom = new Geometry();
 		geom.setMesh(hex);
 		geom.setMaterial(TproUtils.getMaterialFace(type, assetManager));
-		attachSpatial(geom, tileNode, x, y, z * elevMod);
+		return geom;
 	}
 	
-	private void addWire(int x, int y, int z, float elevMod) {
+	private Geometry addWire(int x, int y, int z, float elevMod) {
 		Geometry wire = new Geometry();
 		wire.setMesh(MeshUtils.getWire(z, elevMod));
 		wire.setMaterial(MaterialUtils.getWireMaterial(assetManager));
-		attachSpatial(wire, wireNode, x, y, (z * elevMod) + 0.002f);
+		return wire;
 	}
 	
-	private void addSides(String type, int x, int y, int z, float elevMod) {
+	private Geometry addSides(String type, int x, int y, int z, float elevMod) {
+		Geometry geomSides = null;
 		if (z > 0) {
 			HexSides hexSides = MeshUtils.getSide(z, elevMod);
-			Geometry geomSides = new Geometry();
+			geomSides = new Geometry();
 			geomSides.setMesh(hexSides);
 			geomSides.setMaterial(TproUtils.getMaterialSide(type, assetManager));
-			attachSpatial(geomSides, sideNode, x, y, 0);
 		}
+		return geomSides;
 	}
 	
-	private void addInhabitant(Tile tile, int x, int y, float z, float elevMod) {
+	private Spatial addInhabitant(Tile tile, int x, int y, float z, float elevMod) {
+		Spatial model = null;
 		if (tile.hasInhabitant()) {
-			Spatial model = ModelUtils.getModel(tile.getInhabitant(), assetManager);
-			attachSpatial(model, modelNode, x, y, (z * elevMod) + 0.004f);
+			model = ModelUtils.getModel(tile.getInhabitant(), assetManager);
 		}
+		return model;
 	}
 
 	protected void zoom(float tpf) {
@@ -215,12 +185,7 @@ public abstract class GraphicalApp extends CommonApp {
 
 		if (keyHandler.isPressed(KeyControl.TOGGLE_WIRE)) {
 			keyHandler.onAction(KeyControl.TOGGLE_WIRE.getName(), false, 0);
-
-			if (wireNode.getParent() == null) {
-				rootNode.attachChild(wireNode);
-			} else {
-				wireNode.removeFromParent();
-			}
+			NodeHandler.toggleWire(rootNode);
 		}
 
     }
@@ -231,7 +196,7 @@ public abstract class GraphicalApp extends CommonApp {
 		Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
 		Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d).normalizeLocal();
 		Ray ray = new Ray(click3d, dir);
-		tileNode.collideWith(ray, results);
+		NodeHandler.collide(ray, results);
 		return results;
 	}
 	
