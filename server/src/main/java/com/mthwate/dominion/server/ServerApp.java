@@ -20,7 +20,10 @@ import java.util.logging.Logger;
 public class ServerApp extends CommonApp {
 
 	private static final Logger log = Logger.getLogger(ServerApp.class.getName());
-	
+
+	/**
+	 * The server networking object.
+	 */
 	private Server server;
 
 	private File saveFile = new File("map.dwm");
@@ -36,8 +39,8 @@ public class ServerApp extends CommonApp {
 		}
 
 		if (server != null) {
-			TileStore.set(SaveUtils.load(saveFile));
-			MessageUtils.register();
+			TileStore.set(SaveUtils.load(saveFile));//Loads the map
+			MessageUtils.register();//Registers the network message types
 			server.addMessageListener(new ServerListener(server), GZIPCompressedMessage.class);
 			server.start();
 		}
