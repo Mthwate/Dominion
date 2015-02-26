@@ -21,6 +21,7 @@ import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.MaterialUtils;
 import com.mthwate.dominion.graphical.MeshUtils;
+import com.mthwate.dominion.graphical.node.NodeHandler;
 
 import java.io.IOException;
 import java.util.Random;
@@ -131,7 +132,7 @@ public class ClientApp extends GraphicalApp {
 		
 		if (worldChange) {
 			worldChange = false;
-			mapUpdate();
+			NodeHandler.update(assetManager);
 		}
 	}
 
