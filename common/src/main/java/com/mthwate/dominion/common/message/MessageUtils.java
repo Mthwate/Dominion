@@ -20,7 +20,10 @@ public class MessageUtils {
 	public static void broadcast(Server server, Message message) {
 		server.broadcast(new GZIPCompressedMessage(message));
 	}
-	
+
+	/**
+	 * Registers the classes to be transferred over the network.
+	 */
 	public static void register() {
 		Serializer.registerClass(LoginMessage.class);
 		Serializer.registerClass(TileMessage.class);

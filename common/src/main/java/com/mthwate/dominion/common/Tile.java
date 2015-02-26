@@ -14,7 +14,7 @@ public class Tile implements Serializable {
 	
 	private int elevation;
 	
-	private EntityProperties inhabitant;//TODO change from string type
+	private EntityProperties inhabitant;
 	
 	public Tile() {}
 	
@@ -49,5 +49,12 @@ public class Tile implements Serializable {
 
 	public void setElevation(int elevation) {
 		this.elevation = elevation;
+	}
+
+	@Override
+	public Tile clone() {
+		Tile clone = new Tile(type, elevation);
+		clone.setInhabitant(inhabitant);
+		return clone;
 	}
 }

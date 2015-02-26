@@ -1,8 +1,8 @@
 package com.mthwate.dominion.graphical;
 
-import com.jme3.scene.Mesh;
 import com.mthwate.dominion.graphical.mesh.HexLine;
 import com.mthwate.dominion.graphical.mesh.HexSides;
+import com.mthwate.dominion.graphical.mesh.Hexagon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,9 @@ public class MeshUtils {
 
 	private static List<HexSides> sides = new ArrayList<HexSides>();
 
-	public static Mesh getWire(int z, float elevMod) {
+	private static Hexagon tile = new Hexagon(1);
+
+	public static HexLine getWire(int z, float elevMod) {
 
 		while (wires.size() <= z) {
 			wires.add(new HexLine(1, wires.size() * elevMod));
@@ -32,6 +34,10 @@ public class MeshUtils {
 		}
 
 		return sides.get(z);
+	}
+
+	public static Hexagon getTile() {
+		return tile;
 	}
 
 }

@@ -7,8 +7,6 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
-import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.SaveUtils;
 import com.mthwate.dominion.common.Tile;
@@ -16,11 +14,11 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.MaterialUtils;
+import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.mesh.Hexagon;
+import com.mthwate.dominion.graphical.node.NodeHandler;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author mthwate
@@ -39,8 +37,6 @@ public class EditorApp extends GraphicalApp {
 		tryLoad();
 		
 		initLight();
-		
-		mapUpdate();
 	}
 	
 	private void tryLoad() {
@@ -101,8 +97,6 @@ public class EditorApp extends GraphicalApp {
 				int y = NiftyUtils.getMenuInt("height");
 				
 				TileStore.resize(x, y);
-				
-				mapUpdate();
 
 				NiftyUtils.gotoScreen("edit");
 			} else {
@@ -119,6 +113,7 @@ public class EditorApp extends GraphicalApp {
 		look();
 		menu();
 		listenWire();
+		NodeHandler.update(assetManager);
 
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
@@ -165,7 +160,7 @@ public class EditorApp extends GraphicalApp {
 							if (TileStore.validPoint(px, py)) {
 
 								Geometry g = new Geometry("selected");
-								g.setMesh(hex);
+								g.setMesh(MeshUtils.getTile());
 								g.setQueueBucket(RenderQueue.Bucket.Transparent);
 								g.setMaterial(MaterialUtils.getHighlightMaterial(assetManager));
 
@@ -191,20 +186,12 @@ public class EditorApp extends GraphicalApp {
 
 									newElevation = Math.max(newElevation, 0);
 									
-									boolean change = false;
-									
 									if (!tile.getType().equals(newType)) {
 										tile.setType(newType);
-										change = true;
 									}
 									
 									if (tile.getElevation() != newElevation) {
 										TileStore.get(px, py).setElevation(newElevation);
-										change = true;
-									}
-
-									if (change) {
-										updateTile(px, py, true);
 									}
 								}
 							}

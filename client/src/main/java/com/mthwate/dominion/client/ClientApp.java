@@ -20,6 +20,7 @@ import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.MaterialUtils;
+import com.mthwate.dominion.graphical.MeshUtils;
 
 import java.io.IOException;
 import java.util.Random;
@@ -99,7 +100,7 @@ public class ClientApp extends GraphicalApp {
 				
 				if (source == null) {
 					Geometry g = new Geometry("selected");
-					g.setMesh(hex);
+					g.setMesh(MeshUtils.getTile());
 					g.setQueueBucket(RenderQueue.Bucket.Transparent);
 					g.setMaterial(MaterialUtils.getHighlightMaterial(assetManager));
 
