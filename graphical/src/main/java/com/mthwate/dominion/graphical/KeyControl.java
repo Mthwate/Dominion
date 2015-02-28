@@ -26,6 +26,8 @@ public enum KeyControl {
 	DECREASE_BRUSH("decreaseBrush"),
 
 	TOGGLE_WIRE("toggleWire"),
+
+	GOTO_HOME("gotoHome"),
 	
 	;
 

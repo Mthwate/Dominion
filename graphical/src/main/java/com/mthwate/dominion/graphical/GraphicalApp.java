@@ -22,6 +22,8 @@ public abstract class GraphicalApp extends CommonApp {
 
 	protected KeyHandler keyHandler;
 
+	protected static final Vector3f CAM_ORIGIN = new Vector3f(0, -10, 15);
+	
 	@Override
 	protected void init() {
 		assetManager.registerLoader(TproLoader.class, "tpro");
@@ -39,7 +41,7 @@ public abstract class GraphicalApp extends CommonApp {
 
 
 		log.info("Setting initial location");
-		cam.setLocation(new Vector3f(0, -10, 15));
+		cam.setLocation(CAM_ORIGIN);
 
 
 		log.info("Setting initial camera direction");
@@ -106,9 +108,24 @@ public abstract class GraphicalApp extends CommonApp {
 
 		cam.setLocation(cam.getLocation().add(move.mult(moveMod * tpf * (z-3))));
 	}
-	
-	protected void listenWire() {
 
+	/**
+	 * Listens for the "home" key to return the camera to the home position.
+	 */
+	protected void listenHome() {
+
+		if (keyHandler.isPressed(KeyControl.GOTO_HOME)) {
+			keyHandler.onAction(KeyControl.GOTO_HOME.getName(), false, 0);
+			cam.setLocation(CAM_ORIGIN.setZ(cam.getLocation().getZ()));
+		}
+		
+	}
+
+	/**
+	 * Listens for the "toggle wire" key to toggle the wire frame.
+	 */
+	protected void listenWire() {
+		
 		if (keyHandler.isPressed(KeyControl.TOGGLE_WIRE)) {
 			keyHandler.onAction(KeyControl.TOGGLE_WIRE.getName(), false, 0);
 			NodeHandler.toggleWire();

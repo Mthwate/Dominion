@@ -43,8 +43,10 @@ public class KeyHandler implements ActionListener {
 
 		addKeyListener(im, KeyControl.INCREASE_BRUSH, KeyInput.KEY_RBRACKET);
 		addKeyListener(im, KeyControl.DECREASE_BRUSH, KeyInput.KEY_LBRACKET);
-		
+
 		addKeyListener(im, KeyControl.TOGGLE_WIRE, KeyInput.KEY_SPACE);
+
+		addKeyListener(im, KeyControl.GOTO_HOME, KeyInput.KEY_H);
 	}
 
 	private void addMouseListener(InputManager im, KeyControl control, int button) {

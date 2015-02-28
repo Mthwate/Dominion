@@ -112,6 +112,8 @@ public class EditorApp extends GraphicalApp {
 		move(tpf);
 		look();
 		menu();
+		
+		listenHome();
 		listenWire();
 
 
