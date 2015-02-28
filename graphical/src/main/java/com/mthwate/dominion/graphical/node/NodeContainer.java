@@ -23,7 +23,7 @@ public class NodeContainer {
 	
 	private Chunk[][] chunks;
 	
-	private static final int CHUNK_SIZE = 25;
+	private static final int CHUNK_SIZE = 10;
 
 	private int sizex = 0;
 	
