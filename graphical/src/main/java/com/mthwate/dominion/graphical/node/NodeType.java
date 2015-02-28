@@ -28,4 +28,5 @@ public abstract class NodeType {
 		return x + "," + y;
 	}
 
+	public abstract boolean canOptimize();
 }

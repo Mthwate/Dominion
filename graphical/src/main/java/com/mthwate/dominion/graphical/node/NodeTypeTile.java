@@ -40,4 +40,9 @@ public class NodeTypeTile extends NodeType {
 		attachSpatial(geom, node, x, y, tile.getElevation(), 0);
 	}
 
+	@Override
+	public boolean canOptimize() {
+		return true;
+	}
+
 }

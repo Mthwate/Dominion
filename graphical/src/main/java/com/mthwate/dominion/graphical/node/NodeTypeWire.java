@@ -35,4 +35,9 @@ public class NodeTypeWire extends NodeType {
 		attachSpatial(wire, node, x, y, tile.getElevation(), 0.002f);
 	}
 
+	@Override
+	public boolean canOptimize() {
+		return true;
+	}
+
 }

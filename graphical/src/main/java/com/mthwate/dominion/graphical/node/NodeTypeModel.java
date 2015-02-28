@@ -42,4 +42,9 @@ public class NodeTypeModel extends NodeType {
 		}
 	}
 
+	@Override
+	public boolean canOptimize() {
+		return false;
+	}
+
 }

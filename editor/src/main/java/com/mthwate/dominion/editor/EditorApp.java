@@ -113,7 +113,6 @@ public class EditorApp extends GraphicalApp {
 		look();
 		menu();
 		listenWire();
-		NodeHandler.update(assetManager);
 
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
@@ -129,6 +128,8 @@ public class EditorApp extends GraphicalApp {
 		highlightNode.detachAllChildren();
 
 		highlight();
+		
+		NodeHandler.update(assetManager);
 	}
 	
 	private void highlight() {
@@ -149,8 +150,6 @@ public class EditorApp extends GraphicalApp {
 
 
 				boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
-				
-				//List<Set2i> coords = new ArrayList<Set2i>();
 
 				for (int ix = -size + 1; ix < size; ix++) {
 					for (int iy = -size + 1; iy < size; iy++) {

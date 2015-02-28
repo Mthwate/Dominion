@@ -18,7 +18,7 @@ public class NodeHandler {
 
 	private static final NodeContainer modelNode = new NodeContainer(new NodeTypeModel());
 
-	private static final NodeContainer collisionNode = new NodeContainer(new NodeTypeTile());
+	private static final NodeContainer collisionNode = new NodeContainer(new NodeTypeCollide());
 
 	public static void init(Node rootNode) {
 		tileNode.setParent(rootNode);

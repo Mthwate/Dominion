@@ -41,4 +41,9 @@ public class NodeTypeSide extends NodeType {
 		}
 	}
 
+	@Override
+	public boolean canOptimize() {
+		return true;
+	}
+
 }

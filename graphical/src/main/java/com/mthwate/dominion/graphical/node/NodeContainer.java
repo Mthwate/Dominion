@@ -18,11 +18,17 @@ public class NodeContainer {
 
 	private Node node = new Node();
 
-	private Tile[][] tiles;
-
 	private NodeType type;
 
 	private Node parent;
+	
+	private Chunk[][] chunks;
+	
+	private static final int CHUNK_SIZE = 25;
+
+	private int sizex = 0;
+	
+	private int sizey = 0;
 
 	public NodeContainer(NodeType type) {
 		this.type = type;
@@ -37,20 +43,34 @@ public class NodeContainer {
 
 		int x = TileStore.sizeX();
 		int y = TileStore.sizeY();
-
-		if (tiles == null || tiles.length != x || tiles[0].length != y) {
-			tiles = new Tile[x][y];
+		
+		if (sizex != x || sizey != y) {
+			sizex = x;
+			sizey = y;
 			node.detachAllChildren();
-		}
-
-		for (int ix = 0; ix < x; ix++) {
-			for (int iy = 0; iy < y; iy++) {
-				if (type.differ(tiles[ix][iy], TileStore.get(ix, iy))) {
-					tiles[ix][iy] = TileStore.get(ix, iy).clone();
-					type.update(node, ix, iy, assetManager);
+			chunks = new Chunk[getChunksForSize(x)][getChunksForSize(y)];
+			for (int ix = 0; ix < getChunksForSize(x); ix++) {
+				for (int iy = 0; iy < getChunksForSize(y); iy++) {
+					int csizex = Math.min(x, (ix + 1) * CHUNK_SIZE) % CHUNK_SIZE;
+					int csizey = Math.min(y, (iy + 1) * CHUNK_SIZE) % CHUNK_SIZE;
+					csizex = csizex == 0 ? CHUNK_SIZE : csizex;
+					csizey = csizey == 0 ? CHUNK_SIZE : csizey;
+					chunks[ix][iy] = new Chunk(type, csizex, csizey);
+					chunks[ix][iy].setParent(node);
 				}
 			}
 		}
+
+		for (int ix = 0; ix < chunks.length; ix++) {
+			for (int iy = 0; iy < chunks[0].length; iy++) {
+				chunks[ix][iy].update(assetManager, ix * CHUNK_SIZE, iy * CHUNK_SIZE);
+			}
+		}
+	}
+	
+	private int getChunksForSize(int i) {
+		int chunks = (i - 1) / CHUNK_SIZE;
+		return chunks + 1;
 	}
 
 	public void collide(Collidable collidable, CollisionResults results) {
