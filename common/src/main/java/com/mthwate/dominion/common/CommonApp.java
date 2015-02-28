@@ -22,9 +22,6 @@ public abstract class CommonApp extends SimpleApplication {
 
 	@Override
 	public void simpleInitApp() {
-		log.info("Initializing log");
-		
-
 		log.info("Registering asset locator");
 		
 		if (new File("assets").exists()) {
