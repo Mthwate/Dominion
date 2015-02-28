@@ -30,14 +30,10 @@ public class ClientListener implements MessageListener<Client> {
 				TileMessage tileMsg = (TileMessage) msg;
 
 				TileStore.set(tileMsg.getTile(), tileMsg.getPos());
-
-				ClientApp.triggerWorldChange();
 			} else if (msg instanceof MapMessage) {
 				MapMessage mapMsg = (MapMessage) msg;
 				
 				TileStore.set(mapMsg.getMap());
-				
-				ClientApp.triggerWorldChange();
 			}
 
 		} else {

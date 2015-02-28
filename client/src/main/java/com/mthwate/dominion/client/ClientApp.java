@@ -36,17 +36,11 @@ public class ClientApp extends GraphicalApp {
 	
 	private Client client;
 	
-	private static boolean worldChange = false;
-	
 	private String ip;
 	
 	public ClientApp(String ip) {
 		super();
 		this.ip = ip;
-	}
-
-	public static void triggerWorldChange() {
-		worldChange = true;
 	}
 	
 	@Override
@@ -130,10 +124,7 @@ public class ClientApp extends GraphicalApp {
 		listenWire();
 		highlight();
 		
-		if (worldChange) {
-			worldChange = false;
-			NodeHandler.update(assetManager);
-		}
+		NodeHandler.update(assetManager);
 	}
 
 	@Override
