@@ -4,7 +4,6 @@ import com.jme3.asset.AssetManager;
 import com.jme3.collision.Collidable;
 import com.jme3.collision.CollisionResults;
 import com.jme3.scene.Node;
-import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 
 import java.util.logging.Logger;
