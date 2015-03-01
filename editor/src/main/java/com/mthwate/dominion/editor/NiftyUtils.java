@@ -1,5 +1,6 @@
 package com.mthwate.dominion.editor;
 
+import com.jme3.asset.AssetKey;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioRenderer;
 import com.jme3.input.InputManager;
@@ -33,9 +34,10 @@ public class NiftyUtils {
 
 
 		addTileOption("");
-		
-		List<String> tiles = (List<String>) assetManager.loadAsset("tiles/tiles.list");
-		
+
+		AssetKey<List<String>> key = new AssetKey<List<String>>("tiles/tiles.list");
+		List<String> tiles = assetManager.loadAsset(key);
+
 		for (String tile : tiles) {
 			TproUtils.load(tile, assetManager);
 			addTileOption(tile);
