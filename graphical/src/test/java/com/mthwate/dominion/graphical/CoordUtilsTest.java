@@ -7,7 +7,7 @@ import org.junit.Test;
 public class CoordUtilsTest {
 
 	@Test
-	public void testReversible() throws Exception {
+	public void testReversible() {
 		int range = 10;
 		
 		for (int x = -range; x <= range; x++) {
