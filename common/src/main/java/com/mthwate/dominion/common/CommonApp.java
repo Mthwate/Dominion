@@ -3,7 +3,7 @@ package com.mthwate.dominion.common;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.ClasspathLocator;
 import com.jme3.asset.plugins.FileLocator;
-import com.mthwate.dominion.common.epro.EproLoader;
+import com.mthwate.dominion.common.entity.EproLoader;
 
 import java.io.File;
 import java.util.logging.Level;

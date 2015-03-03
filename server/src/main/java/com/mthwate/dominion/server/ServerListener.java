@@ -37,9 +37,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
 			
 			if (msg instanceof LoginMessage) {
 				LoginMessage loginMsg = (LoginMessage) msg;
-				connection.setAttribute("username", loginMsg.getUsername());
-				MessageUtils.send(connection, new MapMessage(TileStore.get()));
-				
+				ConnectionUtils.setUsername(connection, loginMsg.getUsername());
 			} else if (msg instanceof MoveMessage) {
 				MoveMessage moveMsg = (MoveMessage) msg;
 
@@ -50,7 +48,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
 				Tile targetTile = TileStore.get(targetPos);
 				
 				if (sourceTile.hasInhabitant() && !targetTile.hasInhabitant()) {
-					if (sourceTile.getInhabitant().moveable) {
+					if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().moveable) {
 						targetTile.setInhabitant(sourceTile.getInhabitant());
 						sourceTile.setInhabitant(null);
 						MessageUtils.broadcast(server, new MapMessage(TileStore.get()));

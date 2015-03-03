@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common.epro;
+package com.mthwate.dominion.common.entity;
 
 import com.jme3.network.serializing.Serializable;
 

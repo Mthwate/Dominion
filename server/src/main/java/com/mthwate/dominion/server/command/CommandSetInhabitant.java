@@ -4,7 +4,8 @@ import com.jme3.asset.AssetManager;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.common.epro.EproUtils;
+import com.mthwate.dominion.common.entity.Entity;
+import com.mthwate.dominion.common.entity.EproUtils;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 
@@ -34,7 +35,7 @@ public class CommandSetInhabitant implements Command {
 			int x = Integer.parseInt(sx);
 			int y = Integer.parseInt(sy);
 			
-			TileStore.get(x, y).setInhabitant(EproUtils.getProperties(name, assetManager));
+			TileStore.get(x, y).setInhabitant(new Entity(EproUtils.getProperties(name, assetManager), null));
 
 			for (HostedConnection connection : server.getConnections()) {
 				MessageUtils.send(connection, new MapMessage(TileStore.get()));

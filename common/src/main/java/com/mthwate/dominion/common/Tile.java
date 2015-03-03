@@ -1,8 +1,8 @@
 package com.mthwate.dominion.common;
 
-import com.mthwate.dominion.common.epro.EntityProperties;
+import com.mthwate.dominion.common.entity.Entity;
+import com.mthwate.dominion.common.entity.EntityProperties;
 
-import javax.xml.ws.Action;
 import java.io.Serializable;
 
 /**
@@ -15,7 +15,7 @@ public class Tile implements Serializable {
 	
 	private int elevation;
 	
-	private EntityProperties inhabitant;
+	private Entity inhabitant;
 
 	public Tile() {
 		this.type = "null";
@@ -35,7 +35,7 @@ public class Tile implements Serializable {
 		return this.elevation;
 	}
 	
-	public EntityProperties getInhabitant() {
+	public Entity getInhabitant() {
 		return inhabitant;
 	}
 	
@@ -43,7 +43,7 @@ public class Tile implements Serializable {
 		return inhabitant != null;
 	}
 	
-	public void setInhabitant(EntityProperties entity) {
+	public void setInhabitant(Entity entity) {
 		this.inhabitant = entity;
 	}
 

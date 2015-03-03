@@ -6,7 +6,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
-import com.mthwate.dominion.common.epro.EntityProperties;
+import com.mthwate.dominion.common.entity.EntityProperties;
 
 /**
  * @author mthwate

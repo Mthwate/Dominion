@@ -1,4 +1,4 @@
-package com.mthwate.dominion.common.epro;
+package com.mthwate.dominion.common.entity;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.jme3.asset.AssetInfo;

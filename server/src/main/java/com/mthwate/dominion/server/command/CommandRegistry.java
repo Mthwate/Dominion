@@ -19,6 +19,7 @@ public class CommandRegistry {
 		add(new CommandSetTile());
 		add(new CommandUsers());
 		add(new CommandSetInhabitant());
+		add(new CommandStart());
 	}
 	
 	private static void add(Command cmd) {

@@ -25,8 +25,6 @@ public class ServerApp extends CommonApp {
 	 * The server networking object.
 	 */
 	private Server server;
-
-	private File saveFile = new File("map.dwm");
 	
 	@Override
 	protected void init() {
@@ -39,7 +37,6 @@ public class ServerApp extends CommonApp {
 		}
 
 		if (server != null) {
-			TileStore.set(SaveUtils.load(saveFile));//Loads the map
 			MessageUtils.register();//Registers the network message types
 			server.addMessageListener(new ServerListener(server), GZIPCompressedMessage.class);
 			server.start();
