@@ -15,7 +15,7 @@ public class MaterialUtils {
 	
 	private static Material matWire;
 	
-	private static Material matHighlight;
+	private static Map<ColorRGBA, Material> highlights = new HashMap<ColorRGBA, Material>();
 	
 	private static Map<String, Material> materials = new HashMap<String, Material>();
 
@@ -43,15 +43,17 @@ public class MaterialUtils {
 		return matWire;
 	}
 
-	public static Material getHighlightMaterial(AssetManager assetManager) {
+	public static Material getHighlightMaterial(ColorRGBA color, AssetManager assetManager) {
 
-		if (matHighlight == null) {
-			matHighlight = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-			matHighlight.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-			matHighlight.setColor("Color", new ColorRGBA(1, 1, 0, 0.2f));
+		Material highlight = highlights.get(color);
+
+		if (highlight == null) {
+			highlight = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+			highlight.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+			highlight.setColor("Color", color);
 		}
 
-		return matHighlight;
+		return highlight;
 	}
 	
 }

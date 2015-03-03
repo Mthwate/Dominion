@@ -1,17 +1,24 @@
 package com.mthwate.dominion.common.save;
 
 import com.mthwate.datlib.IOUtils;
+import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Tile;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
 public class SaveUtils {
 
-	public static Tile[][] load(File file) {
-		Tile[][] tiles = new Tile[1][1];
+	private static final Logger log = Logger.getLogger(SaveUtils.class.getName());
+
+	public static WorldMap loadMap(File file) {
+		Tile tile = new Tile();
+		Tile[][] tiles = {{tile}};
+		WorldMap map = new WorldMap(tiles, new Set2i[0]);
 		
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
@@ -19,16 +26,18 @@ public class SaveUtils {
 		try {
 			fis = new FileInputStream(file);
 			ois = new ObjectInputStream(fis);
-			tiles = (Tile[][]) ois.readObject();
-		} catch (Exception e) {} finally {
+			map = (WorldMap) ois.readObject();
+		} catch (Exception e) {
+			log.log(Level.WARNING, "Error loading world map", e);
+		} finally {
 			IOUtils.close(fis);
 			IOUtils.close(ois);
 		}
 		
-		return tiles;
+		return map;
 	}
 
-	public static boolean save(File file, Tile[][] tiles) {
+	public static boolean saveMap(File file, WorldMap map) {
 		boolean sucess = false;
 		
 		FileOutputStream fos = null;
@@ -37,14 +46,25 @@ public class SaveUtils {
 		try {
 			fos = new FileOutputStream(file);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(tiles);
+			oos.writeObject(map);
 			sucess = true;
-		} catch (Exception e) {} finally {
+		} catch (Exception e) {
+			log.log(Level.WARNING, "Error saving world map", e);
+		} finally {
 			IOUtils.close(fos);
 			IOUtils.close(oos);
 		}
 		
 		return sucess;
 	}
-	
+
+	@Deprecated
+	public static Tile[][] load(File saveFile) {
+		return loadMap(saveFile).getTiles();
+	}
+
+	@Deprecated
+	public static void save(File saveFile, Tile[][] tiles) {
+		saveMap(saveFile, new WorldMap(tiles, null));
+	}
 }

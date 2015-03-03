@@ -44,8 +44,16 @@ public class CoordUtils {
 		return getPosHex(x, CoordUtils.cartesianToHex(x, y));
 	}
 
+	public static Vector3f getPosCartesian(Set2i pos) {
+		return getPosCartesian(pos.getX(), pos.getY());
+	}
+
 	public static Vector3f getPosHex(int x, int y) {
 		return new Vector3f(x * 3f / 2f, (float) ((Math.sqrt(3) * y) + (Math.sqrt(3) * x / 2)), 0);
+	}
+
+	public static Vector3f getPosHex(Set2i pos) {
+		return getPosHex(pos.getX(), pos.getY());
 	}
 	
 }

@@ -8,6 +8,7 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
 import com.mthwate.dominion.graphical.tpro.TproUtils;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.controls.TextField;
 
@@ -59,6 +60,10 @@ public class NiftyUtils {
 	private static DropDown<String> getMenuDropDown(String name) {
 		return nifty.getScreen("menu").findNiftyControl(name, DropDown.class);
 	}
+
+	private static CheckBox getMenuCheckBox(String name) {
+		return nifty.getScreen("menu").findNiftyControl(name, CheckBox.class);
+	}
 	
 	public static String getTileSelection() {
 		return getMenuDropDown("type").getSelection();
@@ -93,6 +98,10 @@ public class NiftyUtils {
 	public static boolean isRelative(String name) {
 		String str = getMenuStr(name);
 		return str.contains("~") || str.equals("");
+	}
+
+	public static boolean isSpawn() {
+		return getMenuCheckBox("spawn").isChecked();
 	}
 	
 }

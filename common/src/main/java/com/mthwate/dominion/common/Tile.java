@@ -2,6 +2,7 @@ package com.mthwate.dominion.common;
 
 import com.mthwate.dominion.common.epro.EntityProperties;
 
+import javax.xml.ws.Action;
 import java.io.Serializable;
 
 /**
@@ -15,8 +16,11 @@ public class Tile implements Serializable {
 	private int elevation;
 	
 	private EntityProperties inhabitant;
-	
-	public Tile() {}
+
+	public Tile() {
+		this.type = "null";
+		this.elevation = 0;
+	}
 	
 	public Tile(String type, int elevation) {
 		this.type = type;

@@ -12,6 +12,7 @@
 				<text text="Type:" font="Interface/Fonts/Default.fnt"/>
 				<text text="Elevation:" font="Interface/Fonts/Default.fnt"/>
 				<text text="Brush Size:" font="Interface/Fonts/Default.fnt"/>
+				<text text="Spawn:" font="Interface/Fonts/Default.fnt"/>
 			</panel>
 			<panel childLayout="vertical" width="10%">
 				<control id="width" name="textfield" filter="[0-9]"/>
@@ -19,6 +20,7 @@
 				<control id="type" name="dropDown"/>
 				<control id="elevation" name="textfield" filter="[~\-0-9]"/>
 				<control id="brushSize" name="textfield" filter="[0-9]"/>
+				<control id="spawn" name="checkbox" />
 			</panel>
 		</layer>
 	</screen>
