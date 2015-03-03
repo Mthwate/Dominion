@@ -60,7 +60,13 @@ public class TileStore {
 	}
 
 	public static int sizeY() {
-		return tiles[0].length;
+		int size = 0;
+
+		if (tiles != null) {
+			size = tiles[0].length;
+		}
+
+		return size;
 	}
 
 	public static boolean validPoint(Set2i pos) {

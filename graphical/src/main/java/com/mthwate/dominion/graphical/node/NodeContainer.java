@@ -60,9 +60,11 @@ public class NodeContainer {
 			}
 		}
 
-		for (int ix = 0; ix < chunks.length; ix++) {
-			for (int iy = 0; iy < chunks[0].length; iy++) {
-				chunks[ix][iy].update(assetManager, ix * CHUNK_SIZE, iy * CHUNK_SIZE);
+		if (x != 0 && y != 0) {
+			for (int ix = 0; ix < chunks.length; ix++) {
+				for (int iy = 0; iy < chunks[0].length; iy++) {
+					chunks[ix][iy].update(assetManager, ix * CHUNK_SIZE, iy * CHUNK_SIZE);
+				}
 			}
 		}
 	}
