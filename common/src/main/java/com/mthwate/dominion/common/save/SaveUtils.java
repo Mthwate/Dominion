@@ -1,6 +1,7 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.common.save;
 
 import com.mthwate.datlib.IOUtils;
+import com.mthwate.dominion.common.Tile;
 
 import java.io.*;
 
