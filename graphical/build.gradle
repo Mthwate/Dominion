@@ -2,8 +2,10 @@ def jme_version = '3.0.10'
 
 dependencies {
 	compile project(':common')
-	runtime "org.bushe:eventbus:1.4"
-	compile "com.jme3:jme3-core:$jme_version"
 	compile "com.jme3:jme3-niftygui:$jme_version"
-	compile "com.jme3:jme3-lwjgl:$jme_version"
+
+	runtime "org.bushe:eventbus:1.4"
+	runtime "com.jme3:jme3-blender:$jme_version"
+	runtime "com.jme3:jme3-core:$jme_version"
+	runtime "com.jme3:jme3-lwjgl:$jme_version"
 }

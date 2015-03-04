@@ -14,7 +14,7 @@ import com.mthwate.dominion.common.entity.EntityProperties;
 public class ModelUtils {
 
 	public static Spatial getModel(EntityProperties entity, AssetManager assetManager) {
-		Spatial model = assetManager.loadModel("obj/" + entity.model + ".obj");
+		Spatial model = assetManager.loadModel("models/" + entity.model + ".blend");
 		model.setLocalScale(0.1f, 0.1f, 0.1f);
 		model.setLocalRotation(getModelRotation());
 		model.setQueueBucket(RenderQueue.Bucket.Transparent);

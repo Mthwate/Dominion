@@ -4,5 +4,6 @@ dependencies {
 	compile "com.mthwate.datlib:datlib:1.3"
 	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.09"
 	compile "com.jme3:jme3-networking:$jme_version"
+
 	runtime "com.jme3:jme3-desktop:$jme_version"
 }
