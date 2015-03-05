@@ -55,5 +55,15 @@ public class CoordUtils {
 	public static Vector3f getPosHex(Set2i pos) {
 		return getPosHex(pos.getX(), pos.getY());
 	}
+
+	public static boolean isAdjacentCartesian(Set2i p1, Set2i p2) {
+		return isAdjacentHex(cartesianToHex(p1), cartesianToHex(p2));
+	}
+
+	public static boolean isAdjacentHex(Set2i p1, Set2i p2) {
+		int dx = Math.abs(p1.getX() - p2.getX());
+		int dy = Math.abs(p1.getY() - p2.getY());
+		return (dx < 2 && dy < 2 && dx + dy < 2);
+	}
 	
 }
