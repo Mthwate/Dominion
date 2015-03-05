@@ -1,7 +1,6 @@
 package com.mthwate.dominion.common;
 
 import com.mthwate.dominion.common.entity.Entity;
-import com.mthwate.dominion.common.entity.EntityProperties;
 
 import java.io.Serializable;
 

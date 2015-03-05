@@ -4,7 +4,6 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Tile;
 
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * @author mthwate
