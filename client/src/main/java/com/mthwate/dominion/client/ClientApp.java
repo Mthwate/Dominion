@@ -12,6 +12,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
+import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.LoginMessage;
@@ -106,7 +107,12 @@ public class ClientApp extends GraphicalApp {
 					
 					source = new Set2i(x, y);
 				} else {
-					MessageUtils.send(client, new MoveMessage(source, new Set2i(x, y)));
+					Set2i dest = new Set2i(x, y);
+					if (CoordUtils.isAdjacentCartesian(source, dest)) {
+						Path path = new Path(source);
+						path.add(dest);
+						MessageUtils.send(client, new MoveMessage(path));
+					}
 					source = null;
 				}
 			}

@@ -5,7 +5,7 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 import com.jme3.network.message.GZIPCompressedMessage;
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.LoginMessage;
@@ -41,18 +41,21 @@ public class ServerListener implements MessageListener<HostedConnection> {
 			} else if (msg instanceof MoveMessage) {
 				MoveMessage moveMsg = (MoveMessage) msg;
 
-				Set2i sourcePos = moveMsg.getSource();
-				Set2i targetPos = moveMsg.getTarget();
+				Path path = moveMsg.getPath();
 
-				Tile sourceTile = TileStore.get(sourcePos);
-				Tile targetTile = TileStore.get(targetPos);
-				
-				if (sourceTile.hasInhabitant() && !targetTile.hasInhabitant()) {
-					if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().moveable) {
-						targetTile.setInhabitant(sourceTile.getInhabitant());
-						sourceTile.setInhabitant(null);
-						MessageUtils.broadcast(server, new MapMessage(TileStore.get()));
+				if (path.isValid()) {
+					Tile sourceTile = TileStore.get(path.getCurrent());
+					Tile targetTile = TileStore.get(path.getNext());
+
+					if (sourceTile.hasInhabitant() && !targetTile.hasInhabitant()) {
+						if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().moveable) {
+							targetTile.setInhabitant(sourceTile.getInhabitant());
+							sourceTile.setInhabitant(null);
+							MessageUtils.broadcast(server, new MapMessage(TileStore.get()));
+						}
 					}
+				} else {
+					log.warning("Invalid path received from connection " + connection.getId() + ", this my be the result of error or attempted cheating");
 				}
 			} else {
 				log.warning("Invalid message type \"" + m.getClass() + "\" received");
