@@ -61,9 +61,9 @@ public class CoordUtils {
 	}
 
 	public static boolean isAdjacentHex(Set2i p1, Set2i p2) {
-		int dx = Math.abs(p1.getX() - p2.getX());
-		int dy = Math.abs(p1.getY() - p2.getY());
-		return (dx < 2 && dy < 2 && dx + dy < 2);
+		int dx = p2.getX() - p1.getX();
+		int dy = p2.getY() - p1.getY();
+		return (Math.abs(dx) < 2 && Math.abs(dy) < 2 && Math.abs(dx + dy) < 2 && (dx != 0 || dy != 0));
 	}
 	
 }
