@@ -51,7 +51,7 @@ public class CommandStart implements Command {
 				int i = rand.nextInt(spawns.size());
 				Set2i spawn = spawns.get(i);
 				spawns.remove(i);
-				Entity entity = new Entity(EproUtils.getProperties("penis", assetManager), ConnectionUtils.getUsername(connection));
+				Entity entity = new Entity(EproUtils.getProperties("placeholder", assetManager), ConnectionUtils.getUsername(connection));
 				TileStore.get(spawn).setInhabitant(entity);
 			}
 		}
