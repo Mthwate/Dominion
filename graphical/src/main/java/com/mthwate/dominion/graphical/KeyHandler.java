@@ -43,6 +43,8 @@ public class KeyHandler implements ActionListener {
 		addKeyListener(im, KeyControl.TOGGLE_WIRE, KeyInput.KEY_SPACE);
 
 		addKeyListener(im, KeyControl.GOTO_HOME, KeyInput.KEY_H);
+
+		addKeyListener(im, KeyControl.SCREENSHOT, KeyInput.KEY_P);
 	}
 
 	private void addMouseListener(InputManager im, KeyControl control, int button) {
@@ -66,6 +68,10 @@ public class KeyHandler implements ActionListener {
 
 	public boolean isPressed(KeyControl key) {
 		return pressed.get(key.getName());
+	}
+
+	public void unpress(KeyControl key) {
+		onAction(key.getName(), false, 0);
 	}
 
 	@Override

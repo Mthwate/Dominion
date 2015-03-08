@@ -1,5 +1,6 @@
 package com.mthwate.dominion.graphical;
 
+import com.jme3.app.state.ScreenshotAppState;
 import com.jme3.collision.CollisionResults;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
@@ -23,7 +24,9 @@ public abstract class GraphicalApp extends CommonApp {
 	protected KeyHandler keyHandler;
 
 	protected static final Vector3f CAM_ORIGIN = new Vector3f(0, -10, 15);
-	
+
+	private ScreenshotAppState screenshotState;
+
 	@Override
 	protected void init() {
 		assetManager.registerLoader(TproLoader.class, "tpro");
@@ -34,6 +37,11 @@ public abstract class GraphicalApp extends CommonApp {
 		log.info("Setting up nodes");
 		rootNode.attachChild(highlightNode);
 		NodeHandler.init(rootNode);
+
+		log.info("Initializing screenshot app state");
+		screenshotState = new ScreenshotAppState("Screenshot");
+		stateManager.attach(screenshotState);
+		viewPort.addProcessor(screenshotState);
 		
 
 		log.info("Disabling the default fly camera");
@@ -49,6 +57,13 @@ public abstract class GraphicalApp extends CommonApp {
 		
 	}
 
+	protected void screenshot() {
+		if (keyHandler.isPressed(KeyControl.SCREENSHOT)) {
+			screenshotState.takeScreenshot();
+			keyHandler.unpress(KeyControl.SCREENSHOT);
+		}
+	}
+
 	protected void zoom(float tpf) {
 
 		float zoomMod = 100f;
@@ -57,11 +72,11 @@ public abstract class GraphicalApp extends CommonApp {
 
 		if (keyHandler.isPressed(KeyControl.ZOOM_IN)) {
 			zoom--;
-			keyHandler.onAction(KeyControl.ZOOM_IN.getName(), false, 0);
+			keyHandler.unpress(KeyControl.ZOOM_IN);
 		}
 		if (keyHandler.isPressed(KeyControl.ZOOM_OUT)) {
 			zoom++;
-			keyHandler.onAction(KeyControl.ZOOM_OUT.getName(), false, 0);
+			keyHandler.unpress(KeyControl.ZOOM_OUT);
 		}
 
 		Vector3f location = cam.getLocation();
@@ -115,7 +130,7 @@ public abstract class GraphicalApp extends CommonApp {
 	protected void listenHome() {
 
 		if (keyHandler.isPressed(KeyControl.GOTO_HOME)) {
-			keyHandler.onAction(KeyControl.GOTO_HOME.getName(), false, 0);
+			keyHandler.unpress(KeyControl.GOTO_HOME);
 			cam.setLocation(CAM_ORIGIN.setZ(cam.getLocation().getZ()));
 		}
 		
@@ -127,7 +142,7 @@ public abstract class GraphicalApp extends CommonApp {
 	protected void listenWire() {
 		
 		if (keyHandler.isPressed(KeyControl.TOGGLE_WIRE)) {
-			keyHandler.onAction(KeyControl.TOGGLE_WIRE.getName(), false, 0);
+			keyHandler.unpress(KeyControl.TOGGLE_WIRE);
 			NodeHandler.toggleWire();
 		}
 

@@ -28,6 +28,8 @@ public enum KeyControl {
 	TOGGLE_WIRE("toggleWire"),
 
 	GOTO_HOME("gotoHome"),
+
+	SCREENSHOT("screenshot"),
 	
 	;
 

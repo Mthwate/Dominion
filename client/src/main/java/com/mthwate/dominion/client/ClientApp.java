@@ -126,6 +126,7 @@ public class ClientApp extends GraphicalApp {
 		move(tpf);
 		listenWire();
 		highlight();
+		screenshot();
 		
 		NodeHandler.update(assetManager);
 	}

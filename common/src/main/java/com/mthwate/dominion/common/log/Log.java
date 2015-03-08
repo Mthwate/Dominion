@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -23,8 +22,6 @@ public class Log {
 		}
 
 		root.addHandler(new LiveStreamHandler(getOutputStream(), new StandardFormatter()));
-
-		root.setLevel(Level.ALL);
 	}
 	
 	private static OutputStream getOutputStream() {

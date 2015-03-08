@@ -122,6 +122,8 @@ public class EditorApp extends GraphicalApp {
 		listenHome();
 		listenWire();
 
+		screenshot();
+
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
 			keyHandler.onAction(KeyControl.INCREASE_BRUSH.getName(), false, 0);
 			NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
