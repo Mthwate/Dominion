@@ -11,3 +11,4 @@ gradle-app.setting
 *.so
 *.dwm
 log.txt
+Screenshot*.png
