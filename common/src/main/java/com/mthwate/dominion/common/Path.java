@@ -5,6 +5,7 @@ import com.mthwate.datlib.math.Set2i;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
@@ -12,16 +13,25 @@ import java.util.List;
 @Serializable
 public class Path {
 
+	private static final Logger log = Logger.getLogger(Path.class.getName());
+
 	List<SerializableSet2i> list = new ArrayList<>();
 
 	@Deprecated
 	public Path() {}
 
 	public Path(Set2i start) {
+		log.info("Initializing path at " + start);
 		list.add(new SerializableSet2i(start));
 	}
 
+	/**
+	 * Adds an adjacent position to the path.
+	 *
+	 * @param pos the position to add
+	 */
 	public void add(Set2i pos) {
+		log.info("Adding " + pos + " to path");
 		if (!CoordUtils.isAdjacentCartesian(list.get(list.size() -1), pos)) {
 			throw new IllegalArgumentException("Tiles not adjacent");
 		}

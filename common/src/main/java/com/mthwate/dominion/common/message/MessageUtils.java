@@ -11,16 +11,34 @@ import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EntityProperties;
 
+import java.util.logging.Logger;
+
 /**
  * @author mthwate
  */
 public class MessageUtils {
 
+	private static final Logger log = Logger.getLogger(MessageUtils.class.getName());
+
+	/**
+	 * Compresses the message and sends it to the connection.
+	 *
+	 * @param connection the connection to send the message to
+	 * @param message the message to compress and send
+	 */
 	public static void send(MessageConnection connection, Message message) {
+		log.info("sending message of type " + message.getClass());
 		connection.send(new GZIPCompressedMessage(message));
 	}
 
+	/**
+	 * Compresses and broadcasts a message to all clients connected to the server.
+	 *
+	 * @param server the server object to broadcast from
+	 * @param message the message to compress and send
+	 */
 	public static void broadcast(Server server, Message message) {
+		log.info("broadcasting message of type " + message.getClass());
 		server.broadcast(new GZIPCompressedMessage(message));
 	}
 
