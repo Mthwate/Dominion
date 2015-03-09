@@ -183,64 +183,59 @@ public class EditorApp extends GraphicalApp {
 	}
 	
 	private void highlight() {
-		CollisionResult result = clickCollisions().getClosestCollision();
-		if (result != null) {
-			Geometry geom = result.getGeometry();
-			if (geom.getMesh() instanceof Hexagon) {
-				String name = geom.getName();
-				String[] split = name.split(",");
-				int x = Integer.parseInt(split[0]);
-				int y = Integer.parseInt(split[1]);
+		Set2i pos = clickCollisionPos();
+		if (pos != null) {
+			int x = pos.getX();
+			int y = pos.getY();
 
-				boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
+			boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
 
-				if (NiftyUtils.isSpawn()) {
-					addHighlight(x, y, Highlighter.YELLOW);
-					if (clicked) {
-						keyHandler.onAction(KeyControl.CLICK.getName(), false, 0);
-						toggleSpawn(new Set2i(x, y));
-					}
-				} else {
-					String type = NiftyUtils.getTileSelection();
+			if (NiftyUtils.isSpawn()) {
+				addHighlight(x, y, Highlighter.YELLOW);
+				if (clicked) {
+					keyHandler.onAction(KeyControl.CLICK.getName(), false, 0);
+					toggleSpawn(new Set2i(x, y));
+				}
+			} else {
+				String type = NiftyUtils.getTileSelection();
 
-					int elevation = NiftyUtils.getMenuInt("elevation");
+				int elevation = NiftyUtils.getMenuInt("elevation");
 
-					int size = NiftyUtils.getMenuInt("brushSize");
+				int size = NiftyUtils.getMenuInt("brushSize");
 
 
-					for (int ix = -size + 1; ix < size; ix++) {
-						for (int iy = -size + 1; iy < size; iy++) {
-							if (Math.abs(ix + iy) < size) {
-								int px = x + ix;
-								int py = CoordUtils.hexToCartesian(px, CoordUtils.cartesianToHex(x, y) + iy);
-								if (TileStore.validPoint(px, py)) {
+				for (int ix = -size + 1; ix < size; ix++) {
+					for (int iy = -size + 1; iy < size; iy++) {
+						if (Math.abs(ix + iy) < size) {
+							int px = x + ix;
+							int py = CoordUtils.hexToCartesian(px, CoordUtils.cartesianToHex(x, y) + iy);
+							if (TileStore.validPoint(px, py)) {
 
-									addHighlight(px, py, Highlighter.YELLOW);
+								addHighlight(px, py, Highlighter.YELLOW);
 
-									if (clicked) {
+								if (clicked) {
 
-										Tile tile = TileStore.get(px, py);
+									Tile tile = TileStore.get(px, py);
 
-										String newType = type;
-										int newElevation = elevation;
+									String newType = type;
+									int newElevation = elevation;
 
-										if (type.equals("")) {
-											newType = tile.getType();
-										}
+									if (type.equals("")) {
+										newType = tile.getType();
+									}
 
-										if (NiftyUtils.isRelative("elevation")) {
-											newElevation += tile.getElevation();
-										}
+									if (NiftyUtils.isRelative("elevation")) {
+										newElevation += tile.getElevation();
+									}
 
-										newElevation = Math.max(newElevation, 0);
+									newElevation = Math.max(newElevation, 0);
 
-										if (!tile.getType().equals(newType)) {
-											tile.setType(newType);
-										}
+									if (!tile.getType().equals(newType)) {
+										tile.setType(newType);
+									}
 
-										if (tile.getElevation() != newElevation) {
-											TileStore.get(px, py).setElevation(newElevation);
-										}
+									if (tile.getElevation() != newElevation) {
+										TileStore.get(px, py).setElevation(newElevation);
 									}
 								}
 							}

@@ -79,7 +79,7 @@ public class ClientApp extends GraphicalApp {
 
 	private void highlight() {
 		if (keyHandler.isPressed(KeyControl.CLICK)) {
-			Set2i pos = collisionCoords();
+			Set2i pos = clickCollisionPos();
 			if (pos != null) {
 				if (path == null) {
 					path = new Path(pos);

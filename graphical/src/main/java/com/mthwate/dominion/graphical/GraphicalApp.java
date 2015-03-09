@@ -151,7 +151,7 @@ public abstract class GraphicalApp extends CommonApp {
 
     }
 
-	protected Set2i collisionCoords() {
+	protected Set2i clickCollisionPos() {
 		Set2i pos = null;
 		CollisionResult result = clickCollisions().getClosestCollision();
 		if (result != null) {
@@ -165,7 +165,7 @@ public abstract class GraphicalApp extends CommonApp {
 		return pos;
 	}
 
-	protected CollisionResults clickCollisions() {
+	private CollisionResults clickCollisions() {
 		CollisionResults results = new CollisionResults();
 		Vector2f click2d = inputManager.getCursorPosition();
 		Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
