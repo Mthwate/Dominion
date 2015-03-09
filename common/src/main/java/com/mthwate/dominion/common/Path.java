@@ -3,6 +3,7 @@ package com.mthwate.dominion.common;
 import com.jme3.network.serializing.Serializable;
 import com.mthwate.datlib.math.Set2i;
 
+import java.awt.datatransfer.DataFlavor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -49,6 +50,10 @@ public class Path {
 	public boolean isValid() {
 		boolean valid = true;
 
+		if (list.size() < 2) {
+			valid = false;
+		}
+
 		for (Set2i item : list) {
 			if (!TileStore.validPoint(item)) {
 				valid = false;
@@ -64,4 +69,7 @@ public class Path {
 		return valid;
 	}
 
+	public Set2i getLast() {
+		return list.get(list.size() - 1);
+	}
 }

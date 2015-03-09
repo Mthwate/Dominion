@@ -1,11 +1,14 @@
 package com.mthwate.dominion.graphical;
 
 import com.jme3.app.state.ScreenshotAppState;
+import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.tpro.TproLoader;
@@ -147,6 +150,20 @@ public abstract class GraphicalApp extends CommonApp {
 		}
 
     }
+
+	protected Set2i collisionCoords() {
+		Set2i pos = null;
+		CollisionResult result = clickCollisions().getClosestCollision();
+		if (result != null) {
+			Geometry geom = result.getGeometry();
+			String name = geom.getName();
+			String[] split = name.split(",");
+			int x = Integer.parseInt(split[0]);
+			int y = Integer.parseInt(split[1]);
+			pos = new Set2i(x, y);
+		}
+		return pos;
+	}
 
 	protected CollisionResults clickCollisions() {
 		CollisionResults results = new CollisionResults();
