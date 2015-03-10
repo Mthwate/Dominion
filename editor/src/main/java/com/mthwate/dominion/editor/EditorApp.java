@@ -16,6 +16,10 @@ import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.graphical.*;
 import com.mthwate.dominion.graphical.mesh.Hexagon;
 import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.state.HomeAppState;
+import com.mthwate.dominion.graphical.state.MoveAppState;
+import com.mthwate.dominion.graphical.state.WireAppState;
+import com.mthwate.dominion.graphical.state.ZoomAppState;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,6 +45,11 @@ public class EditorApp extends GraphicalApp {
 		tryLoad();
 		
 		initLight();
+
+		stateManager.attach(new MoveAppState());
+		stateManager.attach(new ZoomAppState());
+		stateManager.attach(new HomeAppState());
+		stateManager.attach(new WireAppState());
 	}
 	
 	private void tryLoad() {
@@ -114,13 +123,8 @@ public class EditorApp extends GraphicalApp {
 	@Override
 	public void simpleUpdate(float tpf) {
 
-		zoom(tpf);
-		move(tpf);
 		look();
 		menu();
-		
-		listenHome();
-		listenWire();
 
 		screenshot();
 

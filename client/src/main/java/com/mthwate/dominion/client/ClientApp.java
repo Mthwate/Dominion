@@ -1,6 +1,5 @@
 package com.mthwate.dominion.client;
 
-import com.jme3.collision.CollisionResult;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
@@ -20,6 +19,10 @@ import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.*;
 import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.state.HomeAppState;
+import com.mthwate.dominion.graphical.state.MoveAppState;
+import com.mthwate.dominion.graphical.state.WireAppState;
+import com.mthwate.dominion.graphical.state.ZoomAppState;
 
 import java.io.IOException;
 import java.util.Random;
@@ -64,6 +67,11 @@ public class ClientApp extends GraphicalApp {
 		}
 
 		initLight();
+
+		stateManager.attach(new MoveAppState());
+		stateManager.attach(new ZoomAppState());
+		stateManager.attach(new HomeAppState());
+		stateManager.attach(new WireAppState());
 	}
 
 	private void initLight() {
@@ -122,9 +130,6 @@ public class ClientApp extends GraphicalApp {
 	@Override
 	public void simpleUpdate(float tpf) {
 
-		zoom(tpf);
-		move(tpf);
-		listenWire();
 		highlight();
 		screenshot();
 		
