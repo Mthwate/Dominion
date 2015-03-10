@@ -12,7 +12,14 @@ import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
+import com.mthwate.dominion.server.messagehandler.LoginMessageHandler;
+import com.mthwate.dominion.server.messagehandler.MessageHandler;
+import com.mthwate.dominion.server.messagehandler.MoveMessageHandler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -23,46 +30,34 @@ public class ServerListener implements MessageListener<HostedConnection> {
 	private static final Logger log = Logger.getLogger(ServerListener.class.getName());
 	
 	private Server server;
+
+	private Map<Class, MessageHandler> handlers = new HashMap<>();
 	
 	public ServerListener(Server server) {
 		this.server = server;
+
+		//TODO move these somewhere else
+		handlers.put(MoveMessage.class, new MoveMessageHandler());
+		handlers.put(LoginMessage.class, new LoginMessageHandler());
 	}
 	
 	@Override
-	public void messageReceived(HostedConnection connection, Message m) {
+	public void messageReceived(HostedConnection connection, Message message) {
 		
-		if (m instanceof GZIPCompressedMessage) {
-			GZIPCompressedMessage zipped = (GZIPCompressedMessage) m;
-			Message msg = zipped.getMessage();
-			
-			if (msg instanceof LoginMessage) {
-				LoginMessage loginMsg = (LoginMessage) msg;
-				ConnectionUtils.setUsername(connection, loginMsg.getUsername());
-			} else if (msg instanceof MoveMessage) {
-				MoveMessage moveMsg = (MoveMessage) msg;
+		if (message instanceof GZIPCompressedMessage) {
 
-				Path path = moveMsg.getPath();
+			GZIPCompressedMessage zipped = (GZIPCompressedMessage) message;
 
-				if (path.isValid()) {
-					Tile sourceTile = TileStore.get(path.getCurrent());
-					Tile targetTile = TileStore.get(path.getNext());
+			Message unzipped = zipped.getMessage();
 
-					if (sourceTile.hasInhabitant() && !targetTile.hasInhabitant()) {
-						if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().moveable) {
-							targetTile.setInhabitant(sourceTile.getInhabitant());
-							sourceTile.setInhabitant(null);
-							MessageUtils.broadcast(server, new MapMessage(TileStore.get()));
-						}
-					}
-				} else {
-					log.warning("Invalid path received from connection " + connection.getId() + ", this my be the result of error or attempted cheating");
-				}
-			} else {
-				log.warning("Invalid message type \"" + m.getClass() + "\" received");
-			}
+			Class<? extends Message> clazz = unzipped.getClass();
+
+			handlers.get(clazz).onMessage(server, connection, unzipped);
 			
 		} else {
-			log.warning("Invalid message type \"" + m.getClass() + "\" received");
+
+			log.warning("Invalid message type \"" + message.getClass() + "\" received");
+
 		}
 		
 	}
