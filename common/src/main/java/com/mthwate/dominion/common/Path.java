@@ -72,4 +72,8 @@ public class Path {
 	public Set2i getLast() {
 		return list.get(list.size() - 1);
 	}
+
+	public void step() {
+		list.remove(0);
+	}
 }

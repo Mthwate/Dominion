@@ -7,8 +7,9 @@ import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.server.command.CommandUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 /**
@@ -22,6 +23,8 @@ public class ServerApp extends CommonApp {
 	 * The server networking object.
 	 */
 	private Server server;
+
+	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 	
 	@Override
 	protected void init() {
@@ -39,14 +42,23 @@ public class ServerApp extends CommonApp {
 			server.start();
 		}
 
-		Scanner reader = new Scanner(System.in);
+	}
 
-		//TODO fix my stupidity
-		while (true) {
-			String line = reader.nextLine();
-			CommandUtils.run(server, assetManager, line);
+	@Override
+	public void simpleUpdate(float tpf) {
+
+		//CommandUtils.run(server, assetManager, reader.nextLine());
+
+
+		try {
+			while (stdin.ready()) {
+				CommandUtils.run(server, assetManager, stdin.readLine());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
+		PathHandler.update(server, tpf);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.server.ConnectionUtils;
+import com.mthwate.dominion.server.PathHandler;
 
 import java.util.logging.Logger;
 
@@ -25,13 +26,10 @@ public class MoveMessageHandler implements MessageHandler<MoveMessage> {
 
 		if (path.isValid()) {
 			Tile sourceTile = TileStore.get(path.getCurrent());
-			Tile targetTile = TileStore.get(path.getNext());
 
-			if (sourceTile.hasInhabitant() && !targetTile.hasInhabitant()) {
+			if (sourceTile.hasInhabitant()) {
 				if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().moveable) {
-					targetTile.setInhabitant(sourceTile.getInhabitant());
-					sourceTile.setInhabitant(null);
-					MessageUtils.broadcast(server, new MapMessage(TileStore.get()));
+					PathHandler.add(path);
 				}
 			}
 		} else {
