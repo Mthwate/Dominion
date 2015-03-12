@@ -18,11 +18,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
 public class CommandStart implements Command {
+
+	private static final Logger log = Logger.getLogger(CommandStart.class.getName());
 
 	@Deprecated
 	private final File SAVE_FILE = new File("map.dwm");//TODO remove this
@@ -46,13 +49,15 @@ public class CommandStart implements Command {
 
 		Random rand = new Random();
 
-		if (spawns.size() > connections.size()) {
+		if (spawns.size() >= connections.size()) {
+			log.info("Starting the game with " + connections.size() + " connections");
 			for (HostedConnection connection : connections) {
 				int i = rand.nextInt(spawns.size());
 				Set2i spawn = spawns.get(i);
 				spawns.remove(i);
 				Entity entity = new Entity(EproUtils.getProperties("placeholder", assetManager), ConnectionUtils.getUsername(connection));
 				TileStore.get(spawn).setInhabitant(entity);
+				log.info(ConnectionUtils.getUsername(connection) + " is starting the game at " + spawn);
 			}
 		}
 
