@@ -8,16 +8,19 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
 public class Starter {
-	
+
+	private static final Logger log = Logger.getLogger(Starter.class.getName());
+
 	public static void start(CommonApp app, boolean graphical, String name) {
 
 		Log.init();
-		
 
 		if (graphical) {
 			AppSettings settings = new AppSettings(false);
@@ -30,7 +33,7 @@ public class Starter {
 					BufferedImage[] icons = new BufferedImage[]{ImageIO.read(in)};
 					settings.setIcons(icons);
 				} catch (IOException e) {
-					e.printStackTrace();
+					log.log(Level.SEVERE, "Failed to load application icons", e);
 				}
 			}
 

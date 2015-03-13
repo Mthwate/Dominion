@@ -9,6 +9,7 @@ import com.mthwate.dominion.server.state.ConsoleAppState;
 import com.mthwate.dominion.server.state.PathAppState;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -29,8 +30,7 @@ public class ServerApp extends CommonApp {
 		try {
 			server = Network.createServer(6969);//TODO modular port
 		} catch (IOException e) {
-			e.printStackTrace();
-			//TODO log this
+			log.log(Level.SEVERE, "Failed to create server" ,e);
 		}
 
 		if (server != null) {

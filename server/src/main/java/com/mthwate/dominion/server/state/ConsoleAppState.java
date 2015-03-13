@@ -8,11 +8,15 @@ import com.mthwate.dominion.server.command.CommandUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
 public class ConsoleAppState extends ServerAppState {
+
+	private static final Logger log = Logger.getLogger(ConsoleAppState.class.getName());
 
 	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -31,7 +35,7 @@ public class ConsoleAppState extends ServerAppState {
 				CommandUtils.run(server, assetManager, stdin.readLine());
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.log(Level.SEVERE, "Failed to read from stdin", e);
 		}
 	}
 
