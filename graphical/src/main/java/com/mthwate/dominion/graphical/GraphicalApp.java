@@ -1,8 +1,8 @@
 package com.mthwate.dominion.graphical;
 
-import com.jme3.app.state.ScreenshotAppState;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
@@ -28,8 +28,6 @@ public abstract class GraphicalApp extends CommonApp {
 
 	public static final Vector3f CAM_ORIGIN = new Vector3f(0, -10, 15);
 
-	private ScreenshotAppState screenshotState;
-
 	@Override
 	protected void init() {
 		assetManager.registerLoader(TproLoader.class, "tpro");
@@ -40,11 +38,6 @@ public abstract class GraphicalApp extends CommonApp {
 		log.info("Setting up nodes");
 		rootNode.attachChild(highlightNode);
 		NodeHandler.init(rootNode);
-
-		log.info("Initializing screenshot app state");
-		screenshotState = new ScreenshotAppState("Screenshot");
-		stateManager.attach(screenshotState);
-		viewPort.addProcessor(screenshotState);
 		
 
 		log.info("Disabling the default fly camera");
@@ -57,18 +50,13 @@ public abstract class GraphicalApp extends CommonApp {
 
 		log.info("Setting initial camera direction");
 		cam.lookAtDirection(new Vector3f(0, 0.5f, -1), new Vector3f(0, 0, 1));
-		
+
+
+		viewPort.setBackgroundColor(ColorRGBA.Black);
 	}
 
 	public KeyHandler getKeyHandler() {
 		return keyHandler;
-	}
-
-	protected void screenshot() {
-		if (keyHandler.isPressed(KeyControl.SCREENSHOT)) {
-			screenshotState.takeScreenshot();
-			keyHandler.unpress(KeyControl.SCREENSHOT);
-		}
 	}
 
 	protected Set2i clickCollisionPos() {

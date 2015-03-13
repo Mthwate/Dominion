@@ -18,11 +18,7 @@ import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.*;
-import com.mthwate.dominion.graphical.node.NodeHandler;
-import com.mthwate.dominion.graphical.state.HomeAppState;
-import com.mthwate.dominion.graphical.state.MoveAppState;
-import com.mthwate.dominion.graphical.state.WireAppState;
-import com.mthwate.dominion.graphical.state.ZoomAppState;
+import com.mthwate.dominion.graphical.state.*;
 
 import java.io.IOException;
 import java.util.Random;
@@ -72,6 +68,8 @@ public class ClientApp extends GraphicalApp {
 		stateManager.attach(new ZoomAppState());
 		stateManager.attach(new HomeAppState());
 		stateManager.attach(new WireAppState());
+		stateManager.attach(new NodeAppState());
+		stateManager.attach(new ScreenshotAppState());
 	}
 
 	private void initLight() {
@@ -129,11 +127,7 @@ public class ClientApp extends GraphicalApp {
 	
 	@Override
 	public void simpleUpdate(float tpf) {
-
 		highlight();
-		screenshot();
-		
-		NodeHandler.update(assetManager);
 	}
 
 	@Override

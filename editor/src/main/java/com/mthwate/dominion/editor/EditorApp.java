@@ -13,11 +13,7 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.graphical.*;
-import com.mthwate.dominion.graphical.node.NodeHandler;
-import com.mthwate.dominion.graphical.state.HomeAppState;
-import com.mthwate.dominion.graphical.state.MoveAppState;
-import com.mthwate.dominion.graphical.state.WireAppState;
-import com.mthwate.dominion.graphical.state.ZoomAppState;
+import com.mthwate.dominion.graphical.state.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,6 +44,8 @@ public class EditorApp extends GraphicalApp {
 		stateManager.attach(new ZoomAppState());
 		stateManager.attach(new HomeAppState());
 		stateManager.attach(new WireAppState());
+		stateManager.attach(new NodeAppState());
+		stateManager.attach(new ScreenshotAppState());
 	}
 	
 	private void tryLoad() {
@@ -124,8 +122,6 @@ public class EditorApp extends GraphicalApp {
 		look();
 		menu();
 
-		screenshot();
-
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
 			keyHandler.onAction(KeyControl.INCREASE_BRUSH.getName(), false, 0);
 			NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
@@ -142,8 +138,6 @@ public class EditorApp extends GraphicalApp {
 		renderSpawns();
 
 		highlight();
-		
-		NodeHandler.update(assetManager);
 	}
 
 	private void renderSpawns() {
