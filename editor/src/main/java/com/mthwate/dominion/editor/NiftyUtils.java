@@ -1,5 +1,6 @@
 package com.mthwate.dominion.editor;
 
+import com.jme3.app.Application;
 import com.jme3.asset.AssetKey;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioRenderer;
@@ -21,8 +22,11 @@ public class NiftyUtils {
 
 	private static Nifty nifty;
 	
-	public static void init(AssetManager assetManager, InputManager inputManager, AudioRenderer audioRenderer, ViewPort guiViewPort) {
-		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
+	public static void init(Application app) {
+		AssetManager assetManager = app.getAssetManager();
+		ViewPort guiViewPort = app.getGuiViewPort();
+
+		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager, app.getInputManager(), app.getAudioRenderer(), guiViewPort);
 		nifty = niftyDisplay.getNifty();
 
 		nifty.fromXml("gui.xml", "edit");

@@ -34,7 +34,7 @@ public class EditorApp extends GraphicalApp {
 		
 		super.init();
 
-		NiftyUtils.init(assetManager, inputManager, audioRenderer, guiViewPort);
+		NiftyUtils.init(this);
 		
 		tryLoad();
 		
