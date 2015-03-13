@@ -21,7 +21,6 @@ import com.mthwate.dominion.graphical.*;
 import com.mthwate.dominion.graphical.state.*;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,43 +32,42 @@ public class ClientApp extends GraphicalApp {
 	private static final Logger log = Logger.getLogger(ClientApp.class.getName());
 	
 	private Client client;
-	
-	private String ip;
 
 	private Path path;
-	
-	public ClientApp(String ip) {
-		super();
-		this.ip = ip;
-	}
 	
 	@Override
 	protected void init() {
 		
 		super.init();
-		
+
+		NiftyUtils.init(this);
+	}
+
+	private void join() {
+
 		try {
-			client = Network.connectToServer(ip, 6969);
+			client = Network.connectToServer(NiftyUtils.getMenuStr("ip"), 6969);
 		} catch (IOException e) {
 			log.log(Level.WARNING, "Cannot connect to server", e);
 		}
-		
+
 		if (client != null) {
 			MessageUtils.register();
 			client.addMessageListener(new ClientListener(), GZIPCompressedMessage.class);
 			client.start();
-			Random rand = new Random();
-			MessageUtils.send(client, new LoginMessage("Tester" + rand.nextInt(10)));
+			MessageUtils.send(client, new LoginMessage(NiftyUtils.getMenuStr("username")));
+
+			initLight();
+
+			stateManager.attach(new MoveAppState());
+			stateManager.attach(new ZoomAppState());
+			stateManager.attach(new HomeAppState());
+			stateManager.attach(new WireAppState());
+			stateManager.attach(new NodeAppState());
+			stateManager.attach(new ScreenshotAppState());
+
+			NiftyUtils.gotoScreen("game");
 		}
-
-		initLight();
-
-		stateManager.attach(new MoveAppState());
-		stateManager.attach(new ZoomAppState());
-		stateManager.attach(new HomeAppState());
-		stateManager.attach(new WireAppState());
-		stateManager.attach(new NodeAppState());
-		stateManager.attach(new ScreenshotAppState());
 	}
 
 	private void initLight() {
@@ -127,7 +125,15 @@ public class ClientApp extends GraphicalApp {
 	
 	@Override
 	public void simpleUpdate(float tpf) {
-		highlight();
+
+		if (NiftyUtils.canJoin()) {
+			NiftyUtils.setJoin(false);
+			join();
+		}
+
+		if (client != null) {
+			highlight();
+		}
 	}
 
 	@Override
