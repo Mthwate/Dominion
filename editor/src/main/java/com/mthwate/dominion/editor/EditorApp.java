@@ -1,6 +1,5 @@
 package com.mthwate.dominion.editor;
 
-import com.jme3.collision.CollisionResult;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
@@ -14,7 +13,6 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.graphical.*;
-import com.mthwate.dominion.graphical.mesh.Hexagon;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.state.HomeAppState;
 import com.mthwate.dominion.graphical.state.MoveAppState;

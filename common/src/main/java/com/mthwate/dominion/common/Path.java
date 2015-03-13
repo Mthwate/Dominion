@@ -3,7 +3,6 @@ package com.mthwate.dominion.common;
 import com.jme3.network.serializing.Serializable;
 import com.mthwate.datlib.math.Set2i;
 
-import java.awt.datatransfer.DataFlavor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;

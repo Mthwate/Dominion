@@ -4,7 +4,6 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
-import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
 
 /**

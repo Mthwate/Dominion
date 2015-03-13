@@ -6,7 +6,6 @@ import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
-import com.mthwate.dominion.common.message.MoveMessage;
 
 import java.util.HashMap;
 import java.util.Map;

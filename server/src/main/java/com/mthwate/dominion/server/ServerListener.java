@@ -5,20 +5,13 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 import com.jme3.network.message.GZIPCompressedMessage;
-import com.mthwate.dominion.common.Path;
-import com.mthwate.dominion.common.Tile;
-import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.LoginMessage;
-import com.mthwate.dominion.common.message.MapMessage;
-import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.server.messagehandler.LoginMessageHandler;
 import com.mthwate.dominion.server.messagehandler.MessageHandler;
 import com.mthwate.dominion.server.messagehandler.MoveMessageHandler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 

@@ -5,8 +5,6 @@ import com.jme3.network.Server;
 import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.common.message.MapMessage;
-import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.server.ConnectionUtils;
 import com.mthwate.dominion.server.PathHandler;
