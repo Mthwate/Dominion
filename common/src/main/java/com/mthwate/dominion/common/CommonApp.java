@@ -4,6 +4,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.ClasspathLocator;
 import com.jme3.asset.plugins.FileLocator;
 import com.mthwate.dominion.common.entity.EproLoader;
+import lombok.extern.java.Log;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -12,9 +13,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public abstract class CommonApp extends SimpleApplication {
-
-	private static final Logger log = Logger.getLogger(CommonApp.class.getName());
 	
 	protected abstract void init();
 	

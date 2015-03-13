@@ -19,6 +19,7 @@ import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.*;
 import com.mthwate.dominion.graphical.state.*;
+import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -27,9 +28,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public class ClientApp extends GraphicalApp {
-
-	private static final Logger log = Logger.getLogger(ClientApp.class.getName());
 	
 	private Client client;
 

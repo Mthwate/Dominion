@@ -8,15 +8,15 @@ import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EproUtils;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class CommandSetInhabitant implements Command {
-
-	private static final Logger log = Logger.getLogger(CommandSetInhabitant.class.getName());
 	
 	@Override
 	public String getName() {

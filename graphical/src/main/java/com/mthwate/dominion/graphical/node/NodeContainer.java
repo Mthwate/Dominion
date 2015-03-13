@@ -5,15 +5,15 @@ import com.jme3.collision.Collidable;
 import com.jme3.collision.CollisionResults;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.common.TileStore;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class NodeContainer {
-
-	private static final Logger log = Logger.getLogger(NodeContainer.class.getName());
 
 	private Node node = new Node();
 

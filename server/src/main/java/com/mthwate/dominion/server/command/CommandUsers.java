@@ -3,15 +3,15 @@ package com.mthwate.dominion.server.command;
 import com.jme3.asset.AssetManager;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class CommandUsers implements Command {
-
-	private static final Logger log = Logger.getLogger(CommandUsers.class.getName());
 	
 	@Override
 	public String getName() {

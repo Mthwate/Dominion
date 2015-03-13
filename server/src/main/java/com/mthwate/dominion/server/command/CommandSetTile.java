@@ -6,15 +6,15 @@ import com.jme3.network.Server;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class CommandSetTile implements Command {
-
-	private static final Logger log = Logger.getLogger(CommandSetTile.class.getName());
 	
 	@Override
 	public String getName() {

@@ -2,25 +2,24 @@ package com.mthwate.dominion.common;
 
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
-import com.mthwate.dominion.common.log.Log;
+import com.mthwate.dominion.common.log.LogUtils;
+import lombok.extern.java.Log;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class Starter {
-
-	private static final Logger log = Logger.getLogger(Starter.class.getName());
 
 	public static void start(CommonApp app, boolean graphical, String name) {
 
-		Log.init();
+		LogUtils.init();
 
 		if (graphical) {
 			AppSettings settings = new AppSettings(false);

@@ -7,15 +7,15 @@ import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.TileMessage;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class ClientListener implements MessageListener<Client> {
-
-	private static final Logger log = Logger.getLogger(ClientListener.class.getName());
 	
 	@Override
 	public void messageReceived(Client source, Message m) {

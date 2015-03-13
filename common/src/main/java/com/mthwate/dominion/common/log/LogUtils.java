@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
-public class Log {
+public class LogUtils {
 	
 	public static void init() {
 		Logger root = Logger.getLogger("");

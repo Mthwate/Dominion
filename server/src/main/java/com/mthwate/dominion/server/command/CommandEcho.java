@@ -2,15 +2,15 @@ package com.mthwate.dominion.server.command;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.network.Server;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class CommandEcho implements Command {
-
-	private static final Logger log = Logger.getLogger(CommandEcho.class.getName());
 
 	@Override
 	public String getName() {

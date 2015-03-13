@@ -12,15 +12,15 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.tpro.TproLoader;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public abstract class GraphicalApp extends CommonApp {
-
-	private static final Logger log = Logger.getLogger(GraphicalApp.class.getName());
 
 	protected final Node highlightNode = new Node();
 

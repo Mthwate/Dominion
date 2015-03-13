@@ -7,15 +7,15 @@ import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.tpro.TproUtils;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class NodeTypeTile extends NodeType {
-
-	private static final Logger log = Logger.getLogger(NodeTypeTile.class.getName());
 
 	@Override
 	public boolean differ(Tile t1, Tile t2) {

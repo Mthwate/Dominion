@@ -6,4 +6,6 @@ dependencies {
 	compile "com.jme3:jme3-networking:$jme_version"
 
 	runtime "com.jme3:jme3-desktop:$jme_version"
+
+	compile "org.projectlombok:lombok:1.16.2"
 }

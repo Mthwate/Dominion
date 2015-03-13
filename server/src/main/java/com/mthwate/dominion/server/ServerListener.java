@@ -10,6 +10,7 @@ import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.server.messagehandler.LoginMessageHandler;
 import com.mthwate.dominion.server.messagehandler.MessageHandler;
 import com.mthwate.dominion.server.messagehandler.MoveMessageHandler;
+import lombok.extern.java.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +19,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public class ServerListener implements MessageListener<HostedConnection> {
-
-	private static final Logger log = Logger.getLogger(ServerListener.class.getName());
 	
 	private Server server;
 

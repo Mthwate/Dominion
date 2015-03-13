@@ -12,6 +12,7 @@ import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.server.ConnectionUtils;
+import lombok.extern.java.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,9 +24,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public class CommandStart implements Command {
-
-	private static final Logger log = Logger.getLogger(CommandStart.class.getName());
 
 	@Deprecated
 	private final File SAVE_FILE = new File("map.dwm");//TODO remove this

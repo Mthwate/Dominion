@@ -2,6 +2,7 @@ package com.mthwate.dominion.common;
 
 import com.jme3.network.serializing.Serializable;
 import com.mthwate.datlib.math.Set2i;
+import lombok.extern.java.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,9 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 @Serializable
 public class Path {
-
-	private static final Logger log = Logger.getLogger(Path.class.getName());
 
 	List<SerializableSet2i> list = new ArrayList<>();
 

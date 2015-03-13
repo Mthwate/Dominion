@@ -10,15 +10,15 @@ import com.mthwate.dominion.common.SerializableSet2i;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EntityProperties;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class MessageUtils {
-
-	private static final Logger log = Logger.getLogger(MessageUtils.class.getName());
 
 	/**
 	 * Compresses the message and sends it to the connection.

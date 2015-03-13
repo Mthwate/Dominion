@@ -4,6 +4,7 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.asset.AssetManager;
 import com.mthwate.dominion.server.command.CommandUtils;
+import lombok.extern.java.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,9 +15,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public class ConsoleAppState extends ServerAppState {
-
-	private static final Logger log = Logger.getLogger(ConsoleAppState.class.getName());
 
 	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 

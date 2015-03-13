@@ -12,6 +12,7 @@ import com.jme3.texture.FrameBuffer;
 import com.jme3.util.BufferUtils;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.graphical.KeyControl;
+import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,9 +24,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public class ScreenshotAppState extends InputAppState implements SceneProcessor {
-
-	private static final Logger log = Logger.getLogger(ScreenshotAppState.class.getName());
 
 	private Renderer renderer;
 

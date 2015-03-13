@@ -8,15 +8,15 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.server.ConnectionUtils;
 import com.mthwate.dominion.server.state.PathAppState;
+import lombok.extern.java.Log;
 
 import java.util.logging.Logger;
 
 /**
  * @author mthwate
  */
+@Log
 public class MoveMessageHandler implements MessageHandler<MoveMessage> {
-
-	private static final Logger log = Logger.getLogger(MoveMessageHandler.class.getName());
 
 	@Override
 	public void onMessage(Server server, HostedConnection connection, MoveMessage message) {

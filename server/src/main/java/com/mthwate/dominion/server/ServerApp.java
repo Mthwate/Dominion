@@ -7,6 +7,7 @@ import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.server.state.ConsoleAppState;
 import com.mthwate.dominion.server.state.PathAppState;
+import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,9 +16,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public class ServerApp extends CommonApp {
-
-	private static final Logger log = Logger.getLogger(ServerApp.class.getName());
 
 	/**
 	 * The server networking object.

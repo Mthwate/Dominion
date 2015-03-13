@@ -3,6 +3,7 @@ package com.mthwate.dominion.common.save;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Tile;
+import lombok.extern.java.Log;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -11,9 +12,8 @@ import java.util.logging.Logger;
 /**
  * @author mthwate
  */
+@Log
 public class SaveUtils {
-
-	private static final Logger log = Logger.getLogger(SaveUtils.class.getName());
 
 	public static WorldMap loadMap(File file) {
 		Tile tile = new Tile();
