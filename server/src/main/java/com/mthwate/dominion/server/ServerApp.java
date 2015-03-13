@@ -5,11 +5,10 @@ import com.jme3.network.Server;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.message.MessageUtils;
-import com.mthwate.dominion.server.command.CommandUtils;
+import com.mthwate.dominion.server.state.ConsoleAppState;
+import com.mthwate.dominion.server.state.PathAppState;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 /**
@@ -23,14 +22,12 @@ public class ServerApp extends CommonApp {
 	 * The server networking object.
 	 */
 	private Server server;
-
-	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 	
 	@Override
 	protected void init() {
 
 		try {
-			server = Network.createServer(6969);
+			server = Network.createServer(6969);//TODO modular port
 		} catch (IOException e) {
 			e.printStackTrace();
 			//TODO log this
@@ -42,23 +39,13 @@ public class ServerApp extends CommonApp {
 			server.start();
 		}
 
+
+		stateManager.attach(new ConsoleAppState());
+		stateManager.attach(new PathAppState());
 	}
 
-	@Override
-	public void simpleUpdate(float tpf) {
-
-		//CommandUtils.run(server, assetManager, reader.nextLine());
-
-
-		try {
-			while (stdin.ready()) {
-				CommandUtils.run(server, assetManager, stdin.readLine());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		PathHandler.update(server, tpf);
+	public Server getServer() {
+		return server;
 	}
 
 	@Override
@@ -68,5 +55,4 @@ public class ServerApp extends CommonApp {
 			server.close();
 		}
 	}
-	
 }

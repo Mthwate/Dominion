@@ -1,6 +1,5 @@
-package com.mthwate.dominion.server;
+package com.mthwate.dominion.server.state;
 
-import com.jme3.network.Server;
 import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
@@ -13,7 +12,7 @@ import java.util.Map;
 /**
  * @author mthwate
  */
-public class PathHandler {
+public class PathAppState extends ServerAppState {
 
 	private static Map<Path, Float> paths = new HashMap<>();
 
@@ -21,7 +20,8 @@ public class PathHandler {
 		paths.put(path, 0F);
 	}
 
-	public static void update(Server server, float tpf) {
+	@Override
+	public void update(float tpf) {
 		for (Map.Entry<Path, Float> path : paths.entrySet()) {
 			path.setValue(path.getValue() + tpf);
 
