@@ -36,7 +36,7 @@ public class NiftyUtils {
 
 		addTileOption("");
 
-		AssetKey<List<String>> key = new AssetKey<List<String>>("tiles/tiles.list");
+		AssetKey<List<String>> key = new AssetKey<>("tiles/tiles.list");
 		List<String> tiles = assetManager.loadAsset(key);
 
 		for (String tile : tiles) {
