@@ -10,8 +10,6 @@ import com.mthwate.dominion.server.ConnectionUtils;
 import com.mthwate.dominion.server.state.PathAppState;
 import lombok.extern.java.Log;
 
-import java.util.logging.Logger;
-
 /**
  * @author mthwate
  */

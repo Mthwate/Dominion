@@ -12,8 +12,6 @@ import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EntityProperties;
 import lombok.extern.java.Log;
 
-import java.util.logging.Logger;
-
 /**
  * @author mthwate
  */

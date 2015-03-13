@@ -9,8 +9,6 @@ import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.tpro.TproUtils;
 import lombok.extern.java.Log;
 
-import java.util.logging.Logger;
-
 /**
  * @author mthwate
  */

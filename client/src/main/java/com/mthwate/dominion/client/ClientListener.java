@@ -9,8 +9,6 @@ import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.TileMessage;
 import lombok.extern.java.Log;
 
-import java.util.logging.Logger;
-
 /**
  * @author mthwate
  */

@@ -14,8 +14,6 @@ import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.tpro.TproLoader;
 import lombok.extern.java.Log;
 
-import java.util.logging.Logger;
-
 /**
  * @author mthwate
  */

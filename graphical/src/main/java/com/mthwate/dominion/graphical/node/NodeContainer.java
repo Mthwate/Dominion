@@ -7,8 +7,6 @@ import com.jme3.scene.Node;
 import com.mthwate.dominion.common.TileStore;
 import lombok.extern.java.Log;
 
-import java.util.logging.Logger;
-
 /**
  * @author mthwate
  */

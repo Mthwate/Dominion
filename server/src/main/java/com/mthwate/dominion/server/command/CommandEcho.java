@@ -4,8 +4,6 @@ import com.jme3.asset.AssetManager;
 import com.jme3.network.Server;
 import lombok.extern.java.Log;
 
-import java.util.logging.Logger;
-
 /**
  * @author mthwate
  */
