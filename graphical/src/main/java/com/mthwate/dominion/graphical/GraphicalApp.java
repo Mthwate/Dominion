@@ -12,6 +12,7 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.tpro.TproLoader;
+import lombok.Getter;
 import lombok.extern.java.Log;
 
 /**
@@ -22,7 +23,7 @@ public abstract class GraphicalApp extends CommonApp {
 
 	protected final Node highlightNode = new Node();
 
-	protected KeyHandler keyHandler;
+	@Getter protected KeyHandler keyHandler;
 
 	public static final Vector3f CAM_ORIGIN = new Vector3f(0, -10, 15);
 
@@ -51,10 +52,6 @@ public abstract class GraphicalApp extends CommonApp {
 
 
 		viewPort.setBackgroundColor(ColorRGBA.Black);
-	}
-
-	public KeyHandler getKeyHandler() {
-		return keyHandler;
 	}
 
 	protected Set2i clickCollisionPos() {

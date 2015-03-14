@@ -37,7 +37,7 @@ public class CommandSetInhabitant implements Command {
 			TileStore.get(x, y).setInhabitant(new Entity(EproUtils.getProperties(name, assetManager), owner));
 
 			for (HostedConnection connection : server.getConnections()) {
-				MessageUtils.send(connection, new MapMessage(TileStore.get()));
+				MessageUtils.send(connection, new MapMessage(TileStore.getTiles()));
 			}
 		} else {
 			log.severe("Error");

@@ -42,7 +42,7 @@ public class PathAppState extends ServerAppState {
 
 				path.getKey().step();
 
-				MessageUtils.broadcast(server, new MapMessage(TileStore.get()));
+				MessageUtils.broadcast(server, new MapMessage(TileStore.getTiles()));
 
 			}
 		}

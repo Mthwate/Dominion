@@ -31,7 +31,7 @@ public class ClientListener implements MessageListener<Client> {
 			} else if (msg instanceof MapMessage) {
 				MapMessage mapMsg = (MapMessage) msg;
 				
-				TileStore.set(mapMsg.getMap());
+				TileStore.setTiles(mapMsg.getMap());
 			}
 
 		} else {

@@ -1,13 +1,15 @@
 package com.mthwate.dominion.editor;
 
+import lombok.Getter;
+
 /**
  * @author mthwate
  */
 public class Clock {
 	
-	private final float cycle;
-	
-	private float progress = 0;
+	@Getter private final float cycle;
+
+	@Getter private float progress = 0;
 
 	/**
 	 * Initializes a new clock with the supplied cycle time.
@@ -20,14 +22,6 @@ public class Clock {
 	
 	public float getRatio() {
 		return progress / cycle;
-	}
-
-	public float getCycle() {
-		return cycle;
-	}
-
-	public float getProgress() {
-		return progress;
 	}
 	
 	public void update(float amt) {

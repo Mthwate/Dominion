@@ -34,7 +34,7 @@ public class CommandSetTile implements Command {
 			TileStore.get(x, y).setType(name);
 
 			for (HostedConnection connection : server.getConnections()) {
-				MessageUtils.send(connection, new MapMessage(TileStore.get()));
+				MessageUtils.send(connection, new MapMessage(TileStore.getTiles()));
 			}
 		} else {
 			log.severe("Error");

@@ -1,5 +1,7 @@
 package com.mthwate.dominion.graphical;
 
+import lombok.Getter;
+
 /**
  * @author mthwate
  */
@@ -33,13 +35,9 @@ public enum KeyControl {
 	
 	;
 
-	private String name;
+	@Getter private final String name;
 
 	private KeyControl(String name) {
 		this.name = name;
-	}
-
-	public String getName() {
-		return name;
 	}
 }

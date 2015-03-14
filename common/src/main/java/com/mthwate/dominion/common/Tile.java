@@ -1,20 +1,20 @@
 package com.mthwate.dominion.common;
 
 import com.mthwate.dominion.common.entity.Entity;
-
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author mthwate
  */
 @com.jme3.network.serializing.Serializable
-public class Tile implements Serializable {
+public class Tile implements java.io.Serializable {
+
+	@Getter @Setter private String type;
+
+	@Getter @Setter private int elevation;
 	
-	private String type;
-	
-	private int elevation;
-	
-	private Entity inhabitant;
+	@Getter @Setter private Entity inhabitant;
 
 	public Tile() {
 		this.type = "null";
@@ -26,32 +26,8 @@ public class Tile implements Serializable {
 		this.elevation = elevation;
 	}
 	
-	public String getType() {
-		return this.type;
-	}
-
-	public int getElevation() {
-		return this.elevation;
-	}
-	
-	public Entity getInhabitant() {
-		return inhabitant;
-	}
-	
 	public boolean hasInhabitant() {
 		return inhabitant != null;
-	}
-	
-	public void setInhabitant(Entity entity) {
-		this.inhabitant = entity;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public void setElevation(int elevation) {
-		this.elevation = elevation;
 	}
 
 	@Override

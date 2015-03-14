@@ -51,7 +51,7 @@ public class EditorApp extends GraphicalApp {
 	private void tryLoad() {
 		if (saveFile.exists()) {
 			WorldMap map = SaveUtils.loadMap(saveFile);
-			TileStore.set(map.getTiles());
+			TileStore.setTiles(map.getTiles());
 			spawns = new ArrayList<>(Arrays.asList(map.getSpawns()));
 		} else {
 			TileStore.resize(1, 1);
@@ -246,6 +246,6 @@ public class EditorApp extends GraphicalApp {
 	public void close() {
 		Set2i[] spawnsArray = new Set2i[spawns.size()];
 		spawns.toArray(spawnsArray);
-		SaveUtils.saveMap(saveFile, new WorldMap(TileStore.get(), spawnsArray));
+		SaveUtils.saveMap(saveFile, new WorldMap(TileStore.getTiles(), spawnsArray));
 	}
 }

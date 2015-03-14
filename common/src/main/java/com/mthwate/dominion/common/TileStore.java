@@ -1,12 +1,16 @@
 package com.mthwate.dominion.common;
 
 import com.mthwate.datlib.math.Set2i;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author mthwate
  */
 public class TileStore {
-	
+
+	@Getter
+	@Setter
 	private static Tile[][] tiles;
 
 	public static void resize(int x, int y) {
@@ -25,20 +29,12 @@ public class TileStore {
 		tiles = newTiles;
 	}
 
-	public static void set(Tile[][] newTiles) {
-		tiles = newTiles;
-	}
-
 	public static void set(Tile tile, int x, int y) {
 		tiles[x][y] = tile;
 	}
 
 	public static void set(Tile tile, Set2i pos) {
 		set(tile, pos.getX(), pos.getY());
-	}
-
-	public static Tile[][] get() {
-		return tiles;
 	}
 	
 	public static Tile get(int x, int y) {

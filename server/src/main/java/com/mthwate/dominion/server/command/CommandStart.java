@@ -40,7 +40,7 @@ public class CommandStart implements Command {
 
 		WorldMap map = SaveUtils.loadMap(SAVE_FILE);
 
-		TileStore.set(map.getTiles());
+		TileStore.setTiles(map.getTiles());
 
 		ArrayList<Set2i> spawns = new ArrayList<>(Arrays.asList(map.getSpawns()));
 
@@ -60,7 +60,7 @@ public class CommandStart implements Command {
 			}
 		}
 
-		MessageUtils.broadcast(server, new MapMessage(TileStore.get()));
+		MessageUtils.broadcast(server, new MapMessage(TileStore.getTiles()));
 	}
 
 }
