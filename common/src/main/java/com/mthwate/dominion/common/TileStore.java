@@ -21,7 +21,7 @@ public class TileStore {
 				if (xi < sizeX() && yi < sizeY()) {
 					newTiles[xi][yi] = tiles[xi][yi];
 				} else {
-					newTiles[xi][yi] = new Tile("null", 0);
+					newTiles[xi][yi] = new Tile();
 				}
 			}
 		}

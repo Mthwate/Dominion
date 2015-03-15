@@ -17,8 +17,7 @@ public class Tile implements java.io.Serializable {
 	@Getter @Setter private Entity inhabitant;
 
 	public Tile() {
-		this.type = "null";
-		this.elevation = 0;
+		this("null", 0);
 	}
 	
 	public Tile(String type, int elevation) {
