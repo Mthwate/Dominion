@@ -5,6 +5,7 @@ import com.jme3.network.Network;
 import com.jme3.network.message.GZIPCompressedMessage;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Path;
@@ -32,6 +33,9 @@ public class ClientApp extends GraphicalApp {
 	private Client client;
 
 	private Path path;
+
+	@Deprecated
+	private Node highlightNode = new Node();
 	
 	@Override
 	protected void init() {
