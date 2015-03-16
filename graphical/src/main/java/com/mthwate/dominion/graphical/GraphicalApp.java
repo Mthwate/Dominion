@@ -11,6 +11,7 @@ import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.state.*;
 import com.mthwate.dominion.graphical.tpro.TproLoader;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -51,7 +52,18 @@ public abstract class GraphicalApp extends CommonApp {
 		cam.lookAtDirection(new Vector3f(0, 0.5f, -1), new Vector3f(0, 0, 1));
 
 
+		log.info("Setting background color");
 		viewPort.setBackgroundColor(ColorRGBA.Black);
+
+
+		log.info("Initializing common app states");
+		stateManager.attach(new MoveAppState());
+		stateManager.attach(new ZoomAppState());
+		stateManager.attach(new LookAppState());
+		stateManager.attach(new HomeAppState());
+		stateManager.attach(new WireAppState());
+		stateManager.attach(new NodeAppState());
+		stateManager.attach(new ScreenshotAppState());
 	}
 
 	protected Set2i clickCollisionPos() {

@@ -82,18 +82,6 @@ public class ViewerApp extends GraphicalApp {
 				}
 			}
 		}
-
-
-
-
-
-
-		stateManager.attach(new MoveAppState());
-		stateManager.attach(new ZoomAppState());
-		stateManager.attach(new HomeAppState());
-		stateManager.attach(new WireAppState());
-		stateManager.attach(new NodeAppState());
-		stateManager.attach(new ScreenshotAppState());
 	}
 
 	private void initLight() {

@@ -39,13 +39,6 @@ public class EditorApp extends GraphicalApp {
 		tryLoad();
 		
 		initLight();
-
-		stateManager.attach(new MoveAppState());
-		stateManager.attach(new ZoomAppState());
-		stateManager.attach(new HomeAppState());
-		stateManager.attach(new WireAppState());
-		stateManager.attach(new NodeAppState());
-		stateManager.attach(new ScreenshotAppState());
 	}
 	
 	private void tryLoad() {
@@ -72,31 +65,6 @@ public class EditorApp extends GraphicalApp {
 		rootNode.addLight(dl);
 	}
 	
-	private void look() {
-		float x = 0;
-		float y = 0;
-
-		if (keyHandler.isPressed(KeyControl.NORTH)) {
-			y += 0.5;
-		}
-
-		if (keyHandler.isPressed(KeyControl.SOUTH)) {
-			y -= 0.5;
-		}
-
-		if (keyHandler.isPressed(KeyControl.EAST)) {
-			x += 0.5;
-		}
-
-		if (keyHandler.isPressed(KeyControl.WEST)) {
-			x -= 0.5;
-		}
-
-		if ((x != 0 || y != 0) && Math.abs(x) != Math.abs(y)) {
-			cam.lookAtDirection(new Vector3f(x, y, -1), new Vector3f(0, 0, 1));
-		}
-	}
-	
 	private void menu() {
 		
 		if (keyHandler.isPressed(KeyControl.MENU)) {
@@ -119,7 +87,6 @@ public class EditorApp extends GraphicalApp {
 	@Override
 	public void simpleUpdate(float tpf) {
 
-		look();
 		menu();
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
