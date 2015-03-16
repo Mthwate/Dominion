@@ -10,6 +10,7 @@ import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.editor.EditorApp;
 import com.mthwate.dominion.editor.NiftyUtils;
+import com.mthwate.dominion.editor.SpawnStore;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.highlight.HighlightColors;
 import com.mthwate.dominion.graphical.highlight.HighlightUtils;
@@ -22,8 +23,6 @@ public class BrushAppState extends MouseAppState {
 
 	private Node node = new Node();
 
-	private EditorApp eapp;
-
 	private AssetManager assetManager;
 
 	public BrushAppState(Node parentNode) {
@@ -33,7 +32,6 @@ public class BrushAppState extends MouseAppState {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		eapp = (EditorApp) app;
 		assetManager = app.getAssetManager();
 	}
 
@@ -52,7 +50,7 @@ public class BrushAppState extends MouseAppState {
 			HighlightUtils.highlightTile(x, y, HighlightColors.YELLOW, node, assetManager);
 			if (clicked) {
 				keyHandler.onAction(KeyControl.CLICK.getName(), false, 0);
-				eapp.toggleSpawn(new Set2i(x, y));
+				SpawnStore.toggleSpawn(new Set2i(x, y));
 			}
 		} else {
 			String type = NiftyUtils.getTileSelection();

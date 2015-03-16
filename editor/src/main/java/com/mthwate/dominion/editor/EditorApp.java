@@ -28,8 +28,6 @@ public class EditorApp extends GraphicalApp {
 	
 	private File saveFile = new File("map.dwm");
 
-	private ArrayList<Set2i> spawns = new ArrayList<>();
-
 	@Override
 	protected void init() {
 		
@@ -45,14 +43,17 @@ public class EditorApp extends GraphicalApp {
 
 		stateManager.attach(new MenuAppState());
 		stateManager.attach(new BrushAppState(rootNode));
-		stateManager.attach(new SpawnAppState(rootNode, spawns));
+		stateManager.attach(new SpawnAppState(rootNode));
 	}
 	
 	private void tryLoad() {
 		if (saveFile.exists()) {
 			WorldMap map = SaveUtils.loadMap(saveFile);
 			TileStore.setTiles(map.getTiles());
-			spawns = new ArrayList<>(Arrays.asList(map.getSpawns()));
+			SpawnStore.clear();
+			for (Set2i spawn : map.getSpawns()) {
+				SpawnStore.add(spawn);
+			}
 		} else {
 			TileStore.resize(1, 1);
 		}
@@ -75,16 +76,10 @@ public class EditorApp extends GraphicalApp {
 		}
 	}
 
-	public void toggleSpawn(Set2i spawn) {
-		if (!spawns.remove(spawn)) {
-			spawns.add(spawn);
-		}
-	}
-
 	@Override
 	public void close() {
-		Set2i[] spawnsArray = new Set2i[spawns.size()];
-		spawns.toArray(spawnsArray);
+		Set2i[] spawnsArray = new Set2i[SpawnStore.size()];
+		SpawnStore.toArray(spawnsArray);
 		SaveUtils.saveMap(saveFile, new WorldMap(TileStore.getTiles(), spawnsArray));
 	}
 }

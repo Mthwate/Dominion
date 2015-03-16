@@ -8,6 +8,7 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.editor.EditorApp;
 import com.mthwate.dominion.editor.NiftyUtils;
+import com.mthwate.dominion.editor.SpawnStore;
 import com.mthwate.dominion.graphical.highlight.HighlightColors;
 import com.mthwate.dominion.graphical.highlight.HighlightUtils;
 
@@ -23,11 +24,8 @@ public class SpawnAppState extends EditorAppState {
 
 	private AssetManager assetManager;
 
-	private ArrayList<Set2i> spawns;
-
-	public SpawnAppState(Node parentNode, ArrayList<Set2i> spawns) {
+	public SpawnAppState(Node parentNode) {
 		parentNode.attachChild(node);
-		this.spawns = spawns;
 	}
 
 	@Override
@@ -45,17 +43,17 @@ public class SpawnAppState extends EditorAppState {
 
 	private void checkSpawns() {
 		List<Set2i> remove = new ArrayList<>();
-		for (Set2i spawn : spawns) {
+		for (Set2i spawn : SpawnStore.get()) {
 			if (!TileStore.validPoint(spawn)) {
 				remove.add(spawn);
 			}
 		}
-		spawns.removeAll(remove);
+		SpawnStore.removeAll(remove);
 	}
 
 	private void renderSpawns() {
 		if (NiftyUtils.isSpawn()) {
-			for (Set2i spawn : spawns) {
+			for (Set2i spawn : SpawnStore.get()) {
 				HighlightUtils.highlightTile(spawn.getX(), spawn.getY(), HighlightColors.BLUE, node, assetManager);
 			}
 		}
