@@ -17,14 +17,18 @@ public class Tile implements java.io.Serializable {
 	@Getter @Setter private Entity inhabitant;
 
 	public Tile() {
-		this("null", 0);
+		this("null");
+	}
+
+	public Tile(String name) {
+		this(name, 0);
 	}
 	
 	public Tile(String type, int elevation) {
 		this.type = type;
 		this.elevation = elevation;
 	}
-	
+
 	public boolean hasInhabitant() {
 		return inhabitant != null;
 	}

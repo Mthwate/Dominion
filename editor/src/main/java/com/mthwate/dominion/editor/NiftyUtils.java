@@ -48,7 +48,7 @@ public class NiftyUtils {
 			tiles.addAll(IOUtils.listZipContents(IOUtils.getClassJar(EditorApp.class), "tiles"));
 		} catch (IOException e) {}
 
-		File dir = new File("assets");
+		File dir = new File("assets/tiles");
 
 		if (dir.exists()) {
 			tiles.addAll(FileUtils.listRecursive(dir));
