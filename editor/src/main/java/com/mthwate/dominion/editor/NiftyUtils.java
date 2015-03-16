@@ -1,16 +1,20 @@
 package com.mthwate.dominion.editor;
 
 import com.jme3.app.Application;
-import com.jme3.asset.AssetKey;
 import com.jme3.asset.AssetManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
+import com.mthwate.datlib.FileUtils;
+import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.graphical.tpro.TproUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.controls.TextField;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,12 +42,25 @@ public class NiftyUtils {
 
 		addTileOption("");
 
-		AssetKey<List<String>> key = new AssetKey<>("tiles/tiles.list");
-		List<String> tiles = assetManager.loadAsset(key);
+		List<String> tiles = new ArrayList<>();
 
-		for (String tile : tiles) {
-			TproUtils.load(tile, assetManager);
-			addTileOption(tile);
+		try {
+			tiles.addAll(IOUtils.listZipContents(IOUtils.getClassJar(EditorApp.class), "tiles"));
+		} catch (IOException e) {}
+
+		File dir = new File("assets");
+
+		if (dir.exists()) {
+			tiles.addAll(FileUtils.listRecursive(dir));
+		}
+
+		for (String path : tiles) {
+			String ext = ".tpro";
+			if (path.endsWith(ext)) {
+				String tile = path.substring(path.lastIndexOf("/") + 1, path.length() - ext.length());
+				TproUtils.load(tile, assetManager);
+				addTileOption(tile);
+			}
 		}
 	}
 	
