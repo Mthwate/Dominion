@@ -1,11 +1,11 @@
-package com.mthwate.dominion.graphical;
+package com.mthwate.dominion.graphical.highlight;
 
 import com.jme3.math.ColorRGBA;
 
 /**
  * @author mthwate
  */
-public class Highlighter {
+public class HighlightColors {
 
 	private static final float ALPHA = 0.2f;
 

@@ -12,15 +12,13 @@ import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.editor.state.MenuAppState;
 import com.mthwate.dominion.editor.state.SpawnAppState;
 import com.mthwate.dominion.graphical.*;
+import com.mthwate.dominion.graphical.highlight.HighlightColors;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeCollide;
-import com.mthwate.dominion.graphical.node.NodeTypeModel;
-import com.mthwate.dominion.graphical.state.NodeAppState;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author mthwate
@@ -100,7 +98,7 @@ public class EditorApp extends GraphicalApp {
 	}
 	
 	private void highlight() {
-		Set2i pos = clickCollisionPos();
+		Set2i pos = ClickUtils.clickCollisionPos(inputManager, cam);
 		if (pos != null) {
 			int x = pos.getX();
 			int y = pos.getY();
@@ -108,7 +106,7 @@ public class EditorApp extends GraphicalApp {
 			boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
 
 			if (NiftyUtils.isSpawn()) {
-				addHighlight(x, y, Highlighter.YELLOW);
+				addHighlight(x, y, HighlightColors.YELLOW);
 				if (clicked) {
 					keyHandler.onAction(KeyControl.CLICK.getName(), false, 0);
 					toggleSpawn(new Set2i(x, y));
@@ -128,7 +126,7 @@ public class EditorApp extends GraphicalApp {
 							int py = CoordUtils.hexToCartesian(px, CoordUtils.cartesianToHex(x, y) + iy);
 							if (TileStore.validPoint(px, py)) {
 
-								addHighlight(px, py, Highlighter.YELLOW);
+								addHighlight(px, py, HighlightColors.YELLOW);
 
 								if (clicked) {
 

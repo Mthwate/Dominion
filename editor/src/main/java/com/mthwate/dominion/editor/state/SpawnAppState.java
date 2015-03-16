@@ -3,8 +3,7 @@ package com.mthwate.dominion.editor.state;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.editor.NiftyUtils;
-import com.mthwate.dominion.graphical.Highlighter;
-import com.mthwate.dominion.graphical.state.GraphicalAppState;
+import com.mthwate.dominion.graphical.highlight.HighlightColors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class SpawnAppState extends EditorAppState {
 	private void renderSpawns() {
 		if (NiftyUtils.isSpawn()) {
 			for (Set2i spawn : spawns) {
-				eapp.addHighlight(spawn.getX(), spawn.getY(), Highlighter.BLUE);
+				eapp.addHighlight(spawn.getX(), spawn.getY(), HighlightColors.BLUE);
 			}
 		}
 	}

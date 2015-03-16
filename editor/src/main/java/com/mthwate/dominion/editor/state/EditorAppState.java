@@ -4,7 +4,6 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.mthwate.dominion.editor.EditorApp;
-import com.mthwate.dominion.graphical.GraphicalApp;
 
 /**
  * @author mthwate

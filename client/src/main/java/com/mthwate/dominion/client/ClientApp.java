@@ -14,6 +14,7 @@ import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.*;
+import com.mthwate.dominion.graphical.highlight.HighlightColors;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeCollide;
 import com.mthwate.dominion.graphical.node.NodeTypeModel;
@@ -65,7 +66,7 @@ public class ClientApp extends GraphicalApp {
 
 	private void highlight() {
 		if (keyHandler.isPressed(KeyControl.CLICK)) {
-			Set2i pos = clickCollisionPos();
+			Set2i pos = ClickUtils.clickCollisionPos(inputManager, cam);
 			if (pos != null) {
 				if (path == null) {
 					path = new Path(pos);
@@ -94,7 +95,7 @@ public class ClientApp extends GraphicalApp {
 		Geometry g = new Geometry("selected");
 		g.setMesh(MeshUtils.getTile());
 		g.setQueueBucket(RenderQueue.Bucket.Transparent);
-		g.setMaterial(MaterialUtils.getHighlightMaterial(Highlighter.YELLOW, assetManager));
+		g.setMaterial(MaterialUtils.getHighlightMaterial(HighlightColors.YELLOW, assetManager));
 
 		Tile tile = TileStore.get(x, y);
 
