@@ -1,3 +1,3 @@
-model: watchTowerStone
-texture: watchTowerStone
+model: placeholder
+texture: placeholder
 moveable: true
