@@ -49,7 +49,7 @@ public class MoveAppState extends InputAppState {
 
 		float z = cam.getLocation().getZ();
 
-		cam.setLocation(cam.getLocation().add(move.mult(moveMod * tpf * (z-3))));
+		cam.setLocation(cam.getLocation().add(move.mult(moveMod * tpf * (z-2))));
 	}
 
 }

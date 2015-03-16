@@ -38,7 +38,7 @@ public class ZoomAppState extends InputAppState {
 
 		float z = location.getZ() + (zoom * tpf * zoomMod);
 
-		z = Math.max(z, 5);
+		z = Math.max(z, 3);
 		z = Math.min(z, 250);
 
 		location.addLocal(0, 0, z - location.getZ());
