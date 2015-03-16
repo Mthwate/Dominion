@@ -12,7 +12,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CommonApp;
-import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.node.*;
 import com.mthwate.dominion.graphical.state.*;
 import com.mthwate.dominion.graphical.tpro.TproLoader;
 import lombok.Getter;
@@ -39,7 +39,9 @@ public abstract class GraphicalApp extends CommonApp {
 
 		log.info("Setting up nodes");
 		rootNode.attachChild(highlightNode);
-		NodeHandler.init(rootNode);
+		NodeHandler.init("tile", new NodeTypeTile(), rootNode);
+		NodeHandler.init("side", new NodeTypeSide(), rootNode);
+		NodeHandler.init("wire", new NodeTypeWire(), rootNode);
 		
 
 		log.info("Disabling the default fly camera");

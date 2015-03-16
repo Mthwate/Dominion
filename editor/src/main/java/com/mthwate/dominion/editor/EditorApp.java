@@ -12,6 +12,9 @@ import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.editor.state.MenuAppState;
 import com.mthwate.dominion.editor.state.SpawnAppState;
 import com.mthwate.dominion.graphical.*;
+import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.node.NodeTypeCollide;
+import com.mthwate.dominion.graphical.node.NodeTypeModel;
 import com.mthwate.dominion.graphical.state.NodeAppState;
 
 import java.io.File;
@@ -38,6 +41,8 @@ public class EditorApp extends GraphicalApp {
 		tryLoad();
 		
 		initLight();
+
+		NodeHandler.init("collision", new NodeTypeCollide(), null);
 
 		stateManager.attach(new MenuAppState());
 		stateManager.attach(new SpawnAppState(spawns));

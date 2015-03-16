@@ -10,6 +10,9 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EproUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
+import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.node.NodeTypeCollide;
+import com.mthwate.dominion.graphical.node.NodeTypeModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +31,9 @@ public class ViewerApp extends GraphicalApp {
 
 		initLight();
 
+		NodeHandler.init("model", new NodeTypeModel(), rootNode);
 
-
+		
 
 		List<String> entityPaths = new ArrayList<>();
 

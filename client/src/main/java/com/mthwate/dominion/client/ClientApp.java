@@ -14,6 +14,9 @@ import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.*;
+import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.node.NodeTypeCollide;
+import com.mthwate.dominion.graphical.node.NodeTypeModel;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
@@ -35,6 +38,9 @@ public class ClientApp extends GraphicalApp {
 		super.init();
 
 		NiftyUtils.init(this);
+
+		NodeHandler.init("model", new NodeTypeModel(), rootNode);
+		NodeHandler.init("collision", new NodeTypeCollide(), null);
 	}
 
 	private void join() {
