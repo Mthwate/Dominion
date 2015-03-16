@@ -8,24 +8,18 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.graphical.ClickUtils;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.KeyHandler;
-import com.mthwate.dominion.graphical.highlight.Highlighter;
+import com.mthwate.dominion.graphical.state.GraphicalAppState;
 
 /**
  * @author mthwate
  */
-public class HighlightAppState extends GraphicalAppState {
+public abstract class MouseAppState extends GraphicalAppState {
 
-	private KeyHandler keyHandler;
+	protected KeyHandler keyHandler;
 
 	private InputManager inputManager;
 
 	private Camera cam;
-
-	private Highlighter highlighter;
-
-	public HighlightAppState(Highlighter highlighter) {
-		this.highlighter = highlighter;
-	}
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
@@ -40,8 +34,9 @@ public class HighlightAppState extends GraphicalAppState {
 		Set2i pos = ClickUtils.clickCollisionPos(inputManager, cam);
 		if (pos != null) {
 			boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
-			highlighter.highlight(pos, clicked);
+			update(tpf, pos, clicked);
 		}
 	}
 
+	protected abstract void update(float tpf, Set2i pos, boolean clicked);
 }

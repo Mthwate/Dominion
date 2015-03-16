@@ -21,8 +21,6 @@ import lombok.extern.java.Log;
 @Log
 public abstract class GraphicalApp extends CommonApp {
 
-	protected final Node highlightNode = new Node();
-
 	@Getter protected KeyHandler keyHandler;
 
 	public static final Vector3f CAM_ORIGIN = new Vector3f(0, -10, 15);
@@ -35,7 +33,6 @@ public abstract class GraphicalApp extends CommonApp {
 
 
 		log.info("Setting up nodes");
-		rootNode.attachChild(highlightNode);
 		NodeHandler.init("tile", new NodeTypeTile(), rootNode);
 		NodeHandler.init("side", new NodeTypeSide(), rootNode);
 		NodeHandler.init("wire", new NodeTypeWire(), rootNode);
