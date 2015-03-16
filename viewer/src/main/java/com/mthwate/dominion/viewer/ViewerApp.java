@@ -11,11 +11,9 @@ import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
-import com.mthwate.dominion.common.entity.EntityProperties;
 import com.mthwate.dominion.common.entity.EproUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.state.*;
-import com.mthwate.dominion.graphical.tpro.TproUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +59,7 @@ public class ViewerApp extends GraphicalApp {
 
 
 
-		int width = entityNames.size() + 1;
+		int width = entityNames.size() * 2 + 1;
 		int height = 3;
 
 		TileStore.resize(width, height);
