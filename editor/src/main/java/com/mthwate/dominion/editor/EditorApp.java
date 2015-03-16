@@ -9,7 +9,10 @@ import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
+import com.mthwate.dominion.editor.state.MenuAppState;
+import com.mthwate.dominion.editor.state.SpawnAppState;
 import com.mthwate.dominion.graphical.*;
+import com.mthwate.dominion.graphical.state.NodeAppState;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class EditorApp extends GraphicalApp {
 	
 	private File saveFile = new File("map.dwm");
 
-	private ArrayList<Set2i> spawns = new ArrayList<Set2i>();
+	private ArrayList<Set2i> spawns = new ArrayList<>();
 
 	@Override
 	protected void init() {
@@ -35,6 +38,9 @@ public class EditorApp extends GraphicalApp {
 		tryLoad();
 		
 		initLight();
+
+		stateManager.attach(new MenuAppState());
+		stateManager.attach(new SpawnAppState(spawns));
 	}
 	
 	private void tryLoad() {
@@ -50,29 +56,8 @@ public class EditorApp extends GraphicalApp {
 		NiftyUtils.setMenuInt("height", TileStore.sizeY());
 	}
 	
-	private void menu() {
-		
-		if (keyHandler.isPressed(KeyControl.MENU)) {
-			keyHandler.onAction(KeyControl.MENU.getName(), false, 0);
-			if (NiftyUtils.isOnScreen("menu")) {
-
-				int x = NiftyUtils.getMenuInt("width");
-
-				int y = NiftyUtils.getMenuInt("height");
-				
-				TileStore.resize(x, y);
-
-				NiftyUtils.gotoScreen("edit");
-			} else {
-				NiftyUtils.gotoScreen("menu");
-			}
-		}
-	}
-	
 	@Override
 	public void simpleUpdate(float tpf) {
-
-		menu();
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
 			keyHandler.onAction(KeyControl.INCREASE_BRUSH.getName(), false, 0);
@@ -86,21 +71,10 @@ public class EditorApp extends GraphicalApp {
 
 		highlightNode.detachAllChildren();
 
-		checkSpawns();
-		renderSpawns();
-
 		highlight();
 	}
 
-	private void renderSpawns() {
-		if (NiftyUtils.isSpawn()) {
-			for (Set2i spawn : spawns) {
-				addHighlight(spawn.getX(), spawn.getY(), Highlighter.BLUE);
-			}
-		}
-	}
-
-	private void addHighlight(int x, int y, ColorRGBA color) {
+	public void addHighlight(int x, int y, ColorRGBA color) {
 		Geometry g = new Geometry();
 		g.setMesh(MeshUtils.getTile());
 		g.setQueueBucket(RenderQueue.Bucket.Transparent);
@@ -118,16 +92,6 @@ public class EditorApp extends GraphicalApp {
 		if (!spawns.remove(spawn)) {
 			spawns.add(spawn);
 		}
-	}
-
-	private void checkSpawns() {
-		List<Set2i> remove = new ArrayList<Set2i>();
-		for (Set2i spawn : spawns) {
-			if (!TileStore.validPoint(spawn)) {
-				remove.add(spawn);
-			}
-		}
-		spawns.removeAll(remove);
 	}
 	
 	private void highlight() {

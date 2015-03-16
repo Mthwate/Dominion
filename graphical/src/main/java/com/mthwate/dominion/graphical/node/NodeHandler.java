@@ -5,42 +5,49 @@ import com.jme3.collision.CollisionResults;
 import com.jme3.math.Ray;
 import com.jme3.scene.Node;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author mthwate
  */
 public class NodeHandler {
 
-	private static final NodeContainer tileNode = new NodeContainer(new NodeTypeTile());
+	private static final Map<String, NodeContainer> nodes = new HashMap<>();
 
-	private static final NodeContainer sideNode = new NodeContainer(new NodeTypeSide());
+	public static void init(String name, NodeType type, Node parent) {
+		NodeContainer node = new NodeContainer(type);
 
-	private static final NodeContainer wireNode = new NodeContainer(new NodeTypeWire());
+		if (parent != null) {
+			node.setParent(parent);
+		}
 
-	private static final NodeContainer modelNode = new NodeContainer(new NodeTypeModel());
+		nodes.put(name, node);
+	}
 
-	private static final NodeContainer collisionNode = new NodeContainer(new NodeTypeCollide());
-
+	@Deprecated
 	public static void init(Node rootNode) {
-		tileNode.setParent(rootNode);
-		sideNode.setParent(rootNode);
-		wireNode.setParent(rootNode);
-		modelNode.setParent(rootNode);
+		init("tile", new NodeTypeTile(), rootNode);
+		init("side", new NodeTypeSide(), rootNode);
+		init("wire", new NodeTypeWire(), rootNode);
+		init("model", new NodeTypeModel(), rootNode);
+		init("collision", new NodeTypeCollide(), null);
 	}
 
 	public static void update(AssetManager assetManager) {
-		tileNode.update(assetManager);
-		sideNode.update(assetManager);
-		wireNode.update(assetManager);
-		modelNode.update(assetManager);
-		collisionNode.update(assetManager);
+		for (NodeContainer node : nodes.values()) {
+			node.update(assetManager);
+		}
 	}
 
 	public static void collide(Ray ray, CollisionResults results) {
-		collisionNode.collide(ray, results);
+		nodes.get("collision").collide(ray, results);
 	}
 
 	public static void toggleWire() {
-		wireNode.toggle();
+		nodes.get("wire").toggle();
 	}
 
 }
