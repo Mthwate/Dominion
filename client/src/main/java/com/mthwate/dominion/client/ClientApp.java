@@ -62,17 +62,6 @@ public class ClientApp extends GraphicalApp {
 		}
 	}
 
-	private void initLight() {
-		AmbientLight al = new AmbientLight();
-		al.setColor(ColorRGBA.White.mult(1));
-		rootNode.addLight(al);
-
-		DirectionalLight dl = new DirectionalLight();
-		dl.setDirection(new Vector3f(1, 0, -1));
-		dl.setColor(ColorRGBA.White.mult(1));
-		rootNode.addLight(dl);
-	}
-
 	private void highlight() {
 		if (keyHandler.isPressed(KeyControl.CLICK)) {
 			Set2i pos = clickCollisionPos();

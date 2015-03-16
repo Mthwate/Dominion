@@ -54,17 +54,6 @@ public class EditorApp extends GraphicalApp {
 		NiftyUtils.setMenuInt("height", TileStore.sizeY());
 	}
 	
-	private void initLight() {
-		AmbientLight al = new AmbientLight();
-		al.setColor(ColorRGBA.White.mult(1));
-		rootNode.addLight(al);
-		
-		DirectionalLight dl = new DirectionalLight();
-		dl.setDirection(new Vector3f(1, 0, -1));
-		dl.setColor(ColorRGBA.White.mult(1));
-		rootNode.addLight(dl);
-	}
-	
 	private void menu() {
 		
 		if (keyHandler.isPressed(KeyControl.MENU)) {

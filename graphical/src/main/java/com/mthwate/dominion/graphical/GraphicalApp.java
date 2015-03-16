@@ -2,6 +2,8 @@ package com.mthwate.dominion.graphical;
 
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
@@ -64,6 +66,17 @@ public abstract class GraphicalApp extends CommonApp {
 		stateManager.attach(new WireAppState());
 		stateManager.attach(new NodeAppState());
 		stateManager.attach(new ScreenshotAppState());
+	}
+
+	protected void initLight() {
+		AmbientLight al = new AmbientLight();
+		al.setColor(ColorRGBA.White.mult(1));
+		rootNode.addLight(al);
+
+		DirectionalLight dl = new DirectionalLight();
+		dl.setDirection(new Vector3f(1, 0, -1));
+		dl.setColor(ColorRGBA.White.mult(1));
+		rootNode.addLight(dl);
 	}
 
 	protected Set2i clickCollisionPos() {
