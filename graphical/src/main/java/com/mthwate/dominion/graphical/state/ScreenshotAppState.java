@@ -12,6 +12,7 @@ import com.jme3.texture.FrameBuffer;
 import com.jme3.util.BufferUtils;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.graphical.KeyControl;
+import com.mthwate.dominion.graphical.KeyHandler;
 import lombok.extern.java.Log;
 
 import java.io.File;
@@ -24,7 +25,9 @@ import java.util.logging.Level;
  * @author mthwate
  */
 @Log
-public class ScreenshotAppState extends InputAppState implements SceneProcessor {
+public class ScreenshotAppState extends GraphicalAppState implements SceneProcessor {
+
+	private KeyHandler keyHandler;
 
 	private Renderer renderer;
 
@@ -40,6 +43,7 @@ public class ScreenshotAppState extends InputAppState implements SceneProcessor 
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
 		app.getViewPort().addProcessor(this);
+		keyHandler = gapp.getKeyHandler();
 	}
 
 	@Override

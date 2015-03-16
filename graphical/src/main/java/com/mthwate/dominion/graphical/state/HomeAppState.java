@@ -5,20 +5,24 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.renderer.Camera;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
+import com.mthwate.dominion.graphical.KeyHandler;
 
 /**
  * Listens for the "home" key to return the camera to the home position.
  *
  * @author mthwate
  */
-public class HomeAppState extends InputAppState {
+public class HomeAppState extends GraphicalAppState {
+
+	private KeyHandler keyHandler;
 
 	private Camera cam;
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		cam = app.getCamera();
+		keyHandler = gapp.getKeyHandler();
+		cam = gapp.getCamera();
 	}
 
 	@Override

@@ -1,10 +1,7 @@
 package com.mthwate.dominion.viewer;
 
 import com.jme3.font.BitmapText;
-import com.jme3.light.AmbientLight;
-import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
 import com.mthwate.datlib.FileUtils;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.common.CoordUtils;
@@ -13,7 +10,6 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EproUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
-import com.mthwate.dominion.graphical.state.*;
 
 import java.io.File;
 import java.io.IOException;

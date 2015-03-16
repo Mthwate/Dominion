@@ -5,18 +5,22 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.mthwate.dominion.graphical.KeyControl;
+import com.mthwate.dominion.graphical.KeyHandler;
 
 /**
  * @author mthwate
  */
-public class ZoomAppState extends InputAppState {
+public class ZoomAppState extends GraphicalAppState {
+
+	private KeyHandler keyHandler;
 
 	private Camera cam;
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		cam = app.getCamera();
+		keyHandler = gapp.getKeyHandler();
+		cam = gapp.getCamera();
 	}
 
 	@Override

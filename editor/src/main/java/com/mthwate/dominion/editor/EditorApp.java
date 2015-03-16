@@ -1,9 +1,6 @@
 package com.mthwate.dominion.editor;
 
-import com.jme3.light.AmbientLight;
-import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.mthwate.datlib.math.Set2i;
@@ -13,7 +10,6 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.graphical.*;
-import com.mthwate.dominion.graphical.state.*;
 
 import java.io.File;
 import java.util.ArrayList;

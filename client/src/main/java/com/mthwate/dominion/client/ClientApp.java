@@ -1,9 +1,5 @@
 package com.mthwate.dominion.client;
 
-import com.jme3.light.AmbientLight;
-import com.jme3.light.DirectionalLight;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
 import com.jme3.network.Client;
 import com.jme3.network.Network;
 import com.jme3.network.message.GZIPCompressedMessage;
@@ -18,7 +14,6 @@ import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.graphical.*;
-import com.mthwate.dominion.graphical.state.*;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
