@@ -24,9 +24,9 @@ public class Starter {
 		if (graphical) {
 			AppSettings settings = new AppSettings(false);
 
-			settings.setSettingsDialogImage("textures/title.png");
+			settings.setSettingsDialogImage("icons/title.png");
 
-			InputStream in = app.getClass().getResourceAsStream("/textures/icon.png");
+			InputStream in = app.getClass().getResourceAsStream("/icons/icon.png");
 			if (in != null) {
 				try {
 					BufferedImage[] icons = new BufferedImage[]{ImageIO.read(in)};

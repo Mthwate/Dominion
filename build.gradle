@@ -22,4 +22,19 @@ subprojects {
 			url 'http://mthwate.com/maven'
 		}
 	}
+
+	task disableAssets {
+		jar.archiveName = project.name + "-bare.jar"
+		shadowJar.archiveName = project.name + "-bare-all.jar"
+		sourceSets {
+			main {
+				resources {
+					exclude 'entities'
+					exclude 'models'
+					exclude 'textures'
+					exclude 'tiles'
+				}
+			}
+		}
+	}
 }
