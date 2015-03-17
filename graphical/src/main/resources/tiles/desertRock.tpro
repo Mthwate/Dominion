@@ -1,2 +1,2 @@
-textures: [desertRock]
+textures: [desertRock0, desertRock1, desertRock2]
 sides: [desertRockSide]
