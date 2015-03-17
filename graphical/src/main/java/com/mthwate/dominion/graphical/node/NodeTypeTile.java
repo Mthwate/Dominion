@@ -3,10 +3,10 @@ package com.mthwate.dominion.graphical.node;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.graphical.MeshUtils;
-import com.mthwate.dominion.graphical.tpro.TproUtils;
+import com.mthwate.dominion.graphical.tile.TproUtils;
 import lombok.extern.java.Log;
 
 /**

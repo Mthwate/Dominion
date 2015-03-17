@@ -5,10 +5,11 @@ import com.jme3.math.ColorRGBA;
 import com.mthwate.datlib.FileUtils;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.common.CoordUtils;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EproUtils;
+import com.mthwate.dominion.common.tile.TproUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeModel;
@@ -61,11 +62,11 @@ public class ViewerApp extends GraphicalApp {
 		int width = entityNames.size() * 2 + 1;
 		int height = 3;
 
-		TileStore.resize(width, height);
+		TileStore.resize(width, height, assetManager);
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				TileStore.get(x, y).setType("grass");
+				TileStore.get(x, y).setType(TproUtils.getProperties("grass", assetManager));
 				if (y == 1 && x % 2 == 1) {
 					Tile tile = TileStore.get(x, y);
 					tile.setElevation(1);

@@ -6,6 +6,7 @@ import com.jme3.network.Server;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
+import com.mthwate.dominion.common.tile.TproUtils;
 import lombok.extern.java.Log;
 
 /**
@@ -31,7 +32,7 @@ public class CommandSetTile implements Command {
 			int x = Integer.parseInt(sx);
 			int y = Integer.parseInt(sy);
 
-			TileStore.get(x, y).setType(name);
+			TileStore.get(x, y).setType(TproUtils.getProperties(name, assetManager));
 
 			for (HostedConnection connection : server.getConnections()) {
 				MessageUtils.send(connection, new MapMessage(TileStore.getTiles()));

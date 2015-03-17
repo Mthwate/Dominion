@@ -14,11 +14,11 @@ import com.mthwate.dominion.common.entity.EntityProperties;
 public class ModelUtils {
 
 	public static Spatial getModel(EntityProperties entity, AssetManager assetManager) {
-		Spatial model = assetManager.loadModel("models/" + entity.model + ".blend");
+		Spatial model = assetManager.loadModel("models/" + entity.getModel() + ".blend");
 		model.setLocalScale(0.1f, 0.1f, 0.1f);
 		model.setLocalRotation(getModelRotation());
 		model.setQueueBucket(RenderQueue.Bucket.Transparent);
-		model.setMaterial(MaterialUtils.getTexturedMaterial(entity.texture, assetManager));
+		model.setMaterial(MaterialUtils.getTexturedMaterial(entity.getTexture(), assetManager));
 		return model;
 	}
 

@@ -4,7 +4,7 @@ import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.CoordUtils;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 
 /**
  * @author mthwate

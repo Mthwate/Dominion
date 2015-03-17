@@ -2,7 +2,7 @@ package com.mthwate.dominion.common.save;
 
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.datlib.math.Set2i;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 import lombok.extern.java.Log;
 
 import java.io.*;

@@ -1,6 +1,7 @@
-package com.mthwate.dominion.common;
+package com.mthwate.dominion.common.tile;
 
 import com.mthwate.dominion.common.entity.Entity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,21 +11,23 @@ import lombok.Setter;
 @com.jme3.network.serializing.Serializable
 public class Tile implements java.io.Serializable {
 
-	@Getter @Setter private String type;
+	@Getter @Setter private TileProperties type;
 
 	@Getter @Setter private int elevation;
 	
 	@Getter @Setter private Entity inhabitant;
 
-	public Tile() {
-		this("null");
-	}
+	/**
+	 * Serialization constructor.
+	 * DO NOT USE!
+	 */
+	public Tile() {}
 
-	public Tile(String name) {
-		this(name, 0);
+	public Tile(TileProperties type) {
+		this(type, 0);
 	}
 	
-	public Tile(String type, int elevation) {
+	public Tile(TileProperties type, int elevation) {
 		this.type = type;
 		this.elevation = elevation;
 	}

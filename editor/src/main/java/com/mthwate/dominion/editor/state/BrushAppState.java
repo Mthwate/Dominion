@@ -6,8 +6,10 @@ import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
+import com.mthwate.dominion.common.tile.TileProperties;
+import com.mthwate.dominion.common.tile.TproUtils;
 import com.mthwate.dominion.editor.NiftyUtils;
 import com.mthwate.dominion.editor.SpawnStore;
 import com.mthwate.dominion.graphical.KeyControl;
@@ -72,7 +74,7 @@ public class BrushAppState extends MouseAppState {
 
 								Tile tile = TileStore.get(px, py);
 
-								String newType = type;
+								TileProperties newType = TproUtils.getProperties(type, assetManager);
 								int newElevation = elevation;
 
 								if (type.equals("")) {

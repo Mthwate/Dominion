@@ -1,6 +1,8 @@
 package com.mthwate.dominion.common.entity;
 
 import com.jme3.network.serializing.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author mthwate
@@ -8,11 +10,13 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class EntityProperties {
 
-	public String model = "null";
+	@Getter @Setter private String model = "null";
 
-	public String texture = "null";
+	@Getter @Setter private String texture = "null";
 
-	public boolean moveable = false;
+	@Getter @Setter private boolean moveable = false;
+
+	@Getter @Setter private String[] travelType = {"land"};
 
 	public EntityProperties() {}
 	

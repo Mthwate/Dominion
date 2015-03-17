@@ -9,7 +9,7 @@ import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Path;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MessageUtils;

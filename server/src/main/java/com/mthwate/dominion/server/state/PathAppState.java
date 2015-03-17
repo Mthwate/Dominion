@@ -1,7 +1,7 @@
 package com.mthwate.dominion.server.state;
 
 import com.mthwate.dominion.common.Path;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
@@ -34,7 +34,7 @@ public class PathAppState extends ServerAppState {
 				Tile next = TileStore.get(path.getKey().getNext());
 
 				if (current.hasInhabitant() && !next.hasInhabitant()) {
-					if (current.getInhabitant().getType().moveable) {
+					if (current.getInhabitant().getType().isMoveable()) {
 						next.setInhabitant(current.getInhabitant());
 						current.setInhabitant(null);
 					}

@@ -3,7 +3,7 @@ package com.mthwate.dominion.server.messagehandler;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 import com.mthwate.dominion.common.Path;
-import com.mthwate.dominion.common.Tile;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.server.ConnectionUtils;
@@ -24,7 +24,7 @@ public class MoveMessageHandler implements MessageHandler<MoveMessage> {
 			Tile sourceTile = TileStore.get(path.getCurrent());
 
 			if (sourceTile.hasInhabitant()) {
-				if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().moveable) {
+				if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().isMoveable()) {
 					PathAppState.add(path);
 				}
 			}

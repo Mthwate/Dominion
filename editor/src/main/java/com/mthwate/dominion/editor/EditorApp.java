@@ -48,7 +48,7 @@ public class EditorApp extends GraphicalApp {
 				SpawnStore.add(spawn);
 			}
 		} else {
-			TileStore.resize(1, 1);
+			TileStore.resize(1, 1, assetManager);
 		}
 
 		NiftyUtils.setMenuInt("width", TileStore.sizeX());

@@ -1,6 +1,9 @@
 package com.mthwate.dominion.common;
 
+import com.jme3.asset.AssetManager;
 import com.mthwate.datlib.math.Set2i;
+import com.mthwate.dominion.common.tile.Tile;
+import com.mthwate.dominion.common.tile.TproUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +16,7 @@ public class TileStore {
 	@Setter
 	private static Tile[][] tiles;
 
-	public static void resize(int x, int y) {
+	public static void resize(int x, int y, AssetManager assetManager) {
 		Tile[][] newTiles = new Tile[x][y];
 
 		for (int xi = 0; xi < x; xi++) {
@@ -21,7 +24,7 @@ public class TileStore {
 				if (xi < sizeX() && yi < sizeY()) {
 					newTiles[xi][yi] = tiles[xi][yi];
 				} else {
-					newTiles[xi][yi] = new Tile();
+					newTiles[xi][yi] = new Tile(TproUtils.getProperties("null", assetManager));
 				}
 			}
 		}

@@ -2,6 +2,7 @@ package com.mthwate.dominion.editor.state;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.editor.NiftyUtils;
 import com.mthwate.dominion.graphical.KeyControl;
@@ -15,10 +16,13 @@ public class MenuAppState extends GraphicalAppState {
 
 	private KeyHandler keyHandler;
 
+	private AssetManager assetManager;
+
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
 		keyHandler = gapp.getKeyHandler();
+		assetManager = gapp.getAssetManager();
 	}
 
 	@Override
@@ -31,7 +35,7 @@ public class MenuAppState extends GraphicalAppState {
 
 				int y = NiftyUtils.getMenuInt("height");
 
-				TileStore.resize(x, y);
+				TileStore.resize(x, y, assetManager);
 
 				NiftyUtils.gotoScreen("edit");
 			} else {

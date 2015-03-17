@@ -1,4 +1,4 @@
-package com.mthwate.dominion.graphical.tpro;
+package com.mthwate.dominion.common.tile;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.jme3.asset.AssetInfo;

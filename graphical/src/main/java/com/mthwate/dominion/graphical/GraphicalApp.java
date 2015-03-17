@@ -10,7 +10,7 @@ import com.mthwate.dominion.graphical.node.NodeTypeSide;
 import com.mthwate.dominion.graphical.node.NodeTypeTile;
 import com.mthwate.dominion.graphical.node.NodeTypeWire;
 import com.mthwate.dominion.graphical.state.*;
-import com.mthwate.dominion.graphical.tpro.TproLoader;
+import com.mthwate.dominion.common.tile.TproLoader;
 import lombok.Getter;
 import lombok.extern.java.Log;
 
