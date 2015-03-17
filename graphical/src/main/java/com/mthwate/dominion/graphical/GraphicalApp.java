@@ -62,6 +62,7 @@ public abstract class GraphicalApp extends CommonApp {
 		stateManager.attach(new WireAppState());
 		stateManager.attach(new NodeAppState());
 		stateManager.attach(new ScreenshotAppState());
+		stateManager.attach(new CompassAppState(guiNode, settings));
 	}
 
 	protected void initLight() {

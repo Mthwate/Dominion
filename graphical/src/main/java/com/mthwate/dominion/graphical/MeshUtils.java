@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class MeshUtils {
 
-	private static List<HexLine> wires = new ArrayList<HexLine>();
+	private static List<HexLine> wires = new ArrayList<>();
 
-	private static List<HexSides> sides = new ArrayList<HexSides>();
+	private static List<HexSides> sides = new ArrayList<>();
 
 	@Getter private static Hexagon tile = new Hexagon(1);
 
