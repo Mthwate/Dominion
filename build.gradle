@@ -28,16 +28,10 @@ subprojects {
 	task bareFatJar(type: Jar) {
 		manifest = jar.manifest
 		baseName = project.name + "-bare-all"
-		sourceSets {
-			main {
-				resources {
-					exclude 'entities'
-					exclude 'models'
-					exclude 'textures'
-					exclude 'tiles'
-				}
-			}
-		}
+		exclude 'entities/**'
+		exclude 'models/**'
+		exclude 'textures/**'
+		exclude 'tiles/**'
 		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 		with jar
 	}
@@ -45,16 +39,10 @@ subprojects {
 	task bareJar(type: Jar) {
 		manifest = jar.manifest
 		baseName = project.name + "-bare"
-		sourceSets {
-			main {
-				resources {
-					exclude 'entities'
-					exclude 'models'
-					exclude 'textures'
-					exclude 'tiles'
-				}
-			}
-		}
+		exclude 'entities/**'
+		exclude 'models/**'
+		exclude 'textures/**'
+		exclude 'tiles/**'
 		with jar
 	}
 }
