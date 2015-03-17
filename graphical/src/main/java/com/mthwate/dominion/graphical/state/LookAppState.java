@@ -4,6 +4,7 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.KeyHandler;
 
@@ -25,27 +26,26 @@ public class LookAppState extends GraphicalAppState {
 
 	@Override
 	public void update(float tpf) {
-		float x = 0;
-		float y = 0;
 
-		if (keyHandler.isPressed(KeyControl.NORTH)) {
-			y += 0.5;
+		final Vector3f dir = cam.getDirection();
+
+		float angle = (float) Math.atan2(dir.getX(), dir.getY());
+
+		if (keyHandler.isPressed(KeyControl.LOOK_RIGHT)) {
+			angle += tpf;
 		}
 
-		if (keyHandler.isPressed(KeyControl.SOUTH)) {
-			y -= 0.5;
+		if (keyHandler.isPressed(KeyControl.LOOK_LEFT)) {
+			angle -= tpf;
 		}
 
-		if (keyHandler.isPressed(KeyControl.EAST)) {
-			x += 0.5;
-		}
+		float x = (float) Math.sin(angle);
+		float y = (float) Math.cos(angle);
 
-		if (keyHandler.isPressed(KeyControl.WEST)) {
-			x -= 0.5;
-		}
+		cam.lookAtDirection(new Vector3f(x, y, -1), GraphicalApp.UP);
 
-		if ((x != 0 || y != 0) && Math.abs(x) != Math.abs(y)) {
-			cam.lookAtDirection(new Vector3f(x, y, -1), new Vector3f(0, 0, 1));
+		if (keyHandler.isPressed(KeyControl.LOOK_NORTH)) {
+			cam.lookAtDirection(new Vector3f(0, 1, -1), GraphicalApp.UP);
 		}
 	}
 

@@ -12,10 +12,10 @@ public enum KeyControl {
 	LEFT("left"),
 	RIGHT("right"),
 
-	NORTH("north"),
-	SOUTH("south"),
-	WEST("west"),
-	EAST("east"),
+	LOOK_RIGHT("lookRight"),
+	LOOK_LEFT("lookLeft"),
+	LOOK_NORTH("lookNorth"),
+
 	
 	MENU("menu"),
 	

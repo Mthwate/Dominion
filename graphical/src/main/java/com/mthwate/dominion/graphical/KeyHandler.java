@@ -24,11 +24,10 @@ public class KeyHandler implements ActionListener {
 		addKeyListener(im, KeyControl.RIGHT, KeyInput.KEY_D);
 		addKeyListener(im, KeyControl.UP, KeyInput.KEY_W);
 		addKeyListener(im, KeyControl.DOWN, KeyInput.KEY_S);
-		
-		addKeyListener(im, KeyControl.NORTH, KeyInput.KEY_UP);
-		addKeyListener(im, KeyControl.SOUTH, KeyInput.KEY_DOWN);
-		addKeyListener(im, KeyControl.WEST, KeyInput.KEY_LEFT);
-		addKeyListener(im, KeyControl.EAST, KeyInput.KEY_RIGHT);
+
+		addKeyListener(im, KeyControl.LOOK_RIGHT, KeyInput.KEY_RIGHT);
+		addKeyListener(im, KeyControl.LOOK_LEFT, KeyInput.KEY_LEFT);
+		addKeyListener(im, KeyControl.LOOK_NORTH, KeyInput.KEY_UP);
 		
 		addKeyListener(im, KeyControl.MENU, KeyInput.KEY_LMENU);
 		

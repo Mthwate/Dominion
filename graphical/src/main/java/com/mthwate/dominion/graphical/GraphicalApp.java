@@ -24,6 +24,8 @@ public abstract class GraphicalApp extends CommonApp {
 
 	public static final Vector3f CAM_ORIGIN = new Vector3f(0, -10, 15);
 
+	public static final Vector3f UP = new Vector3f(0, 0, 1);
+
 	@Override
 	protected void init() {
 		assetManager.registerLoader(TproLoader.class, "tpro");
@@ -74,5 +76,5 @@ public abstract class GraphicalApp extends CommonApp {
 		dl.setColor(ColorRGBA.White.mult(1));
 		rootNode.addLight(dl);
 	}
-	
+
 }
