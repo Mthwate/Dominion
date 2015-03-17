@@ -1,11 +1,6 @@
-plugins {
-	id 'com.github.johnrengelman.shadow' version '1.2.0'
-}
-
 subprojects {
 
 	apply plugin: 'java'
-	apply plugin: 'com.github.johnrengelman.shadow'
 
 	sourceCompatibility = 1.7
 	
@@ -23,9 +18,16 @@ subprojects {
 		}
 	}
 
-	task disableAssets {
-		jar.archiveName = project.name + "-bare.jar"
-		shadowJar.archiveName = project.name + "-bare-all.jar"
+	task fatJar(type: Jar) {
+		manifest = jar.manifest
+		baseName = project.name + '-all'
+		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+		with jar
+	}
+
+	task bareFatJar(type: Jar) {
+		manifest = jar.manifest
+		baseName = project.name + "-bare-all"
 		sourceSets {
 			main {
 				resources {
@@ -36,5 +38,23 @@ subprojects {
 				}
 			}
 		}
+		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+		with jar
+	}
+
+	task bareJar(type: Jar) {
+		manifest = jar.manifest
+		baseName = project.name + "-bare"
+		sourceSets {
+			main {
+				resources {
+					exclude 'entities'
+					exclude 'models'
+					exclude 'textures'
+					exclude 'tiles'
+				}
+			}
+		}
+		with jar
 	}
 }
