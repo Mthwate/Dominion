@@ -8,7 +8,6 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.graphical.ClickUtils;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.KeyHandler;
-import com.mthwate.dominion.graphical.state.GraphicalAppState;
 
 /**
  * @author mthwate

@@ -8,7 +8,6 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Tile;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.editor.EditorApp;
 import com.mthwate.dominion.editor.NiftyUtils;
 import com.mthwate.dominion.editor.SpawnStore;
 import com.mthwate.dominion.graphical.KeyControl;
