@@ -1,7 +1,6 @@
 package com.mthwate.dominion.editor;
 
 import com.jme3.app.Application;
-import com.jme3.asset.AssetManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
 import com.mthwate.datlib.FileUtils;
@@ -25,10 +24,9 @@ public class NiftyUtils {
 	private static Nifty nifty;
 	
 	public static void init(Application app) {
-		AssetManager assetManager = app.getAssetManager();
 		ViewPort guiViewPort = app.getGuiViewPort();
 
-		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager, app.getInputManager(), app.getAudioRenderer(), guiViewPort);
+		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), guiViewPort);
 		nifty = niftyDisplay.getNifty();
 
 		nifty.fromXml("gui.xml", "edit");
@@ -58,7 +56,7 @@ public class NiftyUtils {
 			String ext = ".tpro";
 			if (path.endsWith(ext)) {
 				String tile = path.substring(path.lastIndexOf("/") + 1, path.length() - ext.length());
-				TproUtils.load(tile, assetManager);
+				TproUtils.load(tile);
 				addTileOption(tile);
 			}
 		}

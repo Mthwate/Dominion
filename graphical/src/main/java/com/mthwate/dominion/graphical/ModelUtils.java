@@ -13,12 +13,18 @@ import com.mthwate.dominion.common.entity.EntityProperties;
  */
 public class ModelUtils {
 
-	public static Spatial getModel(EntityProperties entity, AssetManager assetManager) {
+	private static AssetManager assetManager;
+
+	public static void init(AssetManager assetManager) {
+		ModelUtils.assetManager = assetManager;
+	}
+
+	public static Spatial getModel(EntityProperties entity) {
 		Spatial model = assetManager.loadModel("models/" + entity.getModel() + ".blend");
 		model.setLocalScale(0.1f, 0.1f, 0.1f);
 		model.setLocalRotation(getModelRotation());
 		model.setQueueBucket(RenderQueue.Bucket.Transparent);
-		model.setMaterial(MaterialUtils.getTexturedMaterial(entity.getTexture(), assetManager));
+		model.setMaterial(MaterialUtils.getTexturedMaterial(entity.getTexture()));
 		return model;
 	}
 

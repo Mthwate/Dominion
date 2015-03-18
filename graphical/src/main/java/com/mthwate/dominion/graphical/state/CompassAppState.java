@@ -2,7 +2,6 @@ package com.mthwate.dominion.graphical.state;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.asset.AssetManager;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
@@ -10,6 +9,7 @@ import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
 import com.jme3.ui.Picture;
+import com.mthwate.dominion.graphical.MaterialUtils;
 
 import java.util.Random;
 
@@ -19,8 +19,6 @@ import java.util.Random;
 public class CompassAppState extends GraphicalAppState {
 
 	private Node node = new Node();
-
-	private AssetManager assetManager;
 
 	private Camera cam;
 
@@ -48,11 +46,9 @@ public class CompassAppState extends GraphicalAppState {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		assetManager = gapp.getAssetManager();
 		cam = gapp.getCamera();
 
-
-		pic.setImage(assetManager, "textures/compass.png", true);
+		pic.setMaterial(MaterialUtils.getGuiMaterial("compass"));
 		pic.setWidth(size);
 		pic.setHeight(size);
 		node.setLocalTranslation(width - (size * 0.75f), height - (size * 0.75f), 0);
@@ -83,8 +79,6 @@ public class CompassAppState extends GraphicalAppState {
 		}
 
 		rotation.fromAngles(0, 0, new Vector2f(mod, 1).angleBetween(direction2d));
-
-
 
 
 		node.setLocalRotation(rotation);

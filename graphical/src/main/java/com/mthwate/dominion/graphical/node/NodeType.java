@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.CoordUtils;
@@ -15,7 +14,7 @@ public abstract class NodeType {
 
 	public abstract boolean differ(Tile t1, Tile t2);
 
-	public abstract void update(Node node, int x, int y, AssetManager assetManager);
+	public abstract void update(Node node, int x, int y);
 
 	protected static void attachSpatial(Spatial spatial, Node node, int x, int y, int z, float zmod) {
 		spatial.setName(coordsToName(x, y));

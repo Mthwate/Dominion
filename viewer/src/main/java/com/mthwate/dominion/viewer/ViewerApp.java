@@ -74,16 +74,16 @@ public class ViewerApp extends GraphicalApp {
 		int width = entityNames.size() * 2 + 1;
 		int height = 3;
 
-		TileStore.resize(width, height, assetManager);
+		TileStore.resize(width, height);
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				TileStore.get(x, y).setType(TproUtils.getProperties("grass", assetManager));
+				TileStore.get(x, y).setType(TproUtils.getProperties("grass"));
 				if (y == 1 && x % 2 == 1) {
 					Tile tile = TileStore.get(x, y);
 					tile.setElevation(1);
 					String name = entityNames.get(x / 2);
-					tile.setInhabitant(new Entity(EproUtils.getProperties(name, assetManager), null));
+					tile.setInhabitant(new Entity(EproUtils.getProperties(name), null));
 
 					BitmapText ch = new BitmapText(guiFont);
 					ch.setSize(0.2F);

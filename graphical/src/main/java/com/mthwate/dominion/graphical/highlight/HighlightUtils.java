@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.highlight;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
@@ -16,11 +15,11 @@ import com.mthwate.dominion.graphical.MeshUtils;
  */
 public class HighlightUtils {
 
-	public static void highlightTile(int x, int y, ColorRGBA color, Node node, AssetManager assetManager) {
+	public static void highlightTile(int x, int y, ColorRGBA color, Node node) {
 		Geometry g = new Geometry();
 		g.setMesh(MeshUtils.getTile());
 		g.setQueueBucket(RenderQueue.Bucket.Transparent);
-		g.setMaterial(MaterialUtils.getHighlightMaterial(color, assetManager));
+		g.setMaterial(MaterialUtils.getHighlightMaterial(color));
 
 		Tile tile = TileStore.get(x, y);
 

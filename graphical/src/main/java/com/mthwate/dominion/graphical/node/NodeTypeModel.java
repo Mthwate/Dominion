@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.TileStore;
@@ -33,11 +32,11 @@ public class NodeTypeModel extends NodeType {
 	}
 
 	@Override
-	public void update(Node node, int x, int y, AssetManager assetManager) {
+	public void update(Node node, int x, int y) {
 		Tile tile = TileStore.get(x, y);
 
 		if (tile.hasInhabitant()) {
-			Spatial model = ModelUtils.getModel(tile.getInhabitant().getType(), assetManager);
+			Spatial model = ModelUtils.getModel(tile.getInhabitant().getType());
 			attachSpatial(model, node, x, y, tile.getElevation(), 0.004f);
 		} else {
 			node.detachChildNamed(coordsToName(x, y));

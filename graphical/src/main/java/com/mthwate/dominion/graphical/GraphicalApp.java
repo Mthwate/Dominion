@@ -29,7 +29,13 @@ public abstract class GraphicalApp extends CommonApp {
 	@Override
 	protected void init() {
 		assetManager.registerLoader(TproLoader.class, "tpro");
-		
+
+
+		TextureUtils.init(assetManager);
+		MaterialUtils.init(assetManager);
+		ModelUtils.init(assetManager);
+
+
 		keyHandler = new KeyHandler(inputManager);
 
 

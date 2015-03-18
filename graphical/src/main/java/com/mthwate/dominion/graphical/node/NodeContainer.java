@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.collision.Collidable;
 import com.jme3.collision.CollisionResults;
 import com.jme3.scene.Node;
@@ -36,7 +35,7 @@ public class NodeContainer {
 		parent.attachChild(node);
 	}
 
-	public void update(AssetManager assetManager) {
+	public void update() {
 
 		int x = TileStore.sizeX();
 		int y = TileStore.sizeY();
@@ -61,7 +60,7 @@ public class NodeContainer {
 		if (x != 0 && y != 0) {
 			for (int ix = 0; ix < chunks.length; ix++) {
 				for (int iy = 0; iy < chunks[0].length; iy++) {
-					chunks[ix][iy].update(assetManager, ix * CHUNK_SIZE, iy * CHUNK_SIZE);
+					chunks[ix][iy].update(ix * CHUNK_SIZE, iy * CHUNK_SIZE);
 				}
 			}
 		}

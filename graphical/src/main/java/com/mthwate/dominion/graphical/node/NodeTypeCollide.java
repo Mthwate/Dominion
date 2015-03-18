@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.common.TileStore;
@@ -24,7 +23,7 @@ public class NodeTypeCollide extends NodeType {
 	}
 
 	@Override
-	public void update(Node node, int x, int y, AssetManager assetManager) {
+	public void update(Node node, int x, int y) {
 		Tile tile = TileStore.get(x, y);
 
 		Geometry geom = new Geometry();

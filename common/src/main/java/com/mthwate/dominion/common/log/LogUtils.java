@@ -2,11 +2,9 @@ package com.mthwate.dominion.common.log;
 
 import com.mthwate.datlib.DualOutputStream;
 import com.mthwate.datlib.IOUtils;
-import lombok.Cleanup;
 
 import java.io.*;
 import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 

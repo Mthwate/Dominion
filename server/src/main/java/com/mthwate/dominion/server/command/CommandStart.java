@@ -1,6 +1,5 @@
 package com.mthwate.dominion.server.command;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 import com.mthwate.datlib.math.Set2i;
@@ -35,7 +34,7 @@ public class CommandStart implements Command {
 	}
 
 	@Override
-	public void run(Server server, AssetManager assetManager, String params) {
+	public void run(Server server, String params) {
 
 
 		WorldMap map = SaveUtils.loadMap(SAVE_FILE);
@@ -54,7 +53,7 @@ public class CommandStart implements Command {
 				int i = rand.nextInt(spawns.size());
 				Set2i spawn = spawns.get(i);
 				spawns.remove(i);
-				Entity entity = new Entity(EproUtils.getProperties("placeholder", assetManager), ConnectionUtils.getUsername(connection));
+				Entity entity = new Entity(EproUtils.getProperties("placeholder"), ConnectionUtils.getUsername(connection));
 				TileStore.get(spawn).setInhabitant(entity);
 				log.info(ConnectionUtils.getUsername(connection) + " is starting the game at " + spawn);
 			}

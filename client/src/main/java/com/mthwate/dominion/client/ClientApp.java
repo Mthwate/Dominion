@@ -99,7 +99,7 @@ public class ClientApp extends GraphicalApp {
 		Geometry g = new Geometry("selected");
 		g.setMesh(MeshUtils.getTile());
 		g.setQueueBucket(RenderQueue.Bucket.Transparent);
-		g.setMaterial(MaterialUtils.getHighlightMaterial(HighlightColors.YELLOW, assetManager));
+		g.setMaterial(MaterialUtils.getHighlightMaterial(HighlightColors.YELLOW));
 
 		Tile tile = TileStore.get(x, y);
 

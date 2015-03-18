@@ -1,6 +1,5 @@
 package com.mthwate.dominion.server.command;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.network.Server;
 import lombok.extern.java.Log;
 
@@ -16,7 +15,7 @@ public class CommandEcho implements Command {
 	}
 
 	@Override
-	public void run(Server server, AssetManager assetManager, String params) {
+	public void run(Server server, String params) {
 		log.info(params);
 	}
 	

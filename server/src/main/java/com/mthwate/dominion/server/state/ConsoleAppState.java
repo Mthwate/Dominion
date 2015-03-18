@@ -1,8 +1,5 @@
 package com.mthwate.dominion.server.state;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.asset.AssetManager;
 import com.mthwate.dominion.server.command.CommandUtils;
 import lombok.extern.java.Log;
 
@@ -19,19 +16,11 @@ public class ConsoleAppState extends ServerAppState {
 
 	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
-	private AssetManager assetManager;
-
-	@Override
-	public void initialize(AppStateManager stateManager, Application app) {
-		super.initialize(stateManager, app);
-		assetManager = app.getAssetManager();
-	}
-
 	@Override
 	public void update(float tpf) {
 		try {
 			while (stdin.ready()) {
-				CommandUtils.run(server, assetManager, stdin.readLine());
+				CommandUtils.run(server, stdin.readLine());
 			}
 		} catch (IOException e) {
 			log.log(Level.SEVERE, "Failed to read from stdin", e);

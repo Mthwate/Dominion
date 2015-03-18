@@ -10,10 +10,16 @@ import java.util.Map;
  * @author mthwate
  */
 public class TextureUtils {
+
+	private static AssetManager assetManager;
 	
-	private static Map<String, Texture> textures = new HashMap<String, Texture>();
-	
-	public static Texture getTexture(String path, AssetManager assetManager) {
+	private static Map<String, Texture> textures = new HashMap<>();
+
+	public static void init(AssetManager assetManager) {
+		TextureUtils.assetManager = assetManager;
+	}
+
+	public static Texture getTexture(String path) {
 		
 		Texture texture = textures.get(path);
 		

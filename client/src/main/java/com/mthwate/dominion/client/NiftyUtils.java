@@ -1,7 +1,6 @@
 package com.mthwate.dominion.client;
 
 import com.jme3.app.Application;
-import com.jme3.asset.AssetManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
 import de.lessvoid.nifty.Nifty;
@@ -19,10 +18,9 @@ public class NiftyUtils implements ScreenController {
 	private static boolean join = false;
 
 	public static void init(Application app) {
-		AssetManager assetManager = app.getAssetManager();
 		ViewPort guiViewPort = app.getGuiViewPort();
 
-		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager, app.getInputManager(), app.getAudioRenderer(), guiViewPort);
+		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), guiViewPort);
 		nifty = niftyDisplay.getNifty();
 
 		nifty.fromXml("gui.xml", "menu");

@@ -12,20 +12,28 @@ import java.util.Map;
  * @author mthwate
  */
 public class MaterialUtils {
+
+	private static AssetManager assetManager;
 	
 	private static Material matWire;
 	
-	private static Map<ColorRGBA, Material> highlights = new HashMap<ColorRGBA, Material>();
-	
-	private static Map<String, Material> materials = new HashMap<String, Material>();
+	private static Map<ColorRGBA, Material> highlights = new HashMap<>();
 
-	public static Material getTexturedMaterial(String name, AssetManager assetManager) {
+	private static Map<String, Material> materials = new HashMap<>();
+
+	private static Map<String, Material> guis = new HashMap<>();
+
+	public static void init(AssetManager assetManager) {
+		MaterialUtils.assetManager = assetManager;
+	}
+
+	public static Material getTexturedMaterial(String name) {
 		
 		Material material = materials.get(name);
 		
 		if (material == null) {
 			material = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
-			material.setTexture("DiffuseMap", TextureUtils.getTexture("textures/" + name + ".png", assetManager));
+			material.setTexture("DiffuseMap", TextureUtils.getTexture("textures/" + name + ".png"));
 			material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
 			materials.put(name, material);
 		}
@@ -33,7 +41,7 @@ public class MaterialUtils {
 		return material;
 	}
 
-	public static Material getWireMaterial(AssetManager assetManager) {
+	public static Material getWireMaterial() {
 
 		if (matWire == null) {
 			matWire = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -43,7 +51,7 @@ public class MaterialUtils {
 		return matWire;
 	}
 
-	public static Material getHighlightMaterial(ColorRGBA color, AssetManager assetManager) {
+	public static Material getHighlightMaterial(ColorRGBA color) {
 
 		Material highlight = highlights.get(color);
 
@@ -54,6 +62,21 @@ public class MaterialUtils {
 		}
 
 		return highlight;
+	}
+
+	public static Material getGuiMaterial(String name) {
+
+		Material gui = guis.get(name);
+
+		if (gui == null) {
+			gui = new Material(assetManager, "Common/MatDefs/Gui/Gui.j3md");
+			gui.setColor("Color", ColorRGBA.White);
+			gui.setTexture("Texture", TextureUtils.getTexture("textures/" + name + ".png"));
+			gui.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+			guis.put(name, gui);
+		}
+
+		return gui;
 	}
 	
 }

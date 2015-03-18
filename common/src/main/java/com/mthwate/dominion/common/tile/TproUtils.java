@@ -10,9 +10,15 @@ import java.util.Map;
  */
 public class TproUtils {
 
-	private static Map<String, TileProperties> properties = new HashMap<String, TileProperties>();
+	private static AssetManager assetManager;
 
-	public static TileProperties getProperties(String name, AssetManager assetManager) {
+	private static Map<String, TileProperties> properties = new HashMap<>();
+
+	public static void init(AssetManager assetManager) {
+		TproUtils.assetManager = assetManager;
+	}
+
+	public static TileProperties getProperties(String name) {
 
 		TileProperties tpro = properties.get(name);
 

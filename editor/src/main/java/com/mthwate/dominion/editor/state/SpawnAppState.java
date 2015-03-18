@@ -1,8 +1,5 @@
 package com.mthwate.dominion.editor.state;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.TileStore;
@@ -21,16 +18,8 @@ public class SpawnAppState extends EditorAppState {
 
 	private Node node = new Node();
 
-	private AssetManager assetManager;
-
 	public SpawnAppState(Node parentNode) {
 		parentNode.attachChild(node);
-	}
-
-	@Override
-	public void initialize(AppStateManager stateManager, Application app) {
-		super.initialize(stateManager, app);
-		assetManager = app.getAssetManager();
 	}
 
 	@Override
@@ -53,7 +42,7 @@ public class SpawnAppState extends EditorAppState {
 	private void renderSpawns() {
 		if (NiftyUtils.isSpawn()) {
 			for (Set2i spawn : SpawnStore.get()) {
-				HighlightUtils.highlightTile(spawn.getX(), spawn.getY(), HighlightColors.BLUE, node, assetManager);
+				HighlightUtils.highlightTile(spawn.getX(), spawn.getY(), HighlightColors.BLUE, node);
 			}
 		}
 	}

@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.common.TileStore;
@@ -28,12 +27,12 @@ public class NodeTypeTile extends NodeType {
 	}
 
 	@Override
-	public void update(Node node, int x, int y, AssetManager assetManager) {
+	public void update(Node node, int x, int y) {
 		Tile tile = TileStore.get(x, y);
 
 		Geometry geom = new Geometry();
 		geom.setMesh(MeshUtils.getTile());
-		geom.setMaterial(TproUtils.getMaterialFace(tile.getType(), assetManager));
+		geom.setMaterial(TproUtils.getMaterialFace(tile.getType()));
 
 		attachSpatial(geom, node, x, y, tile.getElevation(), 0);
 	}

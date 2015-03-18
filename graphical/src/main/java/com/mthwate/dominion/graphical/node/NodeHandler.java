@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.collision.CollisionResults;
 import com.jme3.math.Ray;
 import com.jme3.scene.Node;
@@ -34,9 +33,9 @@ public class NodeHandler {
 		init("collision", new NodeTypeCollide(), null);
 	}
 
-	public static void update(AssetManager assetManager) {
+	public static void update() {
 		for (NodeContainer node : nodes.values()) {
-			node.update(assetManager);
+			node.update();
 		}
 	}
 

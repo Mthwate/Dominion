@@ -1,6 +1,5 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.tile.Tile;
@@ -32,7 +31,7 @@ public class Chunk {
 		parent.attachChild(node);
 	}
 
-	public void update(AssetManager assetManager, int x, int y) {
+	public void update(int x, int y) {
 		boolean update = false;
 		
 		for (int ix = 0; ix < sizex; ix++) {
@@ -41,7 +40,7 @@ public class Chunk {
 					update = true;
 					tiles[ix][iy] = TileStore.get(ix + x, iy + y).clone();
 					if (!type.canOptimize()) {
-						type.update(node, ix + x, iy + y, assetManager);
+						type.update(node, ix + x, iy + y);
 					}
 				}
 			}
@@ -51,7 +50,7 @@ public class Chunk {
 			node.detachAllChildren();
 			for (int ix = 0; ix < sizex; ix++) {
 				for (int iy = 0; iy < sizey; iy++) {
-					type.update(node, ix + x, iy + y, assetManager);
+					type.update(node, ix + x, iy + y);
 				}
 			}
 			GeometryBatchFactory.optimize(node);

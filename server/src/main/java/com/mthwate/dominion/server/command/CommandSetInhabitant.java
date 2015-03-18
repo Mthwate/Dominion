@@ -1,6 +1,5 @@
 package com.mthwate.dominion.server.command;
 
-import com.jme3.asset.AssetManager;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 import com.mthwate.dominion.common.TileStore;
@@ -22,7 +21,7 @@ public class CommandSetInhabitant implements Command {
 	}
 
 	@Override
-	public void run(Server server, AssetManager assetManager, String params) {
+	public void run(Server server, String params) {
 		String[] split = params.split(" ");
 
 		if (split.length == 4) {
@@ -34,7 +33,7 @@ public class CommandSetInhabitant implements Command {
 			int x = Integer.parseInt(sx);
 			int y = Integer.parseInt(sy);
 			
-			TileStore.get(x, y).setInhabitant(new Entity(EproUtils.getProperties(name, assetManager), owner));
+			TileStore.get(x, y).setInhabitant(new Entity(EproUtils.getProperties(name), owner));
 
 			for (HostedConnection connection : server.getConnections()) {
 				MessageUtils.send(connection, new MapMessage(TileStore.getTiles()));

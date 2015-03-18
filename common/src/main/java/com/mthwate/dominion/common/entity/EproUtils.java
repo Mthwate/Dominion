@@ -9,10 +9,16 @@ import java.util.Map;
  * @author mthwate
  */
 public class EproUtils {
+
+	private static AssetManager assetManager;
 	
-	private static Map<String, EntityProperties> properties = new HashMap<String, EntityProperties>();
-	
-	public static EntityProperties getProperties(String name, AssetManager assetManager) {
+	private static Map<String, EntityProperties> properties = new HashMap<>();
+
+	public static void init(AssetManager assetManager) {
+		EproUtils.assetManager = assetManager;
+	}
+
+	public static EntityProperties getProperties(String name) {
 
 		EntityProperties epro = properties.get(name);
 		

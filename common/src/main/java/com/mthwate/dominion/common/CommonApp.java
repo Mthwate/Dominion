@@ -4,6 +4,8 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.ClasspathLocator;
 import com.jme3.asset.plugins.FileLocator;
 import com.mthwate.dominion.common.entity.EproLoader;
+import com.mthwate.dominion.common.entity.EproUtils;
+import com.mthwate.dominion.common.tile.TproUtils;
 import lombok.extern.java.Log;
 
 import java.io.File;
@@ -31,6 +33,9 @@ public abstract class CommonApp extends SimpleApplication {
 
 		assetManager.registerLoader(EproLoader.class, "epro");
 		assetManager.registerLoader(ListLoader.class, "list");
+
+		TproUtils.init(assetManager);
+		EproUtils.init(assetManager);
 
 		this.init();
 	}

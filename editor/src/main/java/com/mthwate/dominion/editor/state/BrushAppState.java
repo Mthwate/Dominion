@@ -1,8 +1,5 @@
 package com.mthwate.dominion.editor.state;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
@@ -24,16 +21,8 @@ public class BrushAppState extends MouseAppState {
 
 	private Node node = new Node();
 
-	private AssetManager assetManager;
-
 	public BrushAppState(Node parentNode) {
 		parentNode.attachChild(node);
-	}
-
-	@Override
-	public void initialize(AppStateManager stateManager, Application app) {
-		super.initialize(stateManager, app);
-		assetManager = app.getAssetManager();
 	}
 
 	@Override
@@ -48,7 +37,7 @@ public class BrushAppState extends MouseAppState {
 		int y = pos.getY();
 
 		if (NiftyUtils.isSpawn()) {
-			HighlightUtils.highlightTile(x, y, HighlightColors.YELLOW, node, assetManager);
+			HighlightUtils.highlightTile(x, y, HighlightColors.YELLOW, node);
 			if (clicked) {
 				keyHandler.onAction(KeyControl.CLICK.getName(), false, 0);
 				SpawnStore.toggleSpawn(new Set2i(x, y));
@@ -68,13 +57,13 @@ public class BrushAppState extends MouseAppState {
 						int py = CoordUtils.hexToCartesian(px, CoordUtils.cartesianToHex(x, y) + iy);
 						if (TileStore.validPoint(px, py)) {
 
-							HighlightUtils.highlightTile(px, py, HighlightColors.YELLOW, node, assetManager);
+							HighlightUtils.highlightTile(px, py, HighlightColors.YELLOW, node);
 
 							if (clicked) {
 
 								Tile tile = TileStore.get(px, py);
 
-								TileProperties newType = TproUtils.getProperties(type, assetManager);
+								TileProperties newType = TproUtils.getProperties(type);
 								int newElevation = elevation;
 
 								if (type.equals("")) {
