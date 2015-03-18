@@ -13,6 +13,7 @@ import com.mthwate.dominion.common.tile.TproUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeModel;
+import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * @author mthwate
  */
+@Log
 public class ViewerApp extends GraphicalApp {
 
 	@Override
@@ -53,6 +55,7 @@ public class ViewerApp extends GraphicalApp {
 			String ext = ".epro";
 			if (path.endsWith(ext)) {
 				String entity = path.substring(path.lastIndexOf(System.getProperty("path.separator")) + 1, path.length() - ext.length());
+				log.info("Adding entity " + entity);
 				entityNames.add(entity);
 			}
 		}
