@@ -1,6 +1,7 @@
 package com.mthwate.dominion.common.tile;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author mthwate
@@ -8,7 +9,7 @@ import lombok.Getter;
 @com.jme3.network.serializing.Serializable
 public class TileProperties implements java.io.Serializable {
 
-	@Getter private String name = "null";
+	@Getter @Setter private String name = "null";
 	
 	@Getter private String[] textures = {"null"};
 
