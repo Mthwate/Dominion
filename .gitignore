@@ -12,3 +12,5 @@ gradle-app.setting
 *.dwm
 log.txt
 Screenshot*.png
+
+logging.properties

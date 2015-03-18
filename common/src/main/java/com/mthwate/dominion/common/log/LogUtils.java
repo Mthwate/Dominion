@@ -1,12 +1,13 @@
 package com.mthwate.dominion.common.log;
 
 import com.mthwate.datlib.DualOutputStream;
+import com.mthwate.datlib.IOUtils;
+import lombok.Cleanup;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -15,13 +16,27 @@ import java.util.logging.Logger;
 public class LogUtils {
 	
 	public static void init() {
+
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("logging.properties");
+			LogManager.getLogManager().readConfiguration(fis);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			IOUtils.close(fis);
+		}
+
 		Logger root = Logger.getLogger("");
 
 		for (Handler handler : root.getHandlers()) {
 			root.removeHandler(handler);
 		}
 
-		root.addHandler(new LiveStreamHandler(getOutputStream(), new StandardFormatter()));
+		LiveStreamHandler lsh = new LiveStreamHandler(getOutputStream(), new StandardFormatter());
+
+		root.addHandler(lsh);
+
 	}
 	
 	private static OutputStream getOutputStream() {
