@@ -21,9 +21,7 @@ public class LogUtils {
 		try {
 			fis = new FileInputStream("logging.properties");
 			LogManager.getLogManager().readConfiguration(fis);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		} catch (IOException e) {} finally {
 			IOUtils.close(fis);
 		}
 
