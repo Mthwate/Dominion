@@ -7,9 +7,9 @@ import com.jme3.network.message.GZIPCompressedMessage;
 import com.jme3.network.serializing.Serializer;
 import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.SerializableSet2i;
-import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EntityProperties;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.tile.TileProperties;
 import lombok.extern.java.Log;
 

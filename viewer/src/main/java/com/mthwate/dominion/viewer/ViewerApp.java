@@ -5,10 +5,10 @@ import com.jme3.math.ColorRGBA;
 import com.mthwate.datlib.FileUtils;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.common.CoordUtils;
-import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EproUtils;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.tile.TproUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
@@ -54,7 +54,16 @@ public class ViewerApp extends GraphicalApp {
 		for (String path : entityPaths) {
 			String ext = ".epro";
 			if (path.endsWith(ext)) {
-				String entity = path.replace("\\", "/").substring(path.lastIndexOf("/") + 1, path.length() - ext.length());
+				String entity = path.replace("\\", "/");
+
+				log.fine("Found asset at " + entity);
+
+				entity = entity.substring(entity.lastIndexOf("/") + 1);
+
+				log.fine("File name " + entity);
+
+				entity = entity.substring(0, entity.length() - ext.length());
+
 				log.info("Adding entity " + entity);
 				entityNames.add(entity);
 			}

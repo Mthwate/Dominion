@@ -1,7 +1,6 @@
 package com.mthwate.dominion.common.tile;
 
 import com.mthwate.dominion.common.entity.Entity;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 

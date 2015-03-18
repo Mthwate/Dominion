@@ -3,9 +3,9 @@ package com.mthwate.dominion.graphical.node;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.EntityProperties;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.graphical.ModelUtils;
 
 /**

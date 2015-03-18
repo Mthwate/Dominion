@@ -19,6 +19,8 @@ public class EproLoader implements AssetLoader {
 		
 		YamlReader yr = new YamlReader(isr);
 
+		yr.getConfig().setPrivateFields(true);
+
 		EntityProperties properties = yr.read(EntityProperties.class);
 
 		yr.close();

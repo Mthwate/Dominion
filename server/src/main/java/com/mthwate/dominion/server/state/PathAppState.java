@@ -1,10 +1,10 @@
 package com.mthwate.dominion.server.state;
 
 import com.mthwate.dominion.common.Path;
-import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
+import com.mthwate.dominion.common.tile.Tile;
 
 import java.util.HashMap;
 import java.util.Map;

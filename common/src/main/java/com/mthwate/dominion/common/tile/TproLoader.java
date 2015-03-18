@@ -19,6 +19,8 @@ public class TproLoader implements AssetLoader {
 		
 		YamlReader yr = new YamlReader(isr);
 
+		yr.getConfig().setPrivateFields(true);
+
 		TileProperties properties = yr.read(TileProperties.class);
 
 		yr.close();

@@ -6,8 +6,8 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.common.CoordUtils;
-import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.TileStore;
+import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.graphical.MaterialUtils;
 import com.mthwate.dominion.graphical.MeshUtils;
 
