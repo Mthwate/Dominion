@@ -54,7 +54,7 @@ public class ViewerApp extends GraphicalApp {
 		for (String path : entityPaths) {
 			String ext = ".epro";
 			if (path.endsWith(ext)) {
-				String entity = path.substring(path.lastIndexOf(System.getProperty("path.separator")) + 1, path.length() - ext.length());
+				String entity = path.replace("\\", "/").substring(path.lastIndexOf("/") + 1, path.length() - ext.length());
 				log.info("Adding entity " + entity);
 				entityNames.add(entity);
 			}
