@@ -2,6 +2,7 @@ package com.mthwate.dominion.graphical;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.texture.Texture;
+import lombok.extern.java.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 /**
  * @author mthwate
  */
+@Log
 public class TextureUtils {
 
 	private static AssetManager assetManager;
@@ -19,16 +21,17 @@ public class TextureUtils {
 		TextureUtils.assetManager = assetManager;
 	}
 
-	public static Texture getTexture(String path) {
+	public static Texture getTexture(String name) {
 		
-		Texture texture = textures.get(path);
+		Texture texture = textures.get(name);
 		
 		if (texture == null) {
-			texture = assetManager.loadTexture(path);
+			log.info("Loading texture " + name + " for the first time");
+			texture = assetManager.loadTexture("textures/" + name + ".png");
 			texture.setWrap(Texture.WrapMode.Repeat);
 			texture.setMinFilter(Texture.MinFilter.BilinearNoMipMaps);
 			texture.setMagFilter(Texture.MagFilter.Nearest);
-			textures.put(path, texture);
+			textures.put(name, texture);
 		}
 		
 		return texture;

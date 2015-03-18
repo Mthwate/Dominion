@@ -1,6 +1,8 @@
 package com.mthwate.dominion.common.tile;
 
+import com.jme3.asset.AssetKey;
 import com.jme3.asset.AssetManager;
+import lombok.extern.java.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Map;
 /**
  * @author mthwate
  */
+@Log
 public class TproUtils {
 
 	private static AssetManager assetManager;
@@ -23,7 +26,8 @@ public class TproUtils {
 		TileProperties tpro = properties.get(name);
 
 		if (tpro == null) {
-			tpro = (TileProperties) assetManager.loadAsset("tiles/" + name + ".tpro");
+			log.info("Loading tpro " + name + " for the first time");
+			tpro = assetManager.loadAsset(new AssetKey<TileProperties>("tiles/" + name + ".tpro"));
 			tpro.setName(name);
 			properties.put(name, tpro);
 		}

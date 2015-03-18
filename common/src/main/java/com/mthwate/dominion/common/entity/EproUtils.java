@@ -1,6 +1,8 @@
 package com.mthwate.dominion.common.entity;
 
+import com.jme3.asset.AssetKey;
 import com.jme3.asset.AssetManager;
+import lombok.extern.java.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Map;
 /**
  * @author mthwate
  */
+@Log
 public class EproUtils {
 
 	private static AssetManager assetManager;
@@ -23,7 +26,8 @@ public class EproUtils {
 		EntityProperties epro = properties.get(name);
 		
 		if (epro == null) {
-			epro = (EntityProperties) assetManager.loadAsset("entities/" + name + ".epro");
+			log.info("Loading epro " + name + " for the first time");
+			epro = assetManager.loadAsset(new AssetKey<EntityProperties>("entities/" + name + ".epro"));
 			properties.put(name, epro);
 		}
 		
