@@ -63,11 +63,11 @@ public class BrushAppState extends MouseAppState {
 
 								Tile tile = TileStore.get(px, py);
 
-								TileProperties newType = TproUtils.getProperties(type);
+								TileProperties newType = tile.getType();
 								int newElevation = elevation;
 
-								if (type.equals("")) {
-									newType = tile.getType();
+								if (!type.equals("")) {
+									newType = TproUtils.getProperties(type);
 								}
 
 								if (NiftyUtils.isRelative("elevation")) {

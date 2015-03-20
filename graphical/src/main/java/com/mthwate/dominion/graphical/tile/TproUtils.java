@@ -1,27 +1,25 @@
 package com.mthwate.dominion.graphical.tile;
 
 import com.jme3.material.Material;
+import com.mthwate.datlib.math.Set2i;
+import com.mthwate.dominion.common.RandUtils;
 import com.mthwate.dominion.common.tile.TileProperties;
 import com.mthwate.dominion.graphical.MaterialUtils;
-
-import java.util.Random;
 
 /**
  * @author mthwate
  */
 public class TproUtils extends com.mthwate.dominion.common.tile.TproUtils {
 
-	private static Random rand = new Random();
-
-	public static Material getMaterialFace(TileProperties tile) {
+	public static Material getMaterialFace(TileProperties tile, Set2i pos) {
 		String[] textures = tile.getTextures();
-		String texture = textures[rand.nextInt(textures.length)];
+		String texture = textures[RandUtils.randInt(pos, textures.length)];
 		return MaterialUtils.getTexturedMaterial(texture);
 	}
 
-	public static Material getMaterialSide(TileProperties tile) {
+	public static Material getMaterialSide(TileProperties tile, Set2i pos) {
 		String[] sides = tile.getSides();
-		String side = sides[rand.nextInt(sides.length)];
+		String side = sides[RandUtils.randInt(pos, sides.length)];
 		return MaterialUtils.getTexturedMaterial(side);
 	}
 

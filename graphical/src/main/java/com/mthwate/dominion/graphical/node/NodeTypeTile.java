@@ -2,6 +2,7 @@ package com.mthwate.dominion.graphical.node;
 
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.graphical.MeshUtils;
@@ -32,7 +33,7 @@ public class NodeTypeTile extends NodeType {
 
 		Geometry geom = new Geometry();
 		geom.setMesh(MeshUtils.getTile());
-		geom.setMaterial(TproUtils.getMaterialFace(tile.getType()));
+		geom.setMaterial(TproUtils.getMaterialFace(tile.getType(), new Set2i(x, y)));
 
 		attachSpatial(geom, node, x, y, tile.getElevation(), 0);
 	}
