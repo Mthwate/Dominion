@@ -34,7 +34,6 @@ public class NodeTypeModel extends NodeType {
 		String modelName = tile.getType().getModel();
 
 		if (modelName != null) {
-			System.out.println("ABA");
 			Spatial model = ModelUtils.getModel(EproUtils.getProperties(modelName));
 			attachSpatial(model, node, x, y, tile.getElevation(), 0.004f);
 		} else {
