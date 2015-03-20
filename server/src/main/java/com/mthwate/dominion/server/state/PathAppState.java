@@ -1,9 +1,11 @@
 package com.mthwate.dominion.server.state;
 
+import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
+import com.mthwate.dominion.common.message.TileMessage;
 import com.mthwate.dominion.common.tile.Tile;
 
 import java.util.HashMap;
@@ -30,8 +32,11 @@ public class PathAppState extends ServerAppState {
 			if (path.getValue() >= val) {
 				path.setValue(path.getValue() - val);
 
-				Tile current = TileStore.get(path.getKey().getCurrent());
-				Tile next = TileStore.get(path.getKey().getNext());
+				Set2i cPos = path.getKey().getCurrent();
+				Set2i nPos = path.getKey().getNext();
+
+				Tile current = TileStore.get(cPos);
+				Tile next = TileStore.get(nPos);
 
 				if (current.hasInhabitant() && !next.hasInhabitant()) {
 					if (current.getInhabitant().getType().isMoveable()) {
@@ -42,7 +47,8 @@ public class PathAppState extends ServerAppState {
 
 				path.getKey().step();
 
-				MessageUtils.broadcast(server, new MapMessage(TileStore.getTiles()));
+				MessageUtils.broadcast(server, new TileMessage(current, cPos.getX(), cPos.getY()));
+				MessageUtils.broadcast(server, new TileMessage(next, nPos.getX(), nPos.getY()));
 
 			}
 		}
