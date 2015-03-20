@@ -39,7 +39,7 @@ public class BrushAppState extends MouseAppState {
 		if (NiftyUtils.isSpawn()) {
 			HighlightUtils.highlightTile(x, y, HighlightColors.YELLOW, node);
 			if (clicked) {
-				keyHandler.onAction(KeyControl.CLICK.getName(), false, 0);
+				keyHandler.unpress(KeyControl.CLICK);
 				SpawnStore.toggleSpawn(new Set2i(x, y));
 			}
 		} else {
