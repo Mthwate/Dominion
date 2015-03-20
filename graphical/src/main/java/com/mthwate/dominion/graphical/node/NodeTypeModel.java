@@ -1,5 +1,8 @@
 package com.mthwate.dominion.graphical.node;
 
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -11,10 +14,14 @@ import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.ModelUtils;
 import com.mthwate.dominion.graphical.tile.TproUtils;
 
+import java.util.Random;
+
 /**
  * @author mthwate
  */
 public class NodeTypeModel extends NodeType {
+
+	private Random rand = new Random();
 
 	@Override
 	public boolean differ(Tile t1, Tile t2) {
@@ -35,6 +42,12 @@ public class NodeTypeModel extends NodeType {
 
 		if (modelName != null) {
 			Spatial model = ModelUtils.getModel(EproUtils.getProperties(modelName));
+
+			Quaternion rotation = new Quaternion();
+			float angle = FastMath.PI / 3 * rand.nextInt(6);
+			rotation.fromAngleAxis(angle, new Vector3f(0, 1, 0));
+			model.rotate(rotation);
+
 			attachSpatial(model, node, x, y, tile.getElevation(), 0.004f);
 		} else {
 			node.detachChildNamed(coordsToName(x, y));
@@ -43,7 +56,7 @@ public class NodeTypeModel extends NodeType {
 
 	@Override
 	public boolean canOptimize() {
-		return false;
+		return true;
 	}
 
 }
