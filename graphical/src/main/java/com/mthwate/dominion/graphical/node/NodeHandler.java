@@ -24,15 +24,6 @@ public class NodeHandler {
 		nodes.put(name, node);
 	}
 
-	@Deprecated
-	public static void init(Node rootNode) {
-		init("tile", new NodeTypeTile(), rootNode);
-		init("side", new NodeTypeSide(), rootNode);
-		init("wire", new NodeTypeWire(), rootNode);
-		init("model", new NodeTypeModel(), rootNode);
-		init("collision", new NodeTypeCollide(), null);
-	}
-
 	public static void update() {
 		for (NodeContainer node : nodes.values()) {
 			node.update();

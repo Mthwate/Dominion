@@ -18,7 +18,7 @@ import com.mthwate.dominion.graphical.*;
 import com.mthwate.dominion.graphical.highlight.HighlightColors;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeCollide;
-import com.mthwate.dominion.graphical.node.NodeTypeModel;
+import com.mthwate.dominion.graphical.node.NodeTypeInhabitant;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class ClientApp extends GraphicalApp {
 
 		NiftyUtils.init(this);
 
-		NodeHandler.init("model", new NodeTypeModel(), rootNode);
+		NodeHandler.init("inhabitant", new NodeTypeInhabitant(), rootNode);
 		NodeHandler.init("collision", new NodeTypeCollide(), null);
 	}
 

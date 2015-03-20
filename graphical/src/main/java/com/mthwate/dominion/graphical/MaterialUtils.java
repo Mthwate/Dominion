@@ -65,6 +65,7 @@ public class MaterialUtils {
 			highlight = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
 			highlight.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
 			highlight.setColor("Color", color);
+			highlights.put(color, highlight);
 		}
 
 		return highlight;

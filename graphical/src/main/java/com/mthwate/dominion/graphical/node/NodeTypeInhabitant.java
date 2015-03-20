@@ -1,28 +1,31 @@
 package com.mthwate.dominion.graphical.node;
 
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.mthwate.dominion.common.TileStore;
-import com.mthwate.dominion.common.entity.EproUtils;
+import com.mthwate.dominion.common.entity.EntityProperties;
 import com.mthwate.dominion.common.tile.Tile;
-import com.mthwate.dominion.common.tile.TileProperties;
-import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.ModelUtils;
-import com.mthwate.dominion.graphical.tile.TproUtils;
 
 /**
  * @author mthwate
  */
-public class NodeTypeModel extends NodeType {
+public class NodeTypeInhabitant extends NodeType {
 
 	@Override
 	public boolean differ(Tile t1, Tile t2) {
 		boolean differ = true;
 
 		if (t1 != null && t2 != null) {
-			differ = !t1.getType().equals(t2.getType());
-			differ = differ || t1.getElevation() != t2.getElevation();
+			if (t1.getInhabitant() != null && t2.getInhabitant() != null) {
+				EntityProperties e1 = t1.getInhabitant().getType();
+				EntityProperties e2 = t2.getInhabitant().getType();
+				if (e1 == e2) {
+					differ = false;
+				} else if (e1 != null && e2 != null) {
+					differ = !t1.getInhabitant().equals(t2.getInhabitant());
+				}
+			}
 		}
 
 		return differ;
@@ -31,11 +34,9 @@ public class NodeTypeModel extends NodeType {
 	@Override
 	public void update(Node node, int x, int y) {
 		Tile tile = TileStore.get(x, y);
-		String modelName = tile.getType().getModel();
 
-		if (modelName != null) {
-			System.out.println("ABA");
-			Spatial model = ModelUtils.getModel(EproUtils.getProperties(modelName));
+		if (tile.hasInhabitant()) {
+			Spatial model = ModelUtils.getModel(tile.getInhabitant().getType());
 			attachSpatial(model, node, x, y, tile.getElevation(), 0.004f);
 		} else {
 			node.detachChildNamed(coordsToName(x, y));
