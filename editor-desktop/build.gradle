@@ -1,0 +1,9 @@
+dependencies {
+	compile project(':editor')
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.mthwate.dominion.editor.EditorMain'
+	}
+}

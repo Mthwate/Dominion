@@ -1,9 +1,3 @@
 dependencies {
 	compile project(':graphical')
 }
-
-jar {
-	manifest {
-		attributes 'Main-Class': 'com.mthwate.dominion.editor.EditorMain'
-	}
-}

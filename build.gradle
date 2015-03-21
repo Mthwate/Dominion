@@ -1,14 +1,18 @@
-subprojects {
-
-	apply plugin: 'java'
-
-	sourceCompatibility = 1.7
-	
-	dependencies {
-		testCompile "junit:junit:4.11"
-	}
-	
+buildscript {
 	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:1.0.0'
+
+		// NOTE: Do not place your application dependencies here; they belong
+		// in the individual module build.gradle files
+	}
+}
+
+allprojects {
+	repositories {
+		jcenter()
 		mavenCentral()
 		maven {
 			url 'http://updates.jmonkeyengine.org/maven'
@@ -16,6 +20,17 @@ subprojects {
 		maven {
 			url 'http://mthwate.com/maven'
 		}
+	}
+}
+
+configure(subprojects.findAll {!it.name.endsWith('-android')}) {
+
+	apply plugin: 'java'
+
+	sourceCompatibility = 1.7
+
+	dependencies {
+		testCompile "junit:junit:4.11"
 	}
 
 	task fatJar(type: Jar) {
@@ -44,5 +59,14 @@ subprojects {
 		exclude 'textures/**'
 		exclude 'tiles/**'
 		with jar
+	}
+}
+
+def jme_version = '3.0.10'
+
+configure(subprojects.findAll {it.name.endsWith('-desktop')}) {
+	dependencies {
+		runtime "com.jme3:jme3-lwjgl:$jme_version"
+		runtime "com.jme3:jme3-desktop:$jme_version"
 	}
 }
