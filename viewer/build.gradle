@@ -1,9 +1,0 @@
-dependencies {
-	compile project(':graphical')
-}
-
-jar {
-	manifest {
-		attributes 'Main-Class': 'com.mthwate.dominion.viewer.ViewerMain'
-	}
-}

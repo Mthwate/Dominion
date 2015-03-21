@@ -1,13 +1,3 @@
+include 'android'
 include 'common'
-
-include 'editor'
-include 'editor-android'
-include 'editor-desktop'
-
-include 'server'
-
-include 'client'
-
-include 'graphical'
-
-include 'viewer'
+include 'desktop'

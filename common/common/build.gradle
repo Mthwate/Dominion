@@ -1,0 +1,8 @@
+def jme_version = '3.0.10'
+
+dependencies {
+	compile 'com.mthwate.datlib:datlib:1.6'
+	compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.09'
+	compile "com.jme3:jme3-networking:$jme_version"
+	compile 'org.projectlombok:lombok:1.16.2'
+}

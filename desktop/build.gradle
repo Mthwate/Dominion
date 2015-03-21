@@ -1,0 +1,6 @@
+subprojects {
+	dependencies {
+		runtime "com.jme3:jme3-lwjgl:$jme_version"
+		runtime "com.jme3:jme3-desktop:$jme_version"
+	}
+}
