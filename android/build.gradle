@@ -28,10 +28,25 @@ subprojects {
 
 		signingConfigs {
 			release {
-				storeFile file(System.getenv("KSTORELOC"))
-				storePassword System.getenv("KSTOREPWD")
-				keyAlias System.getenv("KEYALIAS")
-				keyPassword System.getenv("KEYPWD")
+				def kstoreloc = System.getenv("KSTORELOC");
+				if (kstoreloc != null) {
+					storeFile file(kstoreloc)
+				}
+
+				def kstorepwd = System.getenv("KSTOREPWD");
+				if (kstorepwd != null) {
+					storePassword file(kstorepwd)
+				}
+
+				def keyalias = System.getenv("KEYALIAS");
+				if (keyalias != null) {
+					keyAlias file(keyalias)
+				}
+
+				def keypwd = System.getenv("KEYPWD");
+				if (keypwd != null) {
+					keyPassword file(keypwd)
+				}
 			}
 		}
 
