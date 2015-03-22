@@ -4,35 +4,15 @@ import android.content.pm.ActivityInfo;
 import com.jme3.app.AndroidHarness;
 import com.jme3.system.android.AndroidConfigChooser;
 
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-
-
 public class MainActivity extends AndroidHarness {
 
-    /*
-     * Note that you can ignore the errors displayed in this file,
-     * the android project will build regardless.
-     * Install the 'Android' plugin under Tools->Plugins->Available Plugins
-     * to get error checks and code completion for the Android project files.
-     */
-
-	public MainActivity(){
-		// Set the application class to run
+	public MainActivity() {
 		appClass = "com.mthwate.dominion.client.ClientApp";
-		// Try ConfigType.FASTEST; or ConfigType.LEGACY if you have problems
 		eglConfigType = AndroidConfigChooser.ConfigType.BEST;
-		// Exit Dialog title & message
-		exitDialogTitle = "Exit?";
-		exitDialogMessage = "Press Yes";
-		// Enable verbose logging
-		eglConfigVerboseLogging = false;
-		// Choose screen orientation
+		exitDialogTitle = "Exit";
+		exitDialogMessage = "Are you sure you want to exit?";
 		screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-		// Enable MouseEvents being generated from TouchEvents (default = true)
 		mouseEventsEnabled = true;
-		// Set the default logging level (default=Level.INFO, Level.ALL=All Debug Info)
-		LogManager.getLogManager().getLogger("").setLevel(Level.INFO);
 	}
 
 }
