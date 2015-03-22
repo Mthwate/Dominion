@@ -1,0 +1,12 @@
+evaluationDependsOn(':desktop')
+evaluationDependsOn(':common:server')
+
+dependencies {
+	compile project(':common:server')
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.mthwate.dominion.server.ServerMain'
+	}
+}

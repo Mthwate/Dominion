@@ -3,6 +3,5 @@ evaluationDependsOn(':common:common')
 dependencies {
 	compile project(':common:common')
 	compile "com.jme3:jme3-niftygui:$jme_version"
-
-	runtime "com.jme3:jme3-core:$jme_version"
+	compile "org.bushe:eventbus:1.4"
 }

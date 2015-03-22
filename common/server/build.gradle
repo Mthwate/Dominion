@@ -3,9 +3,3 @@ evaluationDependsOn(':common:common')
 dependencies {
 	compile project(':common:common')
 }
-
-jar {
-	manifest {
-		attributes 'Main-Class': 'com.mthwate.dominion.server.ServerMain'
-	}
-}
