@@ -1,3 +1,5 @@
+evaluationDependsOn(':common:common')
+
 dependencies {
 	compile project(':common:common')
 }

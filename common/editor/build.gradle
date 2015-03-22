@@ -1,3 +1,5 @@
+evaluationDependsOn(':common:graphical')
+
 dependencies {
 	compile project(':common:graphical')
 }
