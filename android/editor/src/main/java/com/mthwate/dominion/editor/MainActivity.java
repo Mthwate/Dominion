@@ -1,10 +1,6 @@
-package com.mthwate.dominion.android;
+package com.mthwate.dominion.editor;
 
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import com.jme3.app.AndroidHarness;
 import com.jme3.system.android.AndroidConfigChooser;
 

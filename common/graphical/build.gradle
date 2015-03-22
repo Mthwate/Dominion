@@ -1,9 +1,6 @@
-def jme_version = '3.0.10'
-
 dependencies {
-	compile project(':common')
+	compile project(':common:common')
 	compile "com.jme3:jme3-niftygui:$jme_version"
 
-	runtime "org.bushe:eventbus:1.4"
 	runtime "com.jme3:jme3-core:$jme_version"
 }

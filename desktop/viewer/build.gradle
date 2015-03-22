@@ -1,5 +1,5 @@
 dependencies {
-	compile project(':viewer')
+	compile project(':common:viewer')
 }
 
 jar {

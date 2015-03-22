@@ -1,6 +1,9 @@
 subprojects {
+	apply plugin: 'java'
+
 	dependencies {
 		runtime "com.jme3:jme3-lwjgl:$jme_version"
 		runtime "com.jme3:jme3-desktop:$jme_version"
+		runtime "org.bushe:eventbus:1.4"
 	}
 }
