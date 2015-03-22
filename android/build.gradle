@@ -53,6 +53,7 @@ subprojects {
 		buildTypes {
 			release {
 				signingConfig signingConfigs.release
+				zipAlignEnabled true
 			}
 		}
 
