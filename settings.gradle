@@ -1,7 +1,5 @@
 include 'android'
 include 'android:client'
-include 'android:editor'
-include 'android:viewer'
 include 'common'
 include 'common:client'
 include 'common:common'
