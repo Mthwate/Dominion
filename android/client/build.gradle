@@ -5,12 +5,6 @@ android {
 	defaultConfig {
 		applicationId "com.mthwate.dominion.client"
 	}
-
-	buildTypes {
-		release {
-			zipAlignEnabled true
-		}
-	}
 }
 
 dependencies {

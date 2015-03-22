@@ -35,17 +35,17 @@ subprojects {
 
 				def kstorepwd = System.getenv("KSTOREPWD");
 				if (kstorepwd != null) {
-					storePassword file(kstorepwd)
+					storePassword kstorepwd
 				}
 
 				def keyalias = System.getenv("KEYALIAS");
 				if (keyalias != null) {
-					keyAlias file(keyalias)
+					keyAlias keyalias
 				}
 
 				def keypwd = System.getenv("KEYPWD");
 				if (keypwd != null) {
-					keyPassword file(keypwd)
+					keyPassword keypwd
 				}
 			}
 		}
@@ -53,6 +53,7 @@ subprojects {
 		buildTypes {
 			release {
 				signingConfig signingConfigs.release
+				zipAlignEnabled true
 			}
 		}
 
