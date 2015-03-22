@@ -40,10 +40,10 @@ public class HexLine extends Mesh {
 		vertices[16] = new Vector3f(-x, y, -height);
 		vertices[17] = new Vector3f(-x, y, 0);
 
-		int[] indexes = new int[vertices.length * 2];
+		short[] indexes = new short[vertices.length * 2];
 		
 		for (int i = 0; i < indexes.length; i++) {
-			indexes[i] = (i + 1) / 2;
+			indexes[i] = (short) ((i + 1) / 2);
 			if (indexes[i] * 2 == indexes.length) {
 				indexes[i] = 0;
 			}
@@ -54,7 +54,7 @@ public class HexLine extends Mesh {
 		this.setLineWidth(2);
 		
 		this.setBuffer(VertexBuffer.Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
-		this.setBuffer(VertexBuffer.Type.Index, 2, BufferUtils.createIntBuffer(indexes));
+		this.setBuffer(VertexBuffer.Type.Index, 2, BufferUtils.createShortBuffer(indexes));
 		this.updateBound();
 		
 	}

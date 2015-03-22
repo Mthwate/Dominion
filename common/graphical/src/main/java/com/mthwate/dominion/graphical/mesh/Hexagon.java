@@ -31,7 +31,7 @@ public class Hexagon extends Mesh {
 		vertices[6] = new Vector3f(-x, y, 0);
 
 
-		int[] indexes = {
+		short[] indexes = {
 				0,1,2, 2,3,0, 0,3,4, 4,5,0, 0,5,6, 6,1,0, // top
 				//0,1,6, 6,5,0, 0,5,4, 4,3,0, 0,3,2, 2,1,0 // bottom
 		};
@@ -57,7 +57,7 @@ public class Hexagon extends Mesh {
 
 		this.setBuffer(VertexBuffer.Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
 		this.setBuffer(VertexBuffer.Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoord));
-		this.setBuffer(VertexBuffer.Type.Index, 3, BufferUtils.createIntBuffer(indexes));
+		this.setBuffer(VertexBuffer.Type.Index, 3, BufferUtils.createShortBuffer(indexes));
 		this.setBuffer(VertexBuffer.Type.Normal, 3, BufferUtils.createFloatBuffer(normals));
 		this.updateBound();
 	}
