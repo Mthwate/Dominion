@@ -1,4 +1,4 @@
-apply plugin: 'java'
+evaluationDependsOn(':common:editor')
 
 dependencies {
 	compile project(':common:editor')

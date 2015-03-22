@@ -1,4 +1,4 @@
-apply plugin: 'java'
+evaluationDependsOn(':common')
 
 dependencies {
 	compile 'com.mthwate.datlib:datlib:1.6'

@@ -1,12 +1,12 @@
 subprojects {
 	apply plugin: 'java'
 
-	sourceCompatibility = 1.7
+	sourceCompatibility = JavaVersion.VERSION_1_7
 
 	dependencies {
-		compile "com.jme3:jme3-lwjgl:$jme_version"
-		compile "com.jme3:jme3-desktop:$jme_version"
-		compile "org.bushe:eventbus:1.4"
+		runtime "com.jme3:jme3-lwjgl:$jme_version"
+		runtime "com.jme3:jme3-desktop:$jme_version"
+		runtime "org.bushe:eventbus:1.4"
 	}
 
 	task fatJar(type: Jar) {
