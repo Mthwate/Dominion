@@ -3,6 +3,12 @@ subprojects {
 
 	sourceCompatibility = 1.7
 
+	dependencies {
+		compile "com.jme3:jme3-lwjgl:$jme_version"
+		compile "com.jme3:jme3-desktop:$jme_version"
+		compile "org.bushe:eventbus:1.4"
+	}
+
 	task fatJar(type: Jar) {
 		manifest = jar.manifest
 		baseName = project.name + '-all'
@@ -29,11 +35,5 @@ subprojects {
 		exclude 'textures/**'
 		exclude 'tiles/**'
 		with jar
-	}
-
-	dependencies {
-		runtime "com.jme3:jme3-lwjgl:$jme_version"
-		runtime "com.jme3:jme3-desktop:$jme_version"
-		runtime "org.bushe:eventbus:1.4"
 	}
 }
