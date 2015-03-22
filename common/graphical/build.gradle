@@ -1,3 +1,5 @@
+apply plugin: 'java'
+
 dependencies {
 	compile project(':common:common')
 	compile "com.jme3:jme3-niftygui:$jme_version"
