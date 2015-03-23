@@ -8,13 +8,15 @@
 		<layer childLayout="center">
 			<panel childLayout="horizontal">
 				<panel childLayout="vertical">
-					<text text="Username: " align="right" font="Interface/Fonts/Default.fnt"/>
-					<text text="Server: " align="right" font="Interface/Fonts/Default.fnt"/>
+					<panel height="40%"/>
+					<text text="Username: " align="right" font="Interface/Fonts/Default.fnt" height="10%"/>
+					<text text="Server: " align="right" font="Interface/Fonts/Default.fnt" height="10%"/>
 				</panel>
 				<panel childLayout="vertical">
-					<control id="username" name="textfield" width="100"/>
-					<control id="ip" name="textfield" width="100"/>
-					<control id="join" name="button" label="Join">
+					<panel height="40%"/>
+					<control id="username" name="textfield" width="200" height="10%"/>
+					<control id="ip" name="textfield" width="200" height="10%"/>
+					<control id="join" name="button" label="Join" width="200" height="10%">
 						<interact onClick="joinServer()"/>
 					</control>
 				</panel>
