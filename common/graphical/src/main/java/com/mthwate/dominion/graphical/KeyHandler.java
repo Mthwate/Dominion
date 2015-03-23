@@ -69,6 +69,10 @@ public class KeyHandler implements ActionListener {
 		return pressed.get(key.getName());
 	}
 
+	public void press(KeyControl key) {
+		onAction(key.getName(), true, 0);
+	}
+
 	public void unpress(KeyControl key) {
 		onAction(key.getName(), false, 0);
 	}

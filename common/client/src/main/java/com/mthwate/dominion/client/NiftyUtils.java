@@ -7,13 +7,14 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import lombok.Getter;
 
 /**
  * @author mthwate
  */
 public class NiftyUtils implements ScreenController {
 
-	private static Nifty nifty;
+	@Getter private static Nifty nifty;
 
 	private static boolean join = false;
 

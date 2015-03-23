@@ -7,7 +7,7 @@ import com.jme3.system.android.AndroidConfigChooser;
 public class MainActivity extends AndroidHarness {
 
 	public MainActivity() {
-		appClass = "com.mthwate.dominion.client.ClientApp";
+		appClass = "com.mthwate.dominion.client.MobileClientApp";
 		eglConfigType = AndroidConfigChooser.ConfigType.BEST;
 		exitDialogTitle = "Exit";
 		exitDialogMessage = "Are you sure you want to exit?";
