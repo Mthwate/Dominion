@@ -3,6 +3,7 @@ package com.mthwate.dominion.graphical.node;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.tile.Tile;
+import com.mthwate.dominion.common.tile.TproUtils;
 import jme3tools.optimize.GeometryBatchFactory;
 
 /**
@@ -23,6 +24,13 @@ public class Chunk {
 	public Chunk(NodeType type, int sizex, int sizey) {
 		this.type = type;
 		tiles = new Tile[sizex][sizey];
+
+		for (int x = 0; x < sizex; x++) {
+			for (int y = 0; y < sizey; y++) {
+				tiles[x][y] = new Tile(TproUtils.getProperties("null"));
+			}
+		}
+
 		this.sizex = sizex;
 		this.sizey = sizey;
 	}

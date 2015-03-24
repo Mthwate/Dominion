@@ -16,15 +16,13 @@ public class NodeTypeInhabitant extends NodeType {
 	public boolean differ(Tile t1, Tile t2) {
 		boolean differ = true;
 
-		if (t1 != null && t2 != null) {
-			if (t1.getInhabitant() != null && t2.getInhabitant() != null) {
-				EntityProperties e1 = t1.getInhabitant().getType();
-				EntityProperties e2 = t2.getInhabitant().getType();
-				if (e1 == e2) {
-					differ = false;
-				} else if (e1 != null && e2 != null) {
-					differ = !t1.getInhabitant().equals(t2.getInhabitant());
-				}
+		if (t1.getInhabitant() != null && t2.getInhabitant() != null) {
+			EntityProperties e1 = t1.getInhabitant().getType();
+			EntityProperties e2 = t2.getInhabitant().getType();
+			if (e1 == e2) {
+				differ = false;
+			} else if (e1 != null && e2 != null) {
+				differ = !t1.getInhabitant().equals(t2.getInhabitant());
 			}
 		}
 

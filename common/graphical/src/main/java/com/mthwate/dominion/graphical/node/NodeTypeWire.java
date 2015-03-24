@@ -14,13 +14,7 @@ public class NodeTypeWire extends NodeType {
 
 	@Override
 	public boolean differ(Tile t1, Tile t2) {
-		boolean differ = true;
-
-		if (t1 != null && t2 != null) {
-			differ = t1.getElevation() != t2.getElevation();
-		}
-
-		return differ;
+		return t1.getElevation() != t2.getElevation();
 	}
 
 	@Override
