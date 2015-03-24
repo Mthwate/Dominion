@@ -10,11 +10,15 @@ import lombok.Setter;
 @com.jme3.network.serializing.Serializable
 public class Tile implements java.io.Serializable {
 
+	private static final long serialVersionUID = 6211327075280365043L;
+
 	@Getter @Setter private TileProperties type;
 
 	@Getter @Setter private int elevation;
 	
 	@Getter @Setter private Entity inhabitant;
+
+	@Getter @Setter private short rotation = -1;
 
 	/**
 	 * Serialization constructor.

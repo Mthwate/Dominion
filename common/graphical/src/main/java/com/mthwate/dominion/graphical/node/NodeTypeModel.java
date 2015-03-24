@@ -19,7 +19,7 @@ public class NodeTypeModel extends NodeType {
 
 	@Override
 	public boolean differ(Tile t1, Tile t2) {
-		return (!t1.getType().equals(t2.getType())) || (t1.getElevation() != t2.getElevation());
+		return (!t1.getType().equals(t2.getType())) || (t1.getElevation() != t2.getElevation() || (t1.getRotation() != t2.getRotation()));
 	}
 
 	@Override
@@ -31,7 +31,14 @@ public class NodeTypeModel extends NodeType {
 			Spatial model = ModelUtils.getModel(EproUtils.getProperties(modelName));
 
 			Quaternion rotation = new Quaternion();
-			float angle = FastMath.PI / 3 * RandUtils.randInt(new Set2i(x, y), 6);
+
+			int r = tile.getRotation();
+
+			if (r == -1) {
+				r = RandUtils.randInt(new Set2i(x, y), 6);
+			}
+
+			float angle = FastMath.PI / 3 * r;
 			rotation.fromAngleAxis(angle, new Vector3f(0, 1, 0));
 			model.rotate(rotation);
 
