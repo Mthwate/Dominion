@@ -1,10 +1,6 @@
 package com.mthwate.dominion.client.state;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.input.InputManager;
 import com.jme3.network.Client;
-import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -15,8 +11,6 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.common.tile.Tile;
-import com.mthwate.dominion.graphical.ClickUtils;
-import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.MaterialUtils;
 import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.highlight.HighlightColors;

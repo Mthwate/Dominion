@@ -1,7 +1,5 @@
 package com.mthwate.dominion.graphical;
 
-import com.mthwate.datlib.IOUtils;
-import com.mthwate.dominion.common.CoordUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

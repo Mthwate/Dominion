@@ -6,7 +6,6 @@ import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import lombok.extern.java.Log;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 

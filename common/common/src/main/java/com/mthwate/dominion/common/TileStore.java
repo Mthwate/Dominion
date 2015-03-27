@@ -2,7 +2,6 @@ package com.mthwate.dominion.common;
 
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.tile.Tile;
-import com.mthwate.dominion.common.tile.TproUtils;
 import lombok.Getter;
 import lombok.Setter;
 
