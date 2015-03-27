@@ -47,8 +47,6 @@ public class BrushAppState extends MouseAppState {
 
 			int elevation = NiftyUtils.getMenuInt("elevation");
 
-			int rotation = NiftyUtils.getMenuInt("rotation");
-
 			int size = NiftyUtils.getMenuInt("brushSize");
 
 
