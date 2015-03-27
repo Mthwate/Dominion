@@ -27,7 +27,7 @@ public class Entity {
 	}
 
 	public EntityProperties getType() {
-		return EproUtils.getProperties("");
+		return EproUtils.getProperties(type);
 	}
 
 	public void store(Entity entity) {
