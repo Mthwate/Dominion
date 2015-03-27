@@ -18,8 +18,6 @@ public class Tile implements java.io.Serializable {
 	
 	@Getter @Setter private Entity inhabitant;
 
-	@Getter @Setter private short rotation = -1;
-
 	/**
 	 * Serialization constructor.
 	 * DO NOT USE!

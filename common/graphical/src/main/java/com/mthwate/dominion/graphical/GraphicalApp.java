@@ -40,7 +40,6 @@ public abstract class GraphicalApp extends CommonApp {
 		NodeHandler.init("tile", new NodeTypeTile(), rootNode);
 		NodeHandler.init("side", new NodeTypeSide(), rootNode);
 		NodeHandler.init("wire", new NodeTypeWire(), rootNode);
-		NodeHandler.init("model", new NodeTypeModel(), rootNode);
 		
 
 		log.info("Disabling the default fly camera");

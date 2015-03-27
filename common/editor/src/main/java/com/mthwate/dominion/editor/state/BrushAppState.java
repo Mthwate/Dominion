@@ -78,10 +78,6 @@ public class BrushAppState extends MouseAppState {
 
 								newElevation = Math.max(newElevation, 0);
 
-								if (!NiftyUtils.isRelative("rotation")) {
-									tile.setRotation((short) rotation);
-								}
-
 								if (!tile.getType().equals(newType)) {
 									tile.setType(newType.getName());
 								}

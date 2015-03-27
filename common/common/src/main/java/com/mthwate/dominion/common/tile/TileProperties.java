@@ -19,6 +19,4 @@ public class TileProperties implements java.io.Serializable {
 
 	@Getter private String type = "land";
 
-	@Getter private String model = null;
-
 }
