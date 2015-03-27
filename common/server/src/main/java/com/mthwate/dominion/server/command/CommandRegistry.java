@@ -20,6 +20,7 @@ public class CommandRegistry {
 		add(new CommandUsers());
 		add(new CommandSetInhabitant());
 		add(new CommandStart());
+		add(new CommandStop());
 	}
 	
 	private static void add(Command cmd) {

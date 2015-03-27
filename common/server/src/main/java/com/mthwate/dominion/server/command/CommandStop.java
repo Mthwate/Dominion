@@ -1,22 +1,21 @@
 package com.mthwate.dominion.server.command;
 
+import com.jme3.network.Server;
 import com.mthwate.dominion.server.ServerApp;
-import lombok.extern.java.Log;
 
 /**
  * @author mthwate
  */
-@Log
-public class CommandEcho implements Command {
+public class CommandStop implements Command {
 
 	@Override
 	public String getName() {
-		return "echo";
+		return "stop";
 	}
 
 	@Override
 	public void run(ServerApp app, String params) {
-		log.info(params);
+		app.stop();
 	}
-	
+
 }

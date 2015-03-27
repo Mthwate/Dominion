@@ -47,8 +47,8 @@ public class PathAppState extends ServerAppState {
 
 				path.getKey().step();
 
-				MessageUtils.broadcast(server, new TileMessage(current, cPos.getX(), cPos.getY()));
-				MessageUtils.broadcast(server, new TileMessage(next, nPos.getX(), nPos.getY()));
+				MessageUtils.broadcast(sapp.getServer(), new TileMessage(current, cPos.getX(), cPos.getY()));
+				MessageUtils.broadcast(sapp.getServer(), new TileMessage(next, nPos.getX(), nPos.getY()));
 
 			}
 		}

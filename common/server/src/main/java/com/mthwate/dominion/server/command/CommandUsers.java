@@ -1,7 +1,7 @@
 package com.mthwate.dominion.server.command;
 
 import com.jme3.network.HostedConnection;
-import com.jme3.network.Server;
+import com.mthwate.dominion.server.ServerApp;
 import lombok.extern.java.Log;
 
 /**
@@ -16,8 +16,8 @@ public class CommandUsers implements Command {
 	}
 
 	@Override
-	public void run(Server server, String params) {
-		for (HostedConnection connection : server.getConnections()) {
+	public void run(ServerApp app, String params) {
+		for (HostedConnection connection : app.getServer().getConnections()) {
 			log.info(connection.getId() + ": " + connection.getAttribute("username"));
 		}
 	}

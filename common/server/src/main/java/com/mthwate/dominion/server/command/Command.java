@@ -1,6 +1,6 @@
 package com.mthwate.dominion.server.command;
 
-import com.jme3.network.Server;
+import com.mthwate.dominion.server.ServerApp;
 
 /**
  * @author mthwate
@@ -14,6 +14,6 @@ public interface Command {
 	 */
 	public String getName();
 
-	public void run(Server server, String params);
+	public void run(ServerApp app, String params);
 	
 }

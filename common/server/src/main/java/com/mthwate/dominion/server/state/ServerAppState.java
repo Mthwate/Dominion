@@ -11,13 +11,12 @@ import com.mthwate.dominion.server.ServerApp;
  */
 public class ServerAppState extends AbstractAppState {
 
-	protected Server server;
+	protected ServerApp sapp;
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		ServerApp sapp = (ServerApp) app;
-		server = sapp.getServer();
+		sapp = (ServerApp) app;
 	}
 
 }

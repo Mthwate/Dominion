@@ -1,16 +1,15 @@
 package com.mthwate.dominion.server.command;
 
 import com.jme3.network.HostedConnection;
-import com.jme3.network.Server;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
-import com.mthwate.dominion.common.entity.EproUtils;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.server.ConnectionUtils;
+import com.mthwate.dominion.server.ServerApp;
 import lombok.extern.java.Log;
 
 import java.io.File;
@@ -34,7 +33,7 @@ public class CommandStart implements Command {
 	}
 
 	@Override
-	public void run(Server server, String params) {
+	public void run(ServerApp app, String params) {
 
 
 		WorldMap map = SaveUtils.loadMap(SAVE_FILE);
@@ -43,7 +42,7 @@ public class CommandStart implements Command {
 
 		ArrayList<Set2i> spawns = new ArrayList<>(Arrays.asList(map.getSpawns()));
 
-		Collection<HostedConnection> connections = server.getConnections();
+		Collection<HostedConnection> connections = app.getServer().getConnections();
 
 		Random rand = new Random();
 
@@ -60,7 +59,7 @@ public class CommandStart implements Command {
 			}
 		}
 
-		MessageUtils.broadcast(server, new MapMessage(TileStore.getTiles()));
+		MessageUtils.broadcast(app.getServer(), new MapMessage(TileStore.getTiles()));
 	}
 
 }

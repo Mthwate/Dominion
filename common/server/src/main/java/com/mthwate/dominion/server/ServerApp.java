@@ -7,6 +7,7 @@ import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.server.state.ConsoleAppState;
 import com.mthwate.dominion.server.state.PathAppState;
+import lombok.Getter;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class ServerApp extends CommonApp {
 	/**
 	 * The server networking object.
 	 */
-	private Server server;
+	@Getter private Server server;
 	
 	@Override
 	protected void init() {
@@ -41,10 +42,6 @@ public class ServerApp extends CommonApp {
 
 		stateManager.attach(new ConsoleAppState());
 		stateManager.attach(new PathAppState());
-	}
-
-	public Server getServer() {
-		return server;
 	}
 
 	@Override

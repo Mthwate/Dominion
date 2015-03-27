@@ -1,11 +1,10 @@
 package com.mthwate.dominion.server.command;
 
 import com.jme3.network.HostedConnection;
-import com.jme3.network.Server;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
-import com.mthwate.dominion.common.tile.TproUtils;
+import com.mthwate.dominion.server.ServerApp;
 import lombok.extern.java.Log;
 
 /**
@@ -20,7 +19,7 @@ public class CommandSetTile implements Command {
 	}
 
 	@Override
-	public void run(Server server, String params) {
+	public void run(ServerApp app, String params) {
 		String[] split = params.split(" ");
 		
 		if (split.length == 3) {
@@ -33,7 +32,7 @@ public class CommandSetTile implements Command {
 
 			TileStore.get(x, y).setType(name);
 
-			for (HostedConnection connection : server.getConnections()) {
+			for (HostedConnection connection : app.getServer().getConnections()) {
 				MessageUtils.send(connection, new MapMessage(TileStore.getTiles()));
 			}
 		} else {

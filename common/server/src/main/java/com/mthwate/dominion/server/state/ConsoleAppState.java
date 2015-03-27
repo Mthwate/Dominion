@@ -20,7 +20,7 @@ public class ConsoleAppState extends ServerAppState {
 	public void update(float tpf) {
 		try {
 			while (stdin.ready()) {
-				CommandUtils.run(server, stdin.readLine());
+				CommandUtils.run(sapp, stdin.readLine());
 			}
 		} catch (IOException e) {
 			log.log(Level.SEVERE, "Failed to read from stdin", e);
