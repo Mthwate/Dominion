@@ -52,7 +52,7 @@ public class CommandStart implements Command {
 				int i = rand.nextInt(spawns.size());
 				Set2i spawn = spawns.get(i);
 				spawns.remove(i);
-				Entity entity = new Entity("camp", ConnectionUtils.getUsername(connection));
+				Entity entity = new Entity("cave", ConnectionUtils.getUsername(connection));
 				entity.store(new Entity("placeholder", ConnectionUtils.getUsername(connection)));
 				TileStore.get(spawn).setInhabitant(entity);
 				log.info(ConnectionUtils.getUsername(connection) + " is starting the game at " + spawn);

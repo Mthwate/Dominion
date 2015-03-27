@@ -2,6 +2,7 @@ package com.mthwate.dominion.common.entity;
 
 import com.jme3.network.serializing.Serializable;
 import lombok.Getter;
+import lombok.extern.java.Log;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 /**
  * @author mthwate
  */
+@Log
 @Serializable
 public class Entity {
 
@@ -31,6 +33,7 @@ public class Entity {
 	}
 
 	public void store(Entity entity) {
+		log.info("Attempting to store " + entity.type + " in " + entity.type);
 		if (storage.size() < getType().getStorage()) {
 			storage.add(entity);
 		} else {
