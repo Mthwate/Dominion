@@ -83,7 +83,7 @@ public class BrushAppState extends MouseAppState {
 								}
 
 								if (!tile.getType().equals(newType)) {
-									tile.setType(newType);
+									tile.setType(newType.getName());
 								}
 
 								if (tile.getElevation() != newElevation) {

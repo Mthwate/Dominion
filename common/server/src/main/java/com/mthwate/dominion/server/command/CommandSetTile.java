@@ -31,7 +31,7 @@ public class CommandSetTile implements Command {
 			int x = Integer.parseInt(sx);
 			int y = Integer.parseInt(sy);
 
-			TileStore.get(x, y).setType(TproUtils.getProperties(name));
+			TileStore.get(x, y).setType(name);
 
 			for (HostedConnection connection : server.getConnections()) {
 				MessageUtils.send(connection, new MapMessage(TileStore.getTiles()));

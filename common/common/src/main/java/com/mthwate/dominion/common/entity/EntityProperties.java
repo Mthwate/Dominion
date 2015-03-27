@@ -17,6 +17,8 @@ public class EntityProperties {
 
 	@Getter private String[] travelType = {"land"};
 
+	@Getter private int storage = 0;
+
 	public EntityProperties() {}
 	
 }

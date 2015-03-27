@@ -12,7 +12,7 @@ public class Tile implements java.io.Serializable {
 
 	private static final long serialVersionUID = 6211327075280365043L;
 
-	@Getter @Setter private TileProperties type;
+	@Setter private String type;
 
 	@Getter @Setter private int elevation;
 	
@@ -26,13 +26,17 @@ public class Tile implements java.io.Serializable {
 	 */
 	public Tile() {}
 
-	public Tile(TileProperties type) {
+	public Tile(String type) {
 		this(type, 0);
 	}
 	
-	public Tile(TileProperties type, int elevation) {
+	public Tile(String type, int elevation) {
 		this.type = type;
 		this.elevation = elevation;
+	}
+
+	public TileProperties getType() {
+		return TproUtils.getProperties(type);
 	}
 
 	public boolean hasInhabitant() {

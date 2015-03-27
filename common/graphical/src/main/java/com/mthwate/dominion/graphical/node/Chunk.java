@@ -27,7 +27,7 @@ public class Chunk {
 
 		for (int x = 0; x < sizex; x++) {
 			for (int y = 0; y < sizey; y++) {
-				tiles[x][y] = new Tile(TproUtils.getProperties("null"), -1);
+				tiles[x][y] = new Tile("null", -1);
 			}
 		}
 

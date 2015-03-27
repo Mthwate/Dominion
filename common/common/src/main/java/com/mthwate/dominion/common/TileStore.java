@@ -23,7 +23,7 @@ public class TileStore {
 				if (xi < sizeX() && yi < sizeY()) {
 					newTiles[xi][yi] = tiles[xi][yi];
 				} else {
-					newTiles[xi][yi] = new Tile(TproUtils.getProperties("null"));
+					newTiles[xi][yi] = new Tile("null");
 				}
 			}
 		}
