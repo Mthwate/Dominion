@@ -32,14 +32,14 @@ public class BrushAppState extends MouseAppState {
 	}
 
 	@Override
-	protected void update(float tpf, Set2i pos, boolean clicked) {
+	protected void update(float tpf, Set2i pos, boolean clickedL, boolean clickedR) {
 		int x = pos.getX();
 		int y = pos.getY();
 
 		if (NiftyUtils.isSpawn()) {
 			HighlightUtils.highlightTile(x, y, HighlightColors.YELLOW, node);
-			if (clicked) {
-				keyHandler.unpress(KeyControl.CLICK);
+			if (clickedL) {
+				keyHandler.unpress(KeyControl.LEFT_CLICK);
 				SpawnStore.toggleSpawn(new Set2i(x, y));
 			}
 		} else {
@@ -59,7 +59,7 @@ public class BrushAppState extends MouseAppState {
 
 							HighlightUtils.highlightTile(px, py, HighlightColors.YELLOW, node);
 
-							if (clicked) {
+							if (clickedL) {
 
 								Tile tile = TileStore.get(px, py);
 

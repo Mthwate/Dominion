@@ -21,8 +21,9 @@ public enum KeyControl {
 	
 	ZOOM_IN("zoomIn"),
 	ZOOM_OUT("zoomOut"),
-	
-	CLICK("click"),
+
+	LEFT_CLICK("leftClick"),
+	RIGHT_CLICK("rightClick"),
 	
 	INCREASE_BRUSH("increaseBrush"),
 	DECREASE_BRUSH("decreaseBrush"),
@@ -37,7 +38,7 @@ public enum KeyControl {
 
 	@Getter private final String name;
 
-	private KeyControl(String name) {
+	KeyControl(String name) {
 		this.name = name;
 	}
 }

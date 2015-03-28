@@ -16,7 +16,7 @@ public abstract class MouseAppState extends GraphicalAppState {
 
 	protected KeyHandler keyHandler;
 
-	private InputManager inputManager;
+	protected InputManager inputManager;
 
 	private Camera cam;
 
@@ -32,10 +32,11 @@ public abstract class MouseAppState extends GraphicalAppState {
 	public void update(float tpf) {
 		Set2i pos = ClickUtils.clickCollisionPos(inputManager, cam);
 		if (pos != null) {
-			boolean clicked = keyHandler.isPressed(KeyControl.CLICK);
-			update(tpf, pos, clicked);
+			boolean clickedL = keyHandler.isPressed(KeyControl.LEFT_CLICK);
+			boolean clickedR = keyHandler.isPressed(KeyControl.LEFT_CLICK);
+			update(tpf, pos, clickedL, clickedR);
 		}
 	}
 
-	protected abstract void update(float tpf, Set2i pos, boolean clicked);
+	protected abstract void update(float tpf, Set2i pos, boolean clickedL, boolean clickedR);
 }

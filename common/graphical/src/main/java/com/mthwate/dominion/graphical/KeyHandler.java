@@ -33,8 +33,9 @@ public class KeyHandler implements ActionListener {
 		
 		addAxisListener(im, KeyControl.ZOOM_IN, MouseInput.AXIS_WHEEL, false);
 		addAxisListener(im, KeyControl.ZOOM_OUT, MouseInput.AXIS_WHEEL, true);
-		
-		addMouseListener(im, KeyControl.CLICK, MouseInput.BUTTON_LEFT);
+
+		addMouseListener(im, KeyControl.LEFT_CLICK, MouseInput.BUTTON_LEFT);
+		addMouseListener(im, KeyControl.RIGHT_CLICK, MouseInput.BUTTON_RIGHT);
 
 		addKeyListener(im, KeyControl.INCREASE_BRUSH, KeyInput.KEY_RBRACKET);
 		addKeyListener(im, KeyControl.DECREASE_BRUSH, KeyInput.KEY_LBRACKET);

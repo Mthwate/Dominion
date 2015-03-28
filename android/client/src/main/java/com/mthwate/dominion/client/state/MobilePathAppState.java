@@ -31,12 +31,12 @@ public class MobilePathAppState extends PathAppState {
 	}
 
 	@Override
-	protected void update(float tpf, Set2i pos, boolean clicked) {
+	protected void update(float tpf, Set2i pos, boolean clickedL, boolean clickedR) {
 		Vector2f click2d = inputManager.getCursorPosition();
 		int x = (int) click2d.getX();
 		int y = height - (int) click2d.getY();
 		boolean onDpad = NiftyUtils.getNifty().getScreen("game").findElementByName("dpad").isMouseInsideElement(x, y);
-		super.update(tpf, pos, clicked && !onDpad);
+		super.update(tpf, pos, clickedL && !onDpad, clickedR);
 	}
 
 }

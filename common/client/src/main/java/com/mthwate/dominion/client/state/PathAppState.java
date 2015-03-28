@@ -33,8 +33,8 @@ public class PathAppState extends MouseAppState {
 	}
 
 	@Override
-	protected void update(float tpf, Set2i pos, boolean clicked) {
-		if (clicked) {
+	protected void update(float tpf, Set2i pos, boolean clickedL, boolean clickedR) {
+		if (clickedL) {
 			if (pos != null) {
 				if (path == null) {
 					path = new Path(pos);
