@@ -59,12 +59,12 @@ public class EditorApp extends GraphicalApp {
 	public void simpleUpdate(float tpf) {
 
 		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
-			keyHandler.onAction(KeyControl.INCREASE_BRUSH.getName(), false, 0);
+			keyHandler.unpress(KeyControl.INCREASE_BRUSH);
 			NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
 		}
 
 		if (keyHandler.isPressed(KeyControl.DECREASE_BRUSH)) {
-			keyHandler.onAction(KeyControl.DECREASE_BRUSH.getName(), false, 0);
+			keyHandler.unpress(KeyControl.DECREASE_BRUSH);
 			NiftyUtils.setMenuInt("brushSize", Math.max(NiftyUtils.getMenuInt("brushSize") - 1, 0));
 		}
 	}

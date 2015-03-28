@@ -70,10 +70,12 @@ public class KeyHandler implements ActionListener {
 		return pressed.get(key.getName());
 	}
 
+	@Deprecated
 	public void press(KeyControl key) {
 		onAction(key.getName(), true, 0);
 	}
 
+	@Deprecated
 	public void unpress(KeyControl key) {
 		onAction(key.getName(), false, 0);
 	}

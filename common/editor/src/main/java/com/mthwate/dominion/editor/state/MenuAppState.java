@@ -24,7 +24,7 @@ public class MenuAppState extends GraphicalAppState {
 	@Override
 	public void update(float tpf) {
 		if (keyHandler.isPressed(KeyControl.MENU)) {
-			keyHandler.onAction(KeyControl.MENU.getName(), false, 0);
+			keyHandler.unpress(KeyControl.MENU);
 			if (NiftyUtils.isOnScreen("menu")) {
 
 				int x = NiftyUtils.getMenuInt("width");
