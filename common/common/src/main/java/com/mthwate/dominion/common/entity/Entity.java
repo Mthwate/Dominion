@@ -37,7 +37,7 @@ public class Entity {
 	}
 
 	public void store(Entity entity) {
-		log.info("Attempting to store " + entity.type + " in " + entity.type);
+		log.info("Attempting to store {} in {}" + entity.type, type);
 		if (storage.size() < getType().getStorage()) {
 			storage.add(entity);
 		} else {
