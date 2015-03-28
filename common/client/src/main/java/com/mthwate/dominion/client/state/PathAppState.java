@@ -50,7 +50,9 @@ public class PathAppState extends MouseAppState {
 		} else {
 			if (path != null) {
 				node.detachAllChildren();
-				MessageUtils.send(client, new MoveMessage(path));
+				if (path.isValid()) {
+					MessageUtils.send(client, new MoveMessage(path));
+				}
 				path = null;
 			}
 		}
