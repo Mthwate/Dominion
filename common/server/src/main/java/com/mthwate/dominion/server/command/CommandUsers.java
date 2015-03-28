@@ -2,12 +2,12 @@ package com.mthwate.dominion.server.command;
 
 import com.jme3.network.HostedConnection;
 import com.mthwate.dominion.server.ServerApp;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class CommandUsers implements Command {
 	
 	@Override

@@ -6,15 +6,14 @@ import com.jme3.asset.plugins.FileLocator;
 import com.mthwate.dominion.common.entity.EproLoader;
 import com.mthwate.dominion.common.entity.EproUtils;
 import com.mthwate.dominion.common.tile.TproUtils;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public abstract class CommonApp extends SimpleApplication {
 	
 	protected abstract void init();
@@ -49,6 +48,6 @@ public abstract class CommonApp extends SimpleApplication {
 
 	@Override
 	public void handleError(String msg, Throwable err) {
-		log.log(Level.SEVERE, msg, err);
+		log.error(msg, err);
 	}
 }

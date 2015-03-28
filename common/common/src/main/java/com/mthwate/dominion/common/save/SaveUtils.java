@@ -3,15 +3,14 @@ package com.mthwate.dominion.common.save;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.tile.Tile;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class SaveUtils {
 
 	public static WorldMap loadMap(File file) {
@@ -27,7 +26,7 @@ public class SaveUtils {
 			ois = new ObjectInputStream(fis);
 			map = (WorldMap) ois.readObject();
 		} catch (Exception e) {
-			log.log(Level.WARNING, "Error loading world map", e);
+			log.warn("Error loading world map", e);
 		} finally {
 			IOUtils.close(fis);
 			IOUtils.close(ois);
@@ -48,7 +47,7 @@ public class SaveUtils {
 			oos.writeObject(map);
 			sucess = true;
 		} catch (Exception e) {
-			log.log(Level.WARNING, "Error saving world map", e);
+			log.warn("Error saving world map", e);
 		} finally {
 			IOUtils.close(fos);
 			IOUtils.close(oos);

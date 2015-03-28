@@ -8,15 +8,14 @@ import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.server.state.ConsoleAppState;
 import com.mthwate.dominion.server.state.PathAppState;
 import lombok.Getter;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class ServerApp extends CommonApp {
 
 	/**
@@ -30,7 +29,7 @@ public class ServerApp extends CommonApp {
 		try {
 			server = Network.createServer(6969);//TODO modular port
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Failed to create server" ,e);
+			log.error("Failed to create server" ,e);
 		}
 
 		if (server != null) {

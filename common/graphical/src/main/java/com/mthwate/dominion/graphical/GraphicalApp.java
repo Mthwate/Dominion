@@ -6,15 +6,18 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.tile.TproLoader;
-import com.mthwate.dominion.graphical.node.*;
+import com.mthwate.dominion.graphical.node.NodeHandler;
+import com.mthwate.dominion.graphical.node.NodeTypeSide;
+import com.mthwate.dominion.graphical.node.NodeTypeTile;
+import com.mthwate.dominion.graphical.node.NodeTypeWire;
 import com.mthwate.dominion.graphical.state.*;
 import lombok.Getter;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public abstract class GraphicalApp extends CommonApp {
 
 	@Getter protected KeyHandler keyHandler;

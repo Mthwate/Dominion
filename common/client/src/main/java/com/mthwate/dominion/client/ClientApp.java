@@ -10,15 +10,14 @@ import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeCollide;
 import com.mthwate.dominion.graphical.node.NodeTypeInhabitant;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class ClientApp extends GraphicalApp {
 	
 	protected Client client;
@@ -39,7 +38,7 @@ public class ClientApp extends GraphicalApp {
 		try {
 			client = Network.connectToServer(NiftyUtils.getMenuStr("ip"), 6969);
 		} catch (IOException e) {
-			log.log(Level.WARNING, "Cannot connect to server", e);
+			log.warn("Cannot connect to server", e);
 		}
 
 		if (client != null) {

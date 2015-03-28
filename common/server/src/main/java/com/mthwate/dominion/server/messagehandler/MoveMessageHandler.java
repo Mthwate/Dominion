@@ -8,12 +8,12 @@ import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.server.ConnectionUtils;
 import com.mthwate.dominion.server.state.PathAppState;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class MoveMessageHandler implements MessageHandler<MoveMessage> {
 
 	@Override
@@ -29,7 +29,7 @@ public class MoveMessageHandler implements MessageHandler<MoveMessage> {
 				}
 			}
 		} else {
-			log.warning("Invalid path received from connection " + connection.getId() + ", this my be the result of error or attempted cheating");
+			log.warn("Invalid path received from connection {}, this my be the result of error or attempted cheating", connection.getId());
 		}
 	}
 

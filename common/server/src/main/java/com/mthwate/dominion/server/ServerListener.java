@@ -10,7 +10,7 @@ import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.server.messagehandler.LoginMessageHandler;
 import com.mthwate.dominion.server.messagehandler.MessageHandler;
 import com.mthwate.dominion.server.messagehandler.MoveMessageHandler;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class ServerListener implements MessageListener<HostedConnection> {
 	
 	private Server server;
@@ -48,7 +48,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
 			
 		} else {
 
-			log.warning("Invalid message type \"" + message.getClass() + "\" received");
+			log.warn("Invalid message type {} received", message.getClass());
 
 		}
 		

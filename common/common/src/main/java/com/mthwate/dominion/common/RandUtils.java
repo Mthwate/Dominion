@@ -1,17 +1,16 @@
 package com.mthwate.dominion.common;
 
 import com.mthwate.datlib.math.Set2i;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class RandUtils {
 
 	private static Random rand = new Random();
@@ -24,7 +23,7 @@ public class RandUtils {
 		if (i == null) {
 			i = Math.abs(rand.nextInt());
 			nums.put(pos, i);
-			log.log(Level.FINE, "Generated random number {0} for position {1}", new Object[]{i, pos});
+			log.trace("Generated random number {} for position {}", i, pos);
 		}
 
 		return i % n;

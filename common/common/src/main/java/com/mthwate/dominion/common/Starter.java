@@ -3,18 +3,17 @@ package com.mthwate.dominion.common;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import com.mthwate.dominion.common.log.LogUtils;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class Starter {
 
 	public static void start(CommonApp app, boolean graphical, String name) {
@@ -32,7 +31,7 @@ public class Starter {
 					BufferedImage[] icons = new BufferedImage[]{ImageIO.read(in)};
 					settings.setIcons(icons);
 				} catch (IOException e) {
-					log.log(Level.SEVERE, "Failed to load application icons", e);
+					log.error("Failed to load application icons", e);
 				}
 			}
 

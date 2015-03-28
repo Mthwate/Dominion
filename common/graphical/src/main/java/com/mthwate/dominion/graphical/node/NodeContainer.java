@@ -4,12 +4,12 @@ import com.jme3.collision.Collidable;
 import com.jme3.collision.CollisionResults;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.common.TileStore;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class NodeContainer {
 
 	private Node node = new Node();

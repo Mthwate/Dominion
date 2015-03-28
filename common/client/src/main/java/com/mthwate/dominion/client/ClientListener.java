@@ -7,12 +7,12 @@ import com.jme3.network.message.GZIPCompressedMessage;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.TileMessage;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class ClientListener implements MessageListener<Client> {
 	
 	@Override
@@ -35,7 +35,7 @@ public class ClientListener implements MessageListener<Client> {
 			}
 
 		} else {
-			log.warning("Invalid message type \"" + m.getClass() + "\" received");
+			log.warn("Invalid message type {} received", m.getClass());
 		}
 		
 	}

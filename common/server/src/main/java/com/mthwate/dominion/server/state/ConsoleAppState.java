@@ -1,17 +1,16 @@
 package com.mthwate.dominion.server.state;
 
 import com.mthwate.dominion.server.command.CommandUtils;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class ConsoleAppState extends ServerAppState {
 
 	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
@@ -23,7 +22,7 @@ public class ConsoleAppState extends ServerAppState {
 				CommandUtils.run(sapp, stdin.readLine());
 			}
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Failed to read from stdin", e);
+			log.error("Failed to read from stdin", e);
 		}
 	}
 

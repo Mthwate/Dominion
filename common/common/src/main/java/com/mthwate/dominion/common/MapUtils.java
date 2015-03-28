@@ -3,7 +3,7 @@ package com.mthwate.dominion.common;
 import com.jme3.system.NanoTimer;
 import com.jme3.system.Timer;
 import com.mthwate.dominion.common.entity.Entity;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class MapUtils {
 
 	public static List<Entity> getAllInhabitants() {

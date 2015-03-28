@@ -13,18 +13,17 @@ import com.jme3.util.BufferUtils;
 import com.mthwate.datlib.IOUtils;
 import com.mthwate.dominion.graphical.KeyControl;
 import com.mthwate.dominion.graphical.KeyHandler;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.logging.Level;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class ScreenshotAppState extends GraphicalAppState implements SceneProcessor {
 
 	private KeyHandler keyHandler;
@@ -84,7 +83,7 @@ public class ScreenshotAppState extends GraphicalAppState implements SceneProces
 				fos = new FileOutputStream(file);
 				JmeSystem.writeImageFile(fos, "png", outBuf, width, height);
 			} catch (IOException e) {
-				log.log(Level.SEVERE, "Failed to save screenshot", e);
+				log.error("Failed to save screenshot", e);
 			} finally {
 				IOUtils.close(fos);
 			}

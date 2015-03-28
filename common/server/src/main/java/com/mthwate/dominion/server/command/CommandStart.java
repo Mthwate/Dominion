@@ -10,7 +10,7 @@ import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.server.ConnectionUtils;
 import com.mthwate.dominion.server.ServerApp;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.Random;
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class CommandStart implements Command {
 
 	@Deprecated

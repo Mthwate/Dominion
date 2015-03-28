@@ -5,12 +5,12 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MapMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.server.ServerApp;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class CommandSetTile implements Command {
 	
 	@Override
@@ -36,7 +36,7 @@ public class CommandSetTile implements Command {
 				MessageUtils.send(connection, new MapMessage(TileStore.getTiles()));
 			}
 		} else {
-			log.severe("Error");
+			log.error("Invalied number or parameters");
 		}
 		
 	}

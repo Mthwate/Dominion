@@ -11,7 +11,7 @@ import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeInhabitant;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class ViewerApp extends GraphicalApp {
 
 	@Override
@@ -54,15 +54,15 @@ public class ViewerApp extends GraphicalApp {
 			if (path.endsWith(ext)) {
 				String entity = path.replace("\\", "/");
 
-				log.fine("Found asset at " + entity);
+				log.debug("Found asset at {}", entity);
 
 				entity = entity.substring(entity.lastIndexOf("/") + 1);
 
-				log.fine("File name " + entity);
+				log.debug("File name {}", entity);
 
 				entity = entity.substring(0, entity.length() - ext.length());
 
-				log.info("Adding entity " + entity);
+				log.info("Adding entity {}", entity);
 				entityNames.add(entity);
 			}
 		}

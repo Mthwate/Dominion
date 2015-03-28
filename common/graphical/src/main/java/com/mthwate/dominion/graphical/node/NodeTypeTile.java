@@ -7,12 +7,12 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.tile.TproUtils;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class NodeTypeTile extends NodeType {
 
 	@Override

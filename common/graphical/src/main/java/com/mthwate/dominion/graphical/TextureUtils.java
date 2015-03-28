@@ -2,7 +2,7 @@ package com.mthwate.dominion.graphical;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.texture.Texture;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class TextureUtils {
 
 	private static AssetManager assetManager;

@@ -2,12 +2,12 @@ package com.mthwate.dominion.server.command;
 
 import com.mthwate.datlib.StringUtils;
 import com.mthwate.dominion.server.ServerApp;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class CommandUtils {
 	
 	public static void run(ServerApp app, String line) {

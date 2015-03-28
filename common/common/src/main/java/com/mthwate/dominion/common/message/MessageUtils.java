@@ -11,12 +11,12 @@ import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.entity.EntityProperties;
 import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.common.tile.TileProperties;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author mthwate
  */
-@Log
+@Slf4j
 public class MessageUtils {
 
 	/**
