@@ -2,6 +2,8 @@ package com.mthwate.dominion.common;
 
 import com.jme3.network.serializing.Serializable;
 import com.mthwate.datlib.math.Set2i;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.List;
 @Slf4j
 @Serializable
 public class Path {
+
+	@Getter @Setter private transient double time = 0;
 
 	List<SerializableSet2i> list = new ArrayList<>();
 

@@ -1,7 +1,9 @@
 package com.mthwate.dominion.common.entity;
 
 import com.jme3.network.serializing.Serializable;
+import com.mthwate.dominion.common.Path;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
@@ -15,6 +17,8 @@ import java.util.Set;
 public class Entity {
 
 	private String type;
+
+	@Getter @Setter private transient Path path;
 
 	@Getter private String owner;
 

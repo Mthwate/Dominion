@@ -25,11 +25,11 @@ public class MoveMessageHandler implements MessageHandler<MoveMessage> {
 
 			if (sourceTile.hasInhabitant()) {
 				if (sourceTile.getInhabitant().getOwner().equals(ConnectionUtils.getUsername(connection)) && sourceTile.getInhabitant().getType().isMoveable()) {
-					PathAppState.add(path);
+					sourceTile.getInhabitant().setPath(path);
 				}
 			}
 		} else {
-			log.warn("Invalid path received from connection {}, this my be the result of error or attempted cheating", connection.getId());
+			log.warn("Invalid path received from {} (id {})", ConnectionUtils.getUsername(connection), connection.getId());
 		}
 	}
 
