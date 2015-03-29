@@ -15,8 +15,10 @@ public class HomeAction extends PressAction {
 	}
 
 	@Override
-	protected void onAction() {
-		cam.setLocation(GraphicalApp.CAM_ORIGIN.setZ(cam.getLocation().getZ()));
+	protected void onAction(boolean isPressed) {
+		if (isPressed) {
+			cam.setLocation(GraphicalApp.CAM_ORIGIN.setZ(cam.getLocation().getZ()));
+		}
 	}
 
 	@Override

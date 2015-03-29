@@ -6,8 +6,8 @@ import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
 import com.mthwate.dominion.editor.action.DecreaseBrushAction;
 import com.mthwate.dominion.editor.action.IncreaseBrushAction;
+import com.mthwate.dominion.editor.action.LeftClickAction;
 import com.mthwate.dominion.editor.action.MenuAction;
-import com.mthwate.dominion.editor.state.BrushAppState;
 import com.mthwate.dominion.editor.state.SpawnAppState;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.action.ActionRegistry;
@@ -38,10 +38,11 @@ public class EditorApp extends GraphicalApp {
 
 		ActionRegistry.register(new MenuAction());
 
+		ActionRegistry.register(new LeftClickAction(stateManager, rootNode));
+
 		ActionRegistry.register(new IncreaseBrushAction());
 		ActionRegistry.register(new DecreaseBrushAction());
 
-		stateManager.attach(new BrushAppState(rootNode));
 		stateManager.attach(new SpawnAppState(rootNode));
 	}
 	

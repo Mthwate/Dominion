@@ -11,8 +11,6 @@ import com.jme3.system.JmeSystem;
 import com.jme3.texture.FrameBuffer;
 import com.jme3.util.BufferUtils;
 import com.mthwate.datlib.IOUtils;
-import com.mthwate.dominion.graphical.KeyControl;
-import com.mthwate.dominion.graphical.KeyHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -26,8 +24,6 @@ import java.nio.ByteBuffer;
 @Slf4j
 public class ScreenshotAppState extends GraphicalAppState implements SceneProcessor {
 
-	private KeyHandler keyHandler;
-
 	private Renderer renderer;
 
 	private ByteBuffer outBuf;
@@ -38,11 +34,12 @@ public class ScreenshotAppState extends GraphicalAppState implements SceneProces
 
 	private int height;
 
+	private boolean capture = false;
+
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
 		app.getViewPort().addProcessor(this);
-		keyHandler = gapp.getKeyHandler();
 	}
 
 	@Override
@@ -71,8 +68,8 @@ public class ScreenshotAppState extends GraphicalAppState implements SceneProces
 
 	@Override
 	public void postFrame(FrameBuffer out) {
-		if (keyHandler.isPressed(KeyControl.SCREENSHOT)) {
-			keyHandler.unpress(KeyControl.SCREENSHOT);
+		if (capture) {
+			capture = false;
 
 			renderer.readFrameBuffer(out, outBuf);
 
@@ -89,4 +86,9 @@ public class ScreenshotAppState extends GraphicalAppState implements SceneProces
 			}
 		}
 	}
+
+	public void takeScreenshot() {
+		capture = true;
+	}
+
 }

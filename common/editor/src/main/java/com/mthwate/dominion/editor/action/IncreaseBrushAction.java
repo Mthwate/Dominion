@@ -10,8 +10,10 @@ import com.mthwate.dominion.graphical.action.PressAction;
 public class IncreaseBrushAction extends PressAction {
 
 	@Override
-	protected void onAction() {
-		NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
+	protected void onAction(boolean isPressed) {
+		if (isPressed) {
+			NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
+		}
 	}
 
 	@Override

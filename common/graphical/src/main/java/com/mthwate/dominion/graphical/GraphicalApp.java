@@ -8,6 +8,7 @@ import com.mthwate.dominion.common.CommonApp;
 import com.mthwate.dominion.common.tile.TproLoader;
 import com.mthwate.dominion.graphical.action.ActionRegistry;
 import com.mthwate.dominion.graphical.action.HomeAction;
+import com.mthwate.dominion.graphical.action.ScreenshotAction;
 import com.mthwate.dominion.graphical.action.WireToggleAction;
 import com.mthwate.dominion.graphical.action.look.LookLeftAction;
 import com.mthwate.dominion.graphical.action.look.LookNorthAction;
@@ -24,8 +25,6 @@ import com.mthwate.dominion.graphical.node.NodeTypeTile;
 import com.mthwate.dominion.graphical.node.NodeTypeWire;
 import com.mthwate.dominion.graphical.state.CompassAppState;
 import com.mthwate.dominion.graphical.state.NodeAppState;
-import com.mthwate.dominion.graphical.state.ScreenshotAppState;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,8 +32,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class GraphicalApp extends CommonApp {
-
-	@Getter protected KeyHandler keyHandler;
 
 	public static final Vector3f CAM_ORIGIN = new Vector3f(0, -10, 15);
 
@@ -48,9 +45,6 @@ public abstract class GraphicalApp extends CommonApp {
 		TextureUtils.init(assetManager);
 		MaterialUtils.init(assetManager);
 		ModelUtils.init(assetManager);
-
-
-		keyHandler = new KeyHandler(inputManager);
 
 
 		log.info("Setting up nodes");
@@ -75,12 +69,8 @@ public abstract class GraphicalApp extends CommonApp {
 		viewPort.setBackgroundColor(ColorRGBA.Black);
 
 
-		log.info("Initializing action registry");
 
 		ActionRegistry.init(inputManager);
-
-
-		log.info("Initializing common actions");
 
 
 		ActionRegistry.register(new MoveUpAction(cam));
@@ -102,10 +92,11 @@ public abstract class GraphicalApp extends CommonApp {
 		ActionRegistry.register(new ZoomOutAction(cam));
 
 
+		ActionRegistry.register(new ScreenshotAction(stateManager));
+
 		log.info("Initializing common app states");
 
 		stateManager.attach(new NodeAppState());
-		stateManager.attach(new ScreenshotAppState());
 		stateManager.attach(new CompassAppState(guiNode, settings));
 	}
 

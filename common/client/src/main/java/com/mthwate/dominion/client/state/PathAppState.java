@@ -1,6 +1,9 @@
 package com.mthwate.dominion.client.state;
 
+import com.jme3.app.Application;
+import com.jme3.input.InputManager;
 import com.jme3.network.Client;
+import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -11,15 +14,17 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.common.tile.Tile;
+import com.mthwate.dominion.graphical.ClickUtils;
 import com.mthwate.dominion.graphical.MaterialUtils;
 import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.highlight.HighlightColors;
-import com.mthwate.dominion.graphical.state.MouseAppState;
+import com.mthwate.dominion.graphical.state.GraphicalAppState;
+import lombok.Setter;
 
 /**
  * @author mthwate
  */
-public class PathAppState extends MouseAppState {
+public class PathAppState extends GraphicalAppState {
 
 	private Node node = new Node();
 
@@ -27,14 +32,23 @@ public class PathAppState extends MouseAppState {
 
 	private Path path;
 
-	public PathAppState(Client client, Node parent) {
+	private InputManager inputManager;
+
+	private Camera cam;
+
+	@Setter private boolean clicked = false;
+
+	public PathAppState(Client client, Node parent, Application app) {
 		this.client = client;
 		parent.attachChild(node);
+		inputManager = app.getInputManager();
+		cam = app.getCamera();
 	}
 
 	@Override
-	protected void update(float tpf, Set2i pos, boolean clickedL, boolean clickedR) {
-		if (clickedL) {
+	public void update(float tpf) {
+		if (clicked) {
+			Set2i pos = ClickUtils.clickCollisionPos(inputManager, cam);
 			if (pos != null) {
 				if (path == null) {
 					path = new Path(pos);

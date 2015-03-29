@@ -11,18 +11,20 @@ import com.mthwate.dominion.graphical.action.PressAction;
 public class MenuAction extends PressAction {
 
 	@Override
-	protected void onAction() {
-		if (NiftyUtils.isOnScreen("menu")) {
+	protected void onAction(boolean isPressed) {
+		if (isPressed) {
+			if (NiftyUtils.isOnScreen("menu")) {
 
-			int x = NiftyUtils.getMenuInt("width");
+				int x = NiftyUtils.getMenuInt("width");
 
-			int y = NiftyUtils.getMenuInt("height");
+				int y = NiftyUtils.getMenuInt("height");
 
-			TileStore.resize(x, y);
+				TileStore.resize(x, y);
 
-			NiftyUtils.gotoScreen("edit");
-		} else {
-			NiftyUtils.gotoScreen("menu");
+				NiftyUtils.gotoScreen("edit");
+			} else {
+				NiftyUtils.gotoScreen("menu");
+			}
 		}
 	}
 

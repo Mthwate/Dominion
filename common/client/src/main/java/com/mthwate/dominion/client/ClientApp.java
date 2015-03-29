@@ -3,10 +3,11 @@ package com.mthwate.dominion.client;
 import com.jme3.network.Client;
 import com.jme3.network.Network;
 import com.jme3.network.message.GZIPCompressedMessage;
-import com.mthwate.dominion.client.state.PathAppState;
+import com.mthwate.dominion.client.action.LeftClickAction;
 import com.mthwate.dominion.common.message.LoginMessage;
 import com.mthwate.dominion.common.message.MessageUtils;
 import com.mthwate.dominion.graphical.GraphicalApp;
+import com.mthwate.dominion.graphical.action.ActionRegistry;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeCollide;
 import com.mthwate.dominion.graphical.node.NodeTypeInhabitant;
@@ -56,7 +57,7 @@ public class ClientApp extends GraphicalApp {
 	}
 
 	protected void onJoin() {
-		stateManager.attach(new PathAppState(client, rootNode));
+		ActionRegistry.register(new LeftClickAction(client, rootNode, this));
 	}
 	
 	@Override

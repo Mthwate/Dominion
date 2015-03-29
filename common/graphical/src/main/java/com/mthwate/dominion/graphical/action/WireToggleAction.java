@@ -8,8 +8,10 @@ import com.mthwate.dominion.graphical.node.NodeHandler;
 public class WireToggleAction extends PressAction {
 
 	@Override
-	protected void onAction() {
-		NodeHandler.toggleWire();
+	protected void onAction(boolean isPressed) {
+		if (isPressed) {
+			NodeHandler.toggleWire();
+		}
 	}
 
 	@Override
