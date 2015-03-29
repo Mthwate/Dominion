@@ -57,7 +57,7 @@ public class ClientApp extends GraphicalApp {
 	}
 
 	protected void onJoin() {
-		ActionRegistry.register(new LeftClickAction(client, rootNode, this));
+		ActionRegistry.register(new LeftClickAction(client, rootNode, stateManager));
 	}
 	
 	@Override

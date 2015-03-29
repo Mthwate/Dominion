@@ -1,6 +1,6 @@
 package com.mthwate.dominion.client.action;
 
-import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
 import com.jme3.network.Client;
 import com.jme3.scene.Node;
 import com.mthwate.dominion.client.state.PathAppState;
@@ -14,9 +14,9 @@ public class LeftClickAction extends PressAction {
 
 	private PathAppState state;
 
-	public LeftClickAction(Client client, Node parent, Application app) {
-		state = new PathAppState(client, parent, app);
-		app.getStateManager().attach(state);
+	public LeftClickAction(Client client, Node parent, AppStateManager stateManager) {
+		state = new PathAppState(client, parent);
+		stateManager.attach(state);
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package com.mthwate.dominion.client.state;
 
 import com.jme3.app.Application;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
 import com.jme3.input.InputManager;
 import com.jme3.network.Client;
 import com.jme3.renderer.Camera;
@@ -18,13 +20,12 @@ import com.mthwate.dominion.graphical.ClickUtils;
 import com.mthwate.dominion.graphical.MaterialUtils;
 import com.mthwate.dominion.graphical.MeshUtils;
 import com.mthwate.dominion.graphical.highlight.HighlightColors;
-import com.mthwate.dominion.graphical.state.GraphicalAppState;
 import lombok.Setter;
 
 /**
  * @author mthwate
  */
-public class PathAppState extends GraphicalAppState {
+public class PathAppState extends AbstractAppState {
 
 	private Node node = new Node();
 
@@ -38,9 +39,14 @@ public class PathAppState extends GraphicalAppState {
 
 	@Setter private boolean clicked = false;
 
-	public PathAppState(Client client, Node parent, Application app) {
+	public PathAppState(Client client, Node parent) {
 		this.client = client;
 		parent.attachChild(node);
+	}
+
+	@Override
+	public void initialize(AppStateManager stateManager, Application app) {
+		super.initialize(stateManager, app);
 		inputManager = app.getInputManager();
 		cam = app.getCamera();
 	}

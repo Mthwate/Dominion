@@ -1,6 +1,7 @@
 package com.mthwate.dominion.graphical.state;
 
 import com.jme3.app.Application;
+import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.post.SceneProcessor;
 import com.jme3.renderer.RenderManager;
@@ -22,7 +23,7 @@ import java.nio.ByteBuffer;
  * @author mthwate
  */
 @Slf4j
-public class ScreenshotAppState extends GraphicalAppState implements SceneProcessor {
+public class ScreenshotAppState extends AbstractAppState implements SceneProcessor {
 
 	private Renderer renderer;
 

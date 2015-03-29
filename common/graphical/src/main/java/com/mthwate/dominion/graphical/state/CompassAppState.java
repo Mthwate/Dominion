@@ -1,6 +1,7 @@
 package com.mthwate.dominion.graphical.state;
 
 import com.jme3.app.Application;
+import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
@@ -16,7 +17,7 @@ import java.util.Random;
 /**
  * @author mthwate
  */
-public class CompassAppState extends GraphicalAppState {
+public class CompassAppState extends AbstractAppState {
 
 	private Node node = new Node();
 
@@ -46,7 +47,7 @@ public class CompassAppState extends GraphicalAppState {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		cam = gapp.getCamera();
+		cam = app.getCamera();
 
 		pic.setMaterial(MaterialUtils.getGuiMaterial("compass"));
 		pic.setWidth(size);
