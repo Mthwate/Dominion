@@ -4,11 +4,13 @@ import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.save.SaveUtils;
 import com.mthwate.dominion.common.save.WorldMap;
+import com.mthwate.dominion.editor.action.DecreaseBrushAction;
+import com.mthwate.dominion.editor.action.IncreaseBrushAction;
+import com.mthwate.dominion.editor.action.MenuAction;
 import com.mthwate.dominion.editor.state.BrushAppState;
-import com.mthwate.dominion.editor.state.MenuAppState;
 import com.mthwate.dominion.editor.state.SpawnAppState;
 import com.mthwate.dominion.graphical.GraphicalApp;
-import com.mthwate.dominion.graphical.KeyControl;
+import com.mthwate.dominion.graphical.action.ActionRegistry;
 import com.mthwate.dominion.graphical.node.NodeHandler;
 import com.mthwate.dominion.graphical.node.NodeTypeCollide;
 
@@ -34,7 +36,11 @@ public class EditorApp extends GraphicalApp {
 
 		NodeHandler.init("collision", new NodeTypeCollide(), null);
 
-		stateManager.attach(new MenuAppState());
+		ActionRegistry.register(new MenuAction());
+
+		ActionRegistry.register(new IncreaseBrushAction());
+		ActionRegistry.register(new DecreaseBrushAction());
+
 		stateManager.attach(new BrushAppState(rootNode));
 		stateManager.attach(new SpawnAppState(rootNode));
 	}
@@ -53,20 +59,6 @@ public class EditorApp extends GraphicalApp {
 
 		NiftyUtils.setMenuInt("width", TileStore.sizeX());
 		NiftyUtils.setMenuInt("height", TileStore.sizeY());
-	}
-	
-	@Override
-	public void simpleUpdate(float tpf) {
-
-		if (keyHandler.isPressed(KeyControl.INCREASE_BRUSH)) {
-			keyHandler.unpress(KeyControl.INCREASE_BRUSH);
-			NiftyUtils.setMenuInt("brushSize", NiftyUtils.getMenuInt("brushSize") + 1);
-		}
-
-		if (keyHandler.isPressed(KeyControl.DECREASE_BRUSH)) {
-			keyHandler.unpress(KeyControl.DECREASE_BRUSH);
-			NiftyUtils.setMenuInt("brushSize", Math.max(NiftyUtils.getMenuInt("brushSize") - 1, 0));
-		}
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public abstract class MouseAppState extends GraphicalAppState {
 		Set2i pos = ClickUtils.clickCollisionPos(inputManager, cam);
 		if (pos != null) {
 			boolean clickedL = keyHandler.isPressed(KeyControl.LEFT_CLICK);
-			boolean clickedR = keyHandler.isPressed(KeyControl.LEFT_CLICK);
+			boolean clickedR = keyHandler.isPressed(KeyControl.RIGHT_CLICK);
 			update(tpf, pos, clickedL, clickedR);
 		}
 	}

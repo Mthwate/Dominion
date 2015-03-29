@@ -25,24 +25,8 @@ public class KeyHandler implements ActionListener {
 		addKeyListener(im, KeyControl.UP, KeyInput.KEY_W);
 		addKeyListener(im, KeyControl.DOWN, KeyInput.KEY_S);
 
-		addKeyListener(im, KeyControl.LOOK_RIGHT, KeyInput.KEY_RIGHT);
-		addKeyListener(im, KeyControl.LOOK_LEFT, KeyInput.KEY_LEFT);
-		addKeyListener(im, KeyControl.LOOK_NORTH, KeyInput.KEY_UP);
-		
-		addKeyListener(im, KeyControl.MENU, KeyInput.KEY_LMENU);
-		
-		addAxisListener(im, KeyControl.ZOOM_IN, MouseInput.AXIS_WHEEL, false);
-		addAxisListener(im, KeyControl.ZOOM_OUT, MouseInput.AXIS_WHEEL, true);
-
 		addMouseListener(im, KeyControl.LEFT_CLICK, MouseInput.BUTTON_LEFT);
 		addMouseListener(im, KeyControl.RIGHT_CLICK, MouseInput.BUTTON_RIGHT);
-
-		addKeyListener(im, KeyControl.INCREASE_BRUSH, KeyInput.KEY_RBRACKET);
-		addKeyListener(im, KeyControl.DECREASE_BRUSH, KeyInput.KEY_LBRACKET);
-
-		addKeyListener(im, KeyControl.TOGGLE_WIRE, KeyInput.KEY_SPACE);
-
-		addKeyListener(im, KeyControl.GOTO_HOME, KeyInput.KEY_H);
 
 		addKeyListener(im, KeyControl.SCREENSHOT, KeyInput.KEY_P);
 	}

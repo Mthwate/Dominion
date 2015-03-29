@@ -7,7 +7,6 @@ import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.message.MoveMessage;
 import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.server.ConnectionUtils;
-import com.mthwate.dominion.server.state.PathAppState;
 import lombok.extern.slf4j.Slf4j;
 
 /**

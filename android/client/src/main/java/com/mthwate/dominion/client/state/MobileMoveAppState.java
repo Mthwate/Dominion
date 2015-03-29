@@ -1,15 +1,10 @@
 package com.mthwate.dominion.client.state;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.input.InputManager;
 import com.jme3.math.Vector2f;
 import com.jme3.system.AppSettings;
 import com.mthwate.datlib.math.Set2i;
 import com.mthwate.dominion.client.NiftyUtils;
 import com.mthwate.dominion.graphical.KeyControl;
-import com.mthwate.dominion.graphical.KeyHandler;
-import com.mthwate.dominion.graphical.state.GraphicalAppState;
 import com.mthwate.dominion.graphical.state.MouseAppState;
 import de.lessvoid.nifty.screen.Screen;
 
