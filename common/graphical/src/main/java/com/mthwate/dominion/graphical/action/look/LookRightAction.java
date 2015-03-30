@@ -15,17 +15,8 @@ public class LookRightAction extends LookAction {
 	}
 
 	@Override
-	protected void onAction(float time) {
-		final Vector3f dir = cam.getDirection();
-
-		float angle = (float) Math.atan2(dir.getX(), dir.getY());
-
-		angle += time;
-
-		float x = (float) Math.sin(angle);
-		float y = (float) Math.cos(angle);
-
-		cam.lookAtDirection(new Vector3f(x, y, -1), GraphicalApp.UP);
+	protected int getMult() {
+		return 1;
 	}
 
 	@Override

@@ -4,14 +4,17 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.mthwate.dominion.graphical.GraphicalApp;
 import com.mthwate.dominion.graphical.action.ActionKey;
+import com.mthwate.dominion.graphical.action.AnalogAction;
 
 /**
  * @author mthwate
  */
-public class LookNorthAction extends LookAction {
+public class LookNorthAction extends AnalogAction {
+
+	protected Camera cam;
 
 	public LookNorthAction(Camera camera) {
-		super(camera);
+		cam = camera;
 	}
 
 	@Override
