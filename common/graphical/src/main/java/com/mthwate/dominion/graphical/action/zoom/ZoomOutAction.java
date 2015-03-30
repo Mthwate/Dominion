@@ -14,17 +14,8 @@ public class ZoomOutAction extends ZoomAction {
 	}
 
 	@Override
-	protected void onAction(float time) {
-		Vector3f location = cam.getLocation();
-
-		float z = location.getZ() + (time * ZOOM_SPEED);
-
-		z = Math.max(z, ZOOM_MIN);
-		z = Math.min(z, ZOOM_MAX);
-
-		location.addLocal(0, 0, z - location.getZ());
-
-		cam.setLocation(location);
+	protected int getMult() {
+		return 1;
 	}
 
 	@Override
