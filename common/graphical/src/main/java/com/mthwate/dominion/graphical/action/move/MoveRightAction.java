@@ -14,16 +14,8 @@ public class MoveRightAction extends MoveAction {
 	}
 
 	@Override
-	protected void onAction(float time) {
-		Vector3f direction = cam.getLeft().setZ(0).normalize();
-
-		float z = cam.getLocation().getZ();
-
-		float mult = time * MOVE_SPEED * (z-2);
-
-		Vector3f move = direction.mult(mult);
-
-		cam.setLocation(cam.getLocation().subtract(move));
+	protected Vector3f getDirection() {
+		return cam.getLeft().negate();
 	}
 
 	@Override
