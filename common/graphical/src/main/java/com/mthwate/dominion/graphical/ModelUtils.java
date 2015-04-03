@@ -21,7 +21,7 @@ public class ModelUtils {
 
 	public static Spatial getModel(EntityProperties entity) {
 		Spatial model = assetManager.loadModel("models/" + entity.getModel() + ".j3o");
-		model.setLocalScale(0.1f, 0.1f, 0.1f);
+		model.setLocalScale(0.1f);
 		model.setLocalRotation(getModelRotation());
 		model.setQueueBucket(RenderQueue.Bucket.Transparent);
 		model.setMaterial(MaterialUtils.getTexturedMaterial(entity.getTexture()));

@@ -29,7 +29,7 @@ public class CompassAppState extends AbstractAppState {
 
 	private float size;
 
-	Picture pic = new Picture("compass");
+	private Picture pic = new Picture("compass");
 
 	private float mod = 0;
 

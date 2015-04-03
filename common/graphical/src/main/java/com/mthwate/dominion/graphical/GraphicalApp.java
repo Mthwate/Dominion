@@ -24,6 +24,7 @@ import com.mthwate.dominion.graphical.node.NodeTypeSide;
 import com.mthwate.dominion.graphical.node.NodeTypeTile;
 import com.mthwate.dominion.graphical.node.NodeTypeWire;
 import com.mthwate.dominion.graphical.state.CompassAppState;
+import com.mthwate.dominion.graphical.state.HoverAppState;
 import com.mthwate.dominion.graphical.state.NodeAppState;
 import lombok.extern.slf4j.Slf4j;
 
@@ -98,6 +99,7 @@ public abstract class GraphicalApp extends CommonApp {
 
 		stateManager.attach(new NodeAppState());
 		stateManager.attach(new CompassAppState(guiNode, settings));
+		stateManager.attach(new HoverAppState(guiNode, settings));
 	}
 
 	protected void initLight() {

@@ -16,10 +16,9 @@ public abstract class NodeType {
 
 	public abstract void update(Node node, int x, int y);
 
-	protected static void attachSpatial(Spatial spatial, Node node, int x, int y, int z, float zmod) {
+	protected void attachSpatial(Spatial spatial, Node node, int x, int y, int z, float zmod) {
 		spatial.setName(coordsToName(x, y));
 		spatial.setLocalTranslation(CoordUtils.getPosCartesian(x, y).setZ(z * ELEV_MOD + zmod));
-		node.detachChildNamed(coordsToName(x, y));
 		node.attachChild(spatial);
 	}
 

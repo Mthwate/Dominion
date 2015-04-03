@@ -32,6 +32,10 @@ public class Entity {
 		this.owner = owner;
 	}
 
+	public String getName() {
+		return type;
+	}
+
 	public EntityProperties getType() {
 		return EproUtils.getProperties(type);
 	}
@@ -43,5 +47,9 @@ public class Entity {
 		} else {
 			throw new IllegalArgumentException("Storage full");
 		}
+	}
+
+	public Set<Entity> getStorage() {
+		return new HashSet<>(storage);
 	}
 }
