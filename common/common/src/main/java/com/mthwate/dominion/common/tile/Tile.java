@@ -12,7 +12,7 @@ public class Tile implements java.io.Serializable {
 
 	private static final long serialVersionUID = 6211327075280365043L;
 
-	private String type;
+	@Setter private String type;
 
 	@Getter @Setter private int elevation;
 	
