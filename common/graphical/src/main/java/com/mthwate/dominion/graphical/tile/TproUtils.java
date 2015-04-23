@@ -1,7 +1,7 @@
 package com.mthwate.dominion.graphical.tile;
 
 import com.jme3.material.Material;
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.RandUtils;
 import com.mthwate.dominion.common.tile.TileProperties;
 import com.mthwate.dominion.graphical.MaterialUtils;

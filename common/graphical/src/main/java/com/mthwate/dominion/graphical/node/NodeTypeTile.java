@@ -2,7 +2,7 @@ package com.mthwate.dominion.graphical.node;
 
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.tile.Tile;
 import com.mthwate.dominion.graphical.MeshUtils;

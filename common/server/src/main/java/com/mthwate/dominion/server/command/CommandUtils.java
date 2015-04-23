@@ -15,7 +15,7 @@ public class CommandUtils {
 		String name = split[0];
 		Command cmd = CommandRegistry.getCommand(name);
 		if (cmd != null) {
-			cmd.run(app, StringUtils.join(split, 1, " "));
+			cmd.run(app, StringUtils.join(split, " ", 1));
 		} else {
 			log.info("Command not found: " + name);
 		}

@@ -1,7 +1,7 @@
 package com.mthwate.dominion.editor.state;
 
 import com.jme3.scene.Node;
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.editor.NiftyUtils;
 import com.mthwate.dominion.editor.SpawnStore;

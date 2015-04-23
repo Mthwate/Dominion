@@ -10,7 +10,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.graphical.ClickUtils;

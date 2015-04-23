@@ -1,6 +1,6 @@
 package com.mthwate.dominion.common.save;
 
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.tile.Tile;
 
 import java.io.Serializable;

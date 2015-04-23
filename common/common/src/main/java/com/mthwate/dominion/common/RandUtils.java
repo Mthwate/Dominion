@@ -1,6 +1,6 @@
 package com.mthwate.dominion.common;
 
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;

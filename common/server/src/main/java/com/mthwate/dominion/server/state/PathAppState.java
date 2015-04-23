@@ -1,6 +1,6 @@
 package com.mthwate.dominion.server.state;
 
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.MapUtils;
 import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.TileStore;

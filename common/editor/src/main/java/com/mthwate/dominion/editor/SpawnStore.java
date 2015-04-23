@@ -1,6 +1,6 @@
 package com.mthwate.dominion.editor;
 
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 
 import java.util.ArrayList;
 import java.util.Collection;

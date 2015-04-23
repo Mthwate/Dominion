@@ -49,7 +49,9 @@ public class NiftyUtils {
 		File dir = new File("assets/tiles");
 
 		if (dir.exists()) {
-			tiles.addAll(FileUtils.listRecursive(dir));
+			for (File file : FileUtils.listFilesRecursive(dir)) {
+				tiles.add(file.getName());
+			}
 		}
 
 		for (String path : tiles) {

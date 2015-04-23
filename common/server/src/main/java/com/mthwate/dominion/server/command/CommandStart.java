@@ -1,7 +1,7 @@
 package com.mthwate.dominion.server.command;
 
 import com.jme3.network.HostedConnection;
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.TileStore;
 import com.mthwate.dominion.common.entity.Entity;
 import com.mthwate.dominion.common.message.MapMessage;

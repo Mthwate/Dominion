@@ -9,7 +9,7 @@ import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.mthwate.datlib.math.Set2i;
+import com.mthwate.datlib.math.set.Set2i;
 import com.mthwate.dominion.common.CoordUtils;
 import com.mthwate.dominion.common.Path;
 import com.mthwate.dominion.common.TileStore;

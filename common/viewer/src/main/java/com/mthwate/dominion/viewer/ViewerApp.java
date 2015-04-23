@@ -44,7 +44,9 @@ public class ViewerApp extends GraphicalApp {
 		File dir = new File("assets/entities");
 
 		if (dir.exists()) {
-			entityPaths.addAll(FileUtils.listRecursive(dir));
+			for (File file : FileUtils.listFilesRecursive(dir)) {
+				entityPaths.add(file.getName());
+			}
 		}
 
 		List<String> entityNames = new ArrayList<>();
