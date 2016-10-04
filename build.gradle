@@ -1,10 +1,10 @@
-project.ext.set("jme_version", '3.0.10')
+project.ext.set("jme_version", '3.1.0-beta1')
+project.ext.set("jme_group", 'org.jmonkeyengine')
 
 allprojects {
 	repositories {
 		mavenCentral()
-		maven {
-			url 'http://updates.jmonkeyengine.org/maven'
-		}
+		jcenter()
+		maven { url "http://nifty-gui.sourceforge.net/nifty-maven-repo" }
 	}
 }

@@ -4,9 +4,9 @@ subprojects {
 	sourceCompatibility = JavaVersion.VERSION_1_7
 
 	dependencies {
-		compile "com.jme3:jme3-lwjgl:$jme_version"
-		compile "com.jme3:jme3-desktop:$jme_version"
-		compile "com.jme3:jme3-blender:$jme_version"
+		compile "$jme_group:jme3-lwjgl:$jme_version"
+		compile "$jme_group:jme3-desktop:$jme_version"
+		compile "$jme_group:jme3-blender:$jme_version"
 	}
 
 	task fatJar(type: Jar) {

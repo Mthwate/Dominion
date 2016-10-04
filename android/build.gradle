@@ -60,6 +60,6 @@ subprojects {
 	}
 
 	dependencies {
-		compile "com.jme3:jme3-android:$jme_version"
+		compile "$jme_group:jme3-android:$jme_version"
 	}
 }

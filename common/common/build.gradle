@@ -4,7 +4,7 @@ dependencies {
 	compile 'org.slf4j:slf4j-jdk14:1.7.10'
 	compile 'com.mthwate.datlib:datlib:1.0'
 	compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.09'
-	compile "com.jme3:jme3-networking:$jme_version"
-	compile "com.jme3:jme3-core:$jme_version"
+	compile "$jme_group:jme3-networking:$jme_version"
+	compile "$jme_group:jme3-core:$jme_version"
 	compile 'org.projectlombok:lombok:1.16.2'
 }
