@@ -25,20 +25,10 @@ public class Starter {
 
 			settings.setSettingsDialogImage("icons/title.png");
 
-			InputStream in = app.getClass().getResourceAsStream("/icons/icon.png");
-			if (in != null) {
-				try {
-					BufferedImage[] icons = new BufferedImage[]{ImageIO.read(in)};
-					settings.setIcons(icons);
-				} catch (IOException e) {
-					log.error("Failed to load application icons", e);
-				}
-			}
-
 			settings.setTitle(name);
 
 			app.setSettings(settings);
-			
+
 			app.start();
 		} else {
 			app.start(JmeContext.Type.Headless);
