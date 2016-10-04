@@ -9,3 +9,7 @@ Run the server with the map you wish to use in the current working directory nam
 
 ## Client ##
 Enter a username and ip address of the server you wish to connect to. You will be greeted by a beautiful black screen. Wait for the server to start the game for the map to be loaded.
+
+## Credits ##
+Code developed by Matthew Benkart
+Art assets created by Devon Hinterlang
